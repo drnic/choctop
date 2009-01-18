@@ -1,4 +1,4 @@
-= sparkle-ruby
+= sparkle_tools
 
 * FIX (url)
 

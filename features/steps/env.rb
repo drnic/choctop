@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + "/../../lib/sparkle-ruby"
+require File.dirname(__FILE__) + "/../../lib/sparkle_tools"
 
 gem 'cucumber'
 require 'cucumber'
