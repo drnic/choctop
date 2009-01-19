@@ -8,7 +8,9 @@ Build and deploy tools for Cocoa apps using Sparkle for distributions and upgrad
 
 Rake tasks:
 
+    rake appcast         # Create dmg, update appcast file, and upload to host
     rake appcast:build   # Create/update the appcast file
+    rake appcast:dmg     # Create the dmg file for appcasting
     rake appcast:upload  # Upload the appcast file to the host
 
 Original code posted by Chris Bailey at http://codeintensity.blogspot.com/2008/03/creating-sparkle-appcast-via-rake-tasks.html
@@ -16,27 +18,43 @@ Original code posted by Chris Bailey at http://codeintensity.blogspot.com/2008/0
 
 == FEATURES/PROBLEMS:
 
-* FIX (list of features or problems)
+Choctop comes with rake tasks to instantly deploy your latest Cocoa app's version
+to a remote host, instantly activating all your users' Sparkle auto-updates.
+
+* Can build a DMG of your released app using Info.plist configuration (rake appcast:dmg)
+* Can generate Sparkle-formatted XML file
+* Can upload the DMG and XML files to a remote host
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+  cd to/my/cocoa/app
+  install_choctop .
 
+In your Rakefile, update the Choctop configuration with the host and remote_dir details.
+The rake tasks use rsync to upload the files, so ensure that you have ssh access to the
+remote server, with a password/ssh keys.
+
+The create the distribution, Sparkle XML file, and upload it to the remote host:
+
+  rake appcast
+  
 == REQUIREMENTS:
 
-* FIX (list of requirements)
+* RubyCocoa (installed with OS X 10.5 Leopard)
 
 == INSTALL:
 
     sudo gem install choctop
-    cd to/my/cocoa/app
-    install_choctop .
+    
+== SPONSORED BY:
+
+http//mocra.com - Mocra - the premier Rails/iPhone consultancy
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2009 Dr Nic Williams
+Copyright (c) 2009 Dr Nic Williams, drnicwilliams@gmail.com
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
