@@ -26,6 +26,8 @@ normally served at the movie cinemas. When we (http://mocra.com) were brainstorm
 project we combined "Sparkle" + "Cocoa" + "its almost lunch time and we're hungry" to remember 
 the wonderful Choc-Top ice creams. MMmmm.
 
+Wikipedia: http://en.wikipedia.org/wiki/Choc-Top
+
 == FEATURES/PROBLEMS:
 
 Choctop comes with rake tasks to instantly deploy your latest Cocoa app's version
