@@ -7,7 +7,7 @@ require "builder"
 require "active_support"
 
 class Choctop
-  VERSION = '0.0.1'
+  VERSION = '0.9.0'
   
   # The name of the Cocoa application
   attr_accessor :name

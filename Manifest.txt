@@ -1,6 +1,5 @@
 History.txt
 Manifest.txt
-PostInstall.txt
 README.rdoc
 Rakefile
 app_generators/install_choctop/USAGE
