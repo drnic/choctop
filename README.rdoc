@@ -32,10 +32,30 @@ to a remote host, instantly activating all your users' Sparkle auto-updates.
 
   cd to/my/cocoa/app
   install_choctop .
+  
+Alternately, if you already have a Rakefile in your Xcode project, then add the following
+to the end:
+
+    require "choctop"
+
+    Choctop.new do |s|
+      s.host     = 'project.com'
+      s.remote_dir = '/path/to/upload/root/of/app'
+      
+      # Optional, showing defaults
+      s.base_url   = "http://#{s.host}"
+      s.release_notes_link = s.base_url
+    end
 
 In your Rakefile, update the Choctop configuration with the host and remote_dir details.
 The rake tasks use rsync to upload the files, so ensure that you have ssh access to the
 remote server, with a password/ssh keys.
+
+Also, in your project's Info.plist, remember to update/add the following keys:
+
+    CFBundleExecutable - name of your project
+    CFBundleVersion - version for next release, using X.Y.Z format
+    SUFeedURL - url to Sparkle URL (future: insert this automatically)
 
 The create the distribution, Sparkle XML file, and upload it to the remote host:
 

@@ -28,12 +28,18 @@ class Choctop
   
   # The url from where the xml + dmg files will be downloaded
   # Default: http://#{host}
-  attr_accessor :base_url
+  attr_writer :base_url
+  def base_url
+    @base_url ||= "http://#{host}"
+  end
   
   # The url to display the release notes for the latest release
   # Default: base_url
-  attr_accessor :release_notes_link
-  
+  attr_writer :release_notes_link
+  def release_notes_link
+    @release_notes_link ||= base_url
+  end
+
   # The name of the local xml file containing the Sparkle item details
   # Default: info_plist['SUFeedURL'] or linker_appcast.xml
   attr_accessor :appcast_filename
@@ -60,14 +66,6 @@ class Choctop
     @info_plist ||= OSX::NSDictionary.dictionaryWithContentsOfFile(File.expand_path('Info.plist'))
   end
   
-  def version_info
-    begin
-      YAML.load_file("appcast/version_info.yml")
-    rescue Exception => e
-      raise StandardError, "appcast/version_info.yml could not be loaded: #{e.message}"
-    end
-  end
-  
   def initialize
     $sparkle = self # define a global variable for this object
     
@@ -80,12 +78,9 @@ class Choctop
     
     yield self if block_given?
 
-    @base_url ||= "http://#{host}"
-    @release_notes_link ||= base_url
-    
     define_tasks
   end
-
+  
   def define_tasks
     namespace :appcast do
       desc "Build Xcode Release"
