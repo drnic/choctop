@@ -9,3 +9,4 @@ namespace :appcast do
     upload_appcast
   end
 end
+

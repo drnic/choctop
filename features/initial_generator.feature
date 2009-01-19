@@ -6,6 +6,7 @@ Feature: Setup a Cocoa app with sparkle-ruby
   Scenario: Install sparkle-ruby into an app that has no existing Rakefile
     Given a Cocoa app that does not have an existing Rakefile
     When I run local executable 'install_sparkle_tools' with arguments '.'
+    And Rakefile wired to use development code instead of installed RubyGem
     Then file 'Rakefile' is created
     And output does match /rake appcast:build/
     And output does match /rake appcast:upload/
