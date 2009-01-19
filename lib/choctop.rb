@@ -98,6 +98,9 @@ class Choctop
         upload_appcast
       end
     end
+    
+    desc "Create dmg, update appcast file, and upload to host"
+    task :appcast => %w[appcast:dmg appcast:build appcast:upload]
   end
 end
 require "choctop/appcast"
