@@ -19,6 +19,13 @@ All rake tasks:
     rake appcast:feed    # Create/update the appcast file
     rake appcast:upload  # Upload the appcast file to the host
 
+== Why is it called 'Choctop'? 
+
+In Australia, Choc-Tops are ice cream cones, with hardened chocolate on top, 
+normally served at the movie cinemas. When we (http://mocra.com) were brainstorming a name for this
+project we combined "Sparkle" + "Cocoa" + "its almost lunch time and we're hungry" to remember 
+the wonderful Choc-Top ice creams. MMmmm.
+
 == FEATURES/PROBLEMS:
 
 Choctop comes with rake tasks to instantly deploy your latest Cocoa app's version
