@@ -18,5 +18,6 @@ Feature: Rake tasks are available to build and deploy Cocoa apps with Sparkle
     Given a Cocoa app with sparkle_tools installed
     And task 'rake appcast:build' is invoked
     When task 'rake appcast:upload' is invoked
-    Then outcome
+    Then remote file 'linker_appcast.xml' is created
+    Then remote file 'Myapp-1.0.0.zip' is created
   

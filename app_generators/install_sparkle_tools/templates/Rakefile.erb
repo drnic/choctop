@@ -1,8 +1,9 @@
 require "rubygems"
 require "rake"
 
-APPCAST_SERVER        = '<%= urlname %>.com'
-APPCAST_URL           = "http://#{APPCAST_SERVER}"
-APPCAST_FILENAME      = 'linker_appcast.xml'
+APPCAST_SERVER     = '<%= urlname %>.com'
+APPCAST_URL        = "http://#{APPCAST_SERVER}"
+APPCAST_FILENAME   = 'linker_appcast.xml'
+APPCAST_REMOTE_DIR = '/path/to/upload/root/of/app'
 
 require "sparkle_tools/tasks"

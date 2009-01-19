@@ -44,4 +44,43 @@ module SparkleTools::Appcast
       end
     end
   end
+
+  def upload_appcast
+    remote_dir = APPCAST_REMOTE_DIR
+
+    Net::SSH.start( APPCAST_SERVER, 'deploy' ) do |session|
+      cwd = Dir.pwd
+      Dir.chdir('appcast/build')
+
+      shell = session.shell.sync
+
+      begin
+        out = shell.cd remote_dir
+        raise "Failed to change to proper remote directory." unless out.status == 0  
+
+        out = shell.ls("-1")
+        raise "Failed to get directory listing." unless out.status == 0
+
+        files = Array.new
+        out.stdout.each { |file| files << file.strip }
+
+        # Look through the list of files and see what we need to upload, as 
+        # compared to what we have locally - but always upload the appcast itself
+        local_files = Dir.glob('*')
+        files.delete(APPCAST_FILENAME)  # we always upload this
+        local_files.each do |local_file|
+          unless files.include?(local_file)
+            print "Uploading: #{local_file}... "
+            `scp #{local_file} deploy@#{APPCAST_SERVER}:#{remote_dir}`
+            puts $?.exitstatus == 0 ? "done." : "FAILED!"
+          end
+        end
+      rescue => e
+        puts "Failed: #{e.message}"
+      ensure
+        Dir.chdir(cwd)
+        shell.exit  
+      end
+    end
+  end
 end
