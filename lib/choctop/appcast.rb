@@ -4,6 +4,7 @@ module Choctop::Appcast
   end
   
   def make_dmg
+    FileUtils.rm_rf pkg
     sh "hdiutil create -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
   end
   
