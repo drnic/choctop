@@ -30,6 +30,7 @@ Given /^a Cocoa app with choctop installed$/ do
   FileUtils.rm_rf   @remote_folder
   FileUtils.mkdir_p @remote_folder
   `cp -r #{File.dirname(__FILE__) + "/../fixtures/SampleApp"} #{@tmp_root}/ 2> /dev/null`
+  `rm -rf #{@tmp_root}/SampleApp/build`
   setup_active_project_folder "SampleApp"
   Given "I run local executable 'install_choctop' with arguments '.'"
   Given "Rakefile wired to use development code instead of installed RubyGem"

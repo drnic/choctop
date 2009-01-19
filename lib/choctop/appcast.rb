@@ -1,4 +1,8 @@
 module Choctop::Appcast
+  def make_build
+    sh "xcodebuild -configuration Release"
+  end
+  
   def make_dmg
     sh "hdiutil create -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
   end

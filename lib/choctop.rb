@@ -83,13 +83,18 @@ class Choctop
 
   def define_tasks
     namespace :appcast do
+      desc "Build Xcode Release"
+      task :build do
+        make_build
+      end
+      
       desc "Create the dmg file for appcasting"
       task :dmg do
         make_dmg
       end
       
       desc "Create/update the appcast file"
-      task :build do
+      task :feed do
         make_appcast
       end
 
@@ -100,7 +105,7 @@ class Choctop
     end
     
     desc "Create dmg, update appcast file, and upload to host"
-    task :appcast => %w[appcast:dmg appcast:build appcast:upload]
+    task :appcast => %w[appcast:build appcast:dmg appcast:feed appcast:upload]
   end
 end
 require "choctop/appcast"
