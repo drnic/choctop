@@ -31,7 +31,7 @@ class Choctop
   attr_accessor :base_url
   
   # The name of the local xml file containing the Sparkle item details
-  # Default: linker_appcast.xml
+  # Default: info_plist['SUFeedURL'] or linker_appcast.xml
   attr_accessor :appcast_filename
   
   # The remote directory where the xml + dmg files will be rsync'd
@@ -71,7 +71,7 @@ class Choctop
     @name = info_plist['CFBundleExecutable']
     @version = info_plist['CFBundleVersion']
     @target = "#{name}.app"
-    @appcast_filename = 'linker_appcast.xml'
+    @appcast_filename = info_plist['SUFeedURL'] ? File.basename(info_plist['SUFeedURL']) : 'linker_appcast.xml'
     @rsync_args = '-aCv'
     
     yield self if block_given?
@@ -96,9 +96,11 @@ class Choctop
       end
       
       desc "Create/update the appcast file"
-      task :feed => "appcast/build/#{pkg_name}" do
+      task :feed => "appcast/build/#{pkg_name}"
+      
+      file "appcast/build/#{appcast_filename}" => "appcast/build/#{pkg_name}" do
         make_appcast
-      end
+      end        
 
       desc "Upload the appcast file to the host"
       task :upload do
