@@ -1,7 +1,7 @@
 class InstallChoctopGenerator < RubiGen::Base
   attr_reader :name, :module_name, :urlname, :version
 
-  default_options :version => "1.0.0"
+  default_options :version => "0.1.0"
 
   def initialize(runtime_args, runtime_options = {})
     super
@@ -39,7 +39,7 @@ EOS
       opts.on("-v", "--version", "Show the #{File.basename($0)} version number and quit.")
       opts.on("-V", "--initial-version", 
               "Show the #{File.basename($0)} version number and quit.",
-              "Default: 1.0.0") { |o| options[:version] = o }
+              "Default: 0.1.0") { |o| options[:version] = o }
     end
 
     def extract_options

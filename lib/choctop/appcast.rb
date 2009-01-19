@@ -1,4 +1,8 @@
 module Choctop::Appcast
+  def make_zip
+    
+  end
+  
   def make_appcast
     begin
       versions = YAML.load_file("appcast/version_info.yml")
@@ -46,7 +50,6 @@ module Choctop::Appcast
   end
 
   def upload_appcast
-    # rsync_args = '-av --delete --ignore-errors'
     sh %{rsync -aCv appcast/build/ #{host}#{remote_dir}}
   end
 end

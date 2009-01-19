@@ -48,6 +48,11 @@ class Choctop
 
   def define_tasks
     namespace :appcast do
+      desc "Create the zip file for appcasting"
+      task :zip do
+        make_zip
+      end
+      
       desc "Create/update the appcast file"
       task :build do
         make_appcast
