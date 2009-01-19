@@ -2,20 +2,31 @@ $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
 require "fileutils"
+require "yaml"
 require "rubygems"
 require "builder"
 require "active_support"
+require "osx/cocoa"
 
 class Choctop
   VERSION = '0.9.0'
   
   # The name of the Cocoa application
+  # Default: info_plist['CFBundleExecutable']
   attr_accessor :name
+  
+  # The version of the Cocoa application
+  # Default: info_plist['CFBundleVersion']
+  attr_accessor :version
+  
+  # The target name of the distributed DMG file
+  # Default: #{name}.app
+  attr_accessor :target
   
   # The host name, e.g. some-domain.com
   attr_accessor :host
   
-  # The url from where the xml + zip files will be downloaded
+  # The url from where the xml + dmg files will be downloaded
   # Default: http://#{host}
   attr_accessor :base_url
   
@@ -23,18 +34,43 @@ class Choctop
   # Default: linker_appcast.xml
   attr_accessor :appcast_filename
   
-  # The remote directory where the xml + zip files will be rsync'd
+  # The remote directory where the xml + dmg files will be rsync'd
   attr_accessor :remote_dir
   
   # The argument flags passed to rsync
   # Default: -aCv
   attr_accessor :rsync_args
   
-  def initialize(name)
+  # Generated filename for a distribution, from name, version and .dmg
+  # e.g. MyApp-1.0.0.dmg
+  def pkg_name
+    "#{name}-#{version}.dmg"
+  end
+  
+  # Path to generated package file
+  def pkg
+    "appcast/build/#{pkg_name}"
+  end
+  
+  def info_plist
+    @info_plist ||= OSX::NSDictionary.dictionaryWithContentsOfFile(File.expand_path('Info.plist'))
+  end
+  
+  def version_info
+    begin
+      YAML.load_file("appcast/version_info.yml")
+    rescue Exception => e
+      raise StandardError, "appcast/version_info.yml could not be loaded: #{e.message}"
+    end
+  end
+  
+  def initialize
     $sparkle = self # define a global variable for this object
-    @name = name
     
     # Defaults
+    @name = info_plist['CFBundleExecutable']
+    @version = info_plist['CFBundleVersion']
+    @target = "#{name}.app"
     @appcast_filename = 'linker_appcast.xml'
     @rsync_args = '-aCv'
     
@@ -42,15 +78,14 @@ class Choctop
 
     @base_url ||= "http://#{host}"
     
-    define_tasks
-    
+    define_tasks    
   end
 
   def define_tasks
     namespace :appcast do
-      desc "Create the zip file for appcasting"
-      task :zip do
-        make_zip
+      desc "Create the dmg file for appcasting"
+      task :dmg do
+        make_dmg
       end
       
       desc "Create/update the appcast file"

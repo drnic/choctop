@@ -1,6 +1,6 @@
 Given /^a Cocoa app that does not have an existing Rakefile$/ do
   Given "a safe folder"
-  setup_active_project_folder "myapp"
+  setup_active_project_folder "sample_app"
 end
 
 Given /^a Cocoa app that does have an existing Rakefile$/ do
@@ -25,11 +25,13 @@ Given /Rakefile constants rewired for local rsync/ do
 end
 
 Given /^a Cocoa app with choctop installed$/ do
-  Given "a Cocoa app that does not have an existing Rakefile"
-  Given "I run local executable 'install_choctop' with arguments '.'"
-  Given "Rakefile wired to use development code instead of installed RubyGem"
+  Given "a safe folder"
   @remote_folder = File.expand_path(File.join(@tmp_root, 'website'))
   FileUtils.rm_rf   @remote_folder
   FileUtils.mkdir_p @remote_folder
+  `cp -r #{File.dirname(__FILE__) + "/../fixtures/SampleApp"} #{@tmp_root}/ 2> /dev/null`
+  setup_active_project_folder "SampleApp"
+  Given "I run local executable 'install_choctop' with arguments '.'"
+  Given "Rakefile wired to use development code instead of installed RubyGem"
   Given "Rakefile constants rewired for local rsync"
 end

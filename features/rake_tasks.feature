@@ -3,29 +3,29 @@ Feature: Rake tasks are available to build and deploy Cocoa apps with Sparkle
   As a Cocoa developer or Cocoa application deployer
   I want rake tasks to build and deploy my Cocoa app
 
-  Scenario: rake task to create zip file of build
+  Scenario: rake task to create dmg file of build
     Given a Cocoa app with choctop installed
-    When task 'rake appcast:zip' is invoked
-    Then file 'appcast/build/Myapp-0.1.0.zip' is created
+    When task 'rake appcast:dmg' is invoked
+    Then file 'appcast/build/SampleApp-0.1.0.dmg' is created
   
 
   Scenario: rake task to create/update the appcast file
     Given a Cocoa app with choctop installed
-    And a zip build has been created
+    And a dmg build has been created
     When task 'rake appcast:build' is invoked
     Then file 'appcast/build/linker_appcast.xml' is created
     And contents of file 'appcast/build/linker_appcast.xml' does match /<channel>/
     And contents of file 'appcast/build/linker_appcast.xml' does match /</channel>/
     And contents of file 'appcast/build/linker_appcast.xml' does match /<pubDate>/
     And contents of file 'appcast/build/linker_appcast.xml' does match /<item>/
-    And contents of file 'appcast/build/linker_appcast.xml' does match /<title>myapp 0.1.0</title>/
+    And contents of file 'appcast/build/linker_appcast.xml' does match /<title>sample_app 0.1.0</title>/
   
   Scenario: rake task to upload the appcast file to the server
     Given a Cocoa app with choctop installed
-    And a zip build has been created
+    And a dmg build has been created
     And task 'rake appcast:build' is invoked
     And Choctop config is configured for local rsync
     When task 'rake appcast:upload' is invoked
     Then remote file 'linker_appcast.xml' is created
-    Then remote file 'Myapp-0.1.0.zip' is created
+    Then remote file 'SampleApp-0.1.0.dmg' is created
   

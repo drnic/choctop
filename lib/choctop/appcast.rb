@@ -1,15 +1,9 @@
 module Choctop::Appcast
-  def make_zip
-    
+  def make_dmg
+    sh "hdiutil create -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
   end
   
   def make_appcast
-    begin
-      versions = YAML.load_file("appcast/version_info.yml")
-    rescue Exception => e
-      raise StandardError, "appcast/version_info.yml could not be loaded: #{e.message}"
-    end
-
     app_name = File.basename(File.expand_path('.'))
     
     FileUtils.mkdir_p "appcast/build"
@@ -31,17 +25,20 @@ module Choctop::Appcast
         xml.atom(:link, :href => "#{base_url}/#{appcast_filename}", 
                  :rel => "self", :type => "application/rss+xml")
 
-        versions.each do |version|
+        version_info.each do |version|
           guid = version.first
           items = version[1]
           file = "appcast/build/#{items['filename']}"
-
+          title = "#{name} #{items['version']}"
+          
           xml.item do
-            xml.title(items['title'])
+            xml.title(title)
             xml.description(items['description'])
             xml.pubDate(File.mtime(file))
             xml.enclosure(:url => "#{base_url}/#{items['filename']}", 
-                          :length => "#{File.size(file)}", :type => "application/zip")
+                          :length => "#{File.size(file)}", 
+                          :type => "application/dmg",
+                          :"sparkle:version" => items['version'])
             xml.guid(guid, :isPermaLink => "false")
           end
         end
@@ -52,5 +49,6 @@ module Choctop::Appcast
   def upload_appcast
     sh %{rsync -aCv appcast/build/ #{host}#{remote_dir}}
   end
+  
 end
 Choctop.send(:include, Choctop::Appcast)
