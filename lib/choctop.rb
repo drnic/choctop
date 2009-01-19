@@ -9,11 +9,25 @@ require "active_support"
 class Choctop
   VERSION = '0.0.1'
   
+  # The name of the Cocoa application
   attr_accessor :name
+  
+  # The host name, e.g. some-domain.com
   attr_accessor :host
+  
+  # The url from where the xml + zip files will be downloaded
+  # Default: http://#{host}
   attr_accessor :base_url
+  
+  # The name of the local xml file containing the Sparkle item details
+  # Default: linker_appcast.xml
   attr_accessor :appcast_filename
+  
+  # The remote directory where the xml + zip files will be rsync'd
   attr_accessor :remote_dir
+  
+  # The argument flags passed to rsync
+  # Default: -aCv
   attr_accessor :rsync_args
   
   def initialize(name)
