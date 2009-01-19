@@ -163,6 +163,3 @@ lib/choctop/appcast.rb
 script/console
 script/destroy
 script/generate
-spec/spec.opts
-spec/spec_helper.rb
-tasks/rspec.rake
