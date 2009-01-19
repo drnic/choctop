@@ -6,11 +6,11 @@ require "rubygems"
 require "builder"
 require "active_support"
 
-class SparkleTools
+class Choctop
   VERSION = '0.0.1'
   
   attr_accessor :name
-  attr_accessor :server
+  attr_accessor :host
   attr_accessor :base_url
   attr_accessor :appcast_filename
   attr_accessor :remote_dir
@@ -22,11 +22,11 @@ class SparkleTools
     
     # Defaults
     @appcast_filename = 'linker_appcast.xml'
-    @rsync_args = '-av'
+    @rsync_args = '-aCv'
     
     yield self if block_given?
 
-    @base_url ||= "http://#{server}"
+    @base_url ||= "http://#{host}"
     
     define_tasks
     
@@ -39,12 +39,12 @@ class SparkleTools
         make_appcast
       end
 
-      desc "Upload the appcast file to the server"
+      desc "Upload the appcast file to the host"
       task :upload do
         upload_appcast
       end
     end
   end
 end
-require "sparkle_tools/appcast"
+require "choctop/appcast"
 

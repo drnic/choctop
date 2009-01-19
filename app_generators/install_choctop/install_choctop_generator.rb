@@ -1,4 +1,4 @@
-class InstallSparkleToolsGenerator < RubiGen::Base
+class InstallChoctopGenerator < RubiGen::Base
   attr_reader :name, :module_name, :urlname, :version
 
   default_options :version => "1.0.0"
@@ -25,7 +25,7 @@ class InstallSparkleToolsGenerator < RubiGen::Base
   protected
     def banner
       <<-EOS
-Installs sparkle_tools into your Cocoa application. This gives you
+Installs choctop into your Cocoa application. This gives you
 rake tasks to build and deploy your Cocoa app's latest version for
 Sparkle appcast mechanism.
 

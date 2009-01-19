@@ -1,9 +1,9 @@
 %w[rubygems rake rake/clean fileutils newgem rubigen].each { |f| require f }
-require File.dirname(__FILE__) + '/lib/sparkle_tools'
+require File.dirname(__FILE__) + '/lib/choctop'
 
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
-$hoe = Hoe.new('sparkle_tools', SparkleTools::VERSION) do |p|
+$hoe = Hoe.new('choctop', Choctop::VERSION) do |p|
   p.developer('Dr Nic Williams', 'drnicwilliams@gmail.com')
   p.developer('Chris Bailey', 'chris@cobaltedge.com')
   p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")

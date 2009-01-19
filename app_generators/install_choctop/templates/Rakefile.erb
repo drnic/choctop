@@ -1,0 +1,11 @@
+require "rubygems"
+require "rake"
+
+require "choctop"
+
+Choctop.new('<%= name %>') do |s|
+  s.host     = '<%= urlname %>.com'
+  s.base_url   = "http://#{s.host}"
+  s.remote_dir = '/path/to/upload/root/of/app'
+end
+

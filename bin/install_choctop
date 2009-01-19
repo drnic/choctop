@@ -4,8 +4,8 @@ require 'rubygems'
 require 'rubigen'
 
 if %w(-v --version).include? ARGV.first
-  require 'install_sparkle_tools/version'
-  puts "#{File.basename($0)} #{InstallSparkleTools::VERSION}"
+  require 'install_choctop/version'
+  puts "#{File.basename($0)} #{InstallChoctop::VERSION}"
   exit(0)
 end
 
@@ -14,9 +14,9 @@ source = RubiGen::PathSource.new(:application,
   File.join(File.dirname(__FILE__), "../app_generators"))
 RubiGen::Base.reset_sources
 RubiGen::Base.append_sources source
-RubiGen::Scripts::Generate.new.run(ARGV, :generator => 'install_sparkle_tools')
+RubiGen::Scripts::Generate.new.run(ARGV, :generator => 'install_choctop')
 puts <<-EOS
-You use sparkle_tools with the following rake tasks:
+You use choctop with the following rake tasks:
   rake appcast:build   # Create/update the appcast file
   rake appcast:upload  # Upload the appcast file to the server
 EOS

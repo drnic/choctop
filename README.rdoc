@@ -1,10 +1,18 @@
-= sparkle_tools
+= choctop
 
-* FIX (url)
+* http://drnic.github.com/choctop
 
 == DESCRIPTION:
 
-FIX (describe your package)
+Build and deploy tools for Cocoa apps using Sparkle for distributions and upgrades.
+
+Rake tasks:
+
+    rake appcast:build   # Create/update the appcast file
+    rake appcast:upload  # Upload the appcast file to the host
+
+Original code posted by Chris Bailey at http://codeintensity.blogspot.com/2008/03/creating-sparkle-appcast-via-rake-tasks.html
+
 
 == FEATURES/PROBLEMS:
 
@@ -20,13 +28,15 @@ FIX (describe your package)
 
 == INSTALL:
 
-* FIX (sudo gem install, anything else)
+    sudo gem install choctop
+    cd to/my/cocoa/app
+    install_choctop .
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2009 FIXME full name
+Copyright (c) 2009 Dr Nic Williams
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

@@ -1,4 +1,4 @@
-module SparkleTools::Appcast
+module Choctop::Appcast
   def make_appcast
     begin
       versions = YAML.load_file("appcast/version_info.yml")
@@ -47,6 +47,7 @@ module SparkleTools::Appcast
 
   def upload_appcast
     # rsync_args = '-av --delete --ignore-errors'
+    sh %{rsync -aCv #{local_dir}/ #{host}#{remote_dir}}
   end
 end
-SparkleTools.send(:include, SparkleTools::Appcast)
+Choctop.send(:include, Choctop::Appcast)
