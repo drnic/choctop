@@ -6,7 +6,7 @@ module SparkleTools::Appcast
       raise StandardError, "appcast/version_info.yml could not be loaded: #{e.message}"
     end
 
-    app_name = File.basename(File.expand_path '.')
+    app_name = File.basename(File.expand_path('.'))
     
     FileUtils.mkdir_p "appcast/build"
     appcast = File.open("appcast/build/#{APPCAST_FILENAME}", 'w')
@@ -19,8 +19,8 @@ module SparkleTools::Appcast
             :version => "2.0") do
       xml.channel do
         xml.title(app_name)
+        xml.description('#{app_name} updates')
         xml.link(APPCAST_URL)
-        xml.description('Linker app updates')
         xml.language('en')
         xml.pubDate Time.now.to_s(:rfc822)
         # xml.lastBuildDate(Time.now.rfc822)
