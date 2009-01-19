@@ -47,7 +47,7 @@ module Choctop::Appcast
 
   def upload_appcast
     # rsync_args = '-av --delete --ignore-errors'
-    sh %{rsync -aCv #{local_dir}/ #{host}#{remote_dir}}
+    sh %{rsync -aCv appcast/build/ #{host}#{remote_dir}}
   end
 end
 Choctop.send(:include, Choctop::Appcast)
