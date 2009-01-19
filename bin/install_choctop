@@ -17,7 +17,8 @@ RubiGen::Base.append_sources source
 RubiGen::Scripts::Generate.new.run(ARGV, :generator => 'install_choctop')
 puts <<-EOS
 You use choctop with the following rake tasks:
+  rake appcast         # Create dmg, update appcast file, and upload to host
   rake appcast:build   # Create/update the appcast file
-  rake appcast:upload  # Upload the appcast file to the host
   rake appcast:dmg     # Create the dmg file for appcasting
+  rake appcast:upload  # Upload the appcast file to the host
 EOS
