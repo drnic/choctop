@@ -30,22 +30,15 @@ module Choctop::Appcast
         xml.atom(:link, :href => "#{base_url}/#{appcast_filename}", 
                  :rel => "self", :type => "application/rss+xml")
 
-        version_info.each do |version|
-          guid = version.first
-          items = version[1]
-          file = "appcast/build/#{items['filename']}"
-          title = "#{name} #{items['version']}"
-          
-          xml.item do
-            xml.title(title)
-            xml.description(items['description'])
-            xml.pubDate(File.mtime(file))
-            xml.enclosure(:url => "#{base_url}/#{items['filename']}", 
-                          :length => "#{File.size(file)}", 
-                          :type => "application/dmg",
-                          :"sparkle:version" => items['version'])
-            xml.guid(guid, :isPermaLink => "false")
-          end
+        xml.item do
+          xml.title("#{name} #{version}")
+          xml.tag! "sparkle:releaseNotesLink", release_notes_link
+          xml.pubDate(File.mtime(pkg))
+          xml.guid("#{name}-#{version}", :isPermaLink => "false")
+          xml.enclosure(:url => "#{base_url}/#{target}", 
+                        :length => "#{File.size(pkg)}", 
+                        :type => "application/dmg",
+                        :"sparkle:version" => version)
         end
       end
     end

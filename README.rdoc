@@ -4,7 +4,8 @@
 
 == DESCRIPTION:
 
-Build and deploy tools for Cocoa apps using Sparkle for distributions and upgrades.
+Build and deploy tools for Cocoa apps using Sparkle for distributions and upgrades; it's
+like Hoe but for Cocoa apps.
 
 Rake tasks:
 

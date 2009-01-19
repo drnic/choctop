@@ -30,6 +30,10 @@ class Choctop
   # Default: http://#{host}
   attr_accessor :base_url
   
+  # The url to display the release notes for the latest release
+  # Default: base_url
+  attr_accessor :release_notes_link
+  
   # The name of the local xml file containing the Sparkle item details
   # Default: info_plist['SUFeedURL'] or linker_appcast.xml
   attr_accessor :appcast_filename
@@ -77,6 +81,7 @@ class Choctop
     yield self if block_given?
 
     @base_url ||= "http://#{host}"
+    @release_notes_link ||= base_url
     
     define_tasks
   end
