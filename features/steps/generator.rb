@@ -14,3 +14,9 @@ Given /^a Cocoa app that does have an existing Rakefile$/ do
     end
   end
 end
+
+Given /Rakefile wired to use development code instead of installed RubyGem/ do
+  in_project_folder do
+    force_local_lib_override
+  end
+end

@@ -24,11 +24,11 @@ Given %r{^env variable \$([\w_]+) set to '(.*)'} do |env_var, value|
   ENV[env_var] = value
 end
 
-def force_local_lib_override(project_name = @project_name)
-  rakefile = File.read(File.join(project_name, 'Rakefile'))
-  File.open(File.join(project_name, 'Rakefile'), "w+") do |f|
+def force_local_lib_override(filename = 'Rakefile')
+  file = File.read(filename)
+  File.open(filename, "w+") do |f|
     f << "$:.unshift('#{@lib_path}')\n"
-    f << rakefile
+    f << file
   end
 end
 

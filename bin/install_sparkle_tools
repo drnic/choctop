@@ -15,3 +15,6 @@ source = RubiGen::PathSource.new(:application,
 RubiGen::Base.reset_sources
 RubiGen::Base.append_sources source
 RubiGen::Scripts::Generate.new.run(ARGV, :generator => 'install_sparkle_tools')
+
+puts "You use sparkle_tools with the following rake tasks:"
+puts `rake -s -T appcast`
