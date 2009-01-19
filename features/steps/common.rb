@@ -24,11 +24,17 @@ Given %r{^env variable \$([\w_]+) set to '(.*)'} do |env_var, value|
   ENV[env_var] = value
 end
 
-def force_local_lib_override(filename = 'Rakefile')
+def prepend_to_file(filename, text)
   file = File.read(filename)
   File.open(filename, "w+") do |f|
-    f << "$:.unshift('#{@lib_path}')\n"
+    f << text + "\n"
     f << file
+  end
+end
+
+def append_to_file(filename, text)
+  File.open(filename, "a") do |f|
+    f << text + "\n"
   end
 end
 

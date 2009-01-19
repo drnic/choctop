@@ -12,6 +12,7 @@ class SparkleTools
   attr_accessor :rsync_args
   
   def initialize(name)
+    $sparkle = self # define a global variable for this object
     @name = name
     
     # Defaults
@@ -23,6 +24,7 @@ class SparkleTools
     @base_url ||= "http://#{server}"
     
     define_tasks
+    
   end
 
   def define_tasks

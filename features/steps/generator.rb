@@ -17,7 +17,7 @@ end
 
 Given /Rakefile wired to use development code instead of installed RubyGem/ do
   in_project_folder do
-    force_local_lib_override
+    prepend_to_file "Rakefile", "$:.unshift('#{@lib_path}')"
   end
 end
 
