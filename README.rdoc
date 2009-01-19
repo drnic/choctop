@@ -40,10 +40,15 @@ remote server, with a password/ssh keys.
 The create the distribution, Sparkle XML file, and upload it to the remote host:
 
   rake appcast
-  
+
+The build process uses your Xcode project file, via the xcodebuild command. If this fails,
+you may need to run the build process manually via Xcode. Set Configuration to Release (normally
+its set to Debug for development) and then Build. The "rake appcast" task should finish to completion.
+
 == REQUIREMENTS:
 
 * RubyCocoa (installed with OS X 10.5 Leopard)
+* Xcode 3+
 
 == INSTALL:
 
