@@ -1,5 +1,5 @@
 class InstallSparkleToolsGenerator < RubiGen::Base
-  attr_reader :name, :module_name, :version
+  attr_reader :name, :module_name, :urlname, :version
 
   default_options :version => "1.0.0"
 
@@ -7,8 +7,9 @@ class InstallSparkleToolsGenerator < RubiGen::Base
     super
     usage if args.empty?
     @destination_root = File.expand_path(args.shift)
-    @name = base_name
+    @name        = base_name
     @module_name = base_name.gsub(/[-]+/, '_').camelcase
+    @urlname     = base_name.gsub(/\W+/, '').underscore
     extract_options
   end
 
@@ -16,7 +17,7 @@ class InstallSparkleToolsGenerator < RubiGen::Base
     record do |m|
       %w( appcast/build ).each { |path| m.directory path }
 
-      m.file     "Rakefile",         "Rakefile", :collision => :skip
+      m.template "Rakefile.erb", "Rakefile", :collision => :skip
       m.template "appcast/version_info.yml.erb",  "appcast/version_info.yml"
     end
   end

@@ -1,4 +1,0 @@
-require "rubygems"
-require "rake"
-
-require "sparkle_tools/tasks"

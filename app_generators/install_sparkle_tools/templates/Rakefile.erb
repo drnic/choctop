@@ -1,0 +1,8 @@
+require "rubygems"
+require "rake"
+
+APPCAST_SERVER        = '<%= urlname %>.com'
+APPCAST_URL           = "http://#{APPCAST_SERVER}"
+APPCAST_FILENAME      = 'linker_appcast.xml'
+
+require "sparkle_tools/tasks"

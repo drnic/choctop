@@ -20,3 +20,9 @@ Given /Rakefile wired to use development code instead of installed RubyGem/ do
     force_local_lib_override
   end
 end
+
+Given /^a Cocoa app with sparkle_tools installed$/ do
+  Given "a Cocoa app that does not have an existing Rakefile"
+  Given "I run local executable 'install_sparkle_tools' with arguments '.'"
+  Given "Rakefile wired to use development code instead of installed RubyGem"
+end
