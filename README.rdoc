@@ -7,15 +7,17 @@
 Build and deploy tools for Cocoa apps using Sparkle for distributions and upgrades; it's
 like Hoe but for Cocoa apps.
 
-Rake tasks:
+The main feature is a powerful rake task "rake appcast" which builds a release of your
+application, creates a DMG package, generates a Sparkle XML file, and posts the package
+and XML file to your remote host via rsync.
+
+All rake tasks:
 
     rake appcast         # Create dmg, update appcast file, and upload to host
-    rake appcast:build   # Create/update the appcast file
+    rake appcast:build   # Build Xcode Release
     rake appcast:dmg     # Create the dmg file for appcasting
+    rake appcast:feed    # Create/update the appcast file
     rake appcast:upload  # Upload the appcast file to the host
-
-Original code posted by Chris Bailey at http://codeintensity.blogspot.com/2008/03/creating-sparkle-appcast-via-rake-tasks.html
-
 
 == FEATURES/PROBLEMS:
 
@@ -46,6 +48,12 @@ The create the distribution, Sparkle XML file, and upload it to the remote host:
 == INSTALL:
 
     sudo gem install choctop
+
+== ORIGINAL CODE IDEAS:
+
+* Chris Bailey at http://codeintensity.blogspot.com/2008/03/creating-sparkle-appcast-via-rake-tasks.html
+* Eloy Duran's Rucola at http://github.com/alloy/rucola
+
     
 == SPONSORED BY:
 
