@@ -98,7 +98,7 @@ class Choctop
       end
       
       desc "Create/update the appcast file"
-      task :feed => "appcast/build/#{pkg_name}"
+      task :feed => "appcast/build/#{appcast_filename}"
       
       file "appcast/build/#{appcast_filename}" => "appcast/build/#{pkg_name}" do
         make_appcast
