@@ -84,7 +84,9 @@ class Choctop
   def define_tasks
     namespace :appcast do
       desc "Build Xcode Release"
-      task :build do
+      task :build => "build/Release/#{target}/Contents/Info.plist"
+      
+      task "build/Release/#{target}/Contents/Info.plist" do
         make_build
       end
       

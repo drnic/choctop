@@ -52,7 +52,8 @@ module Choctop::Appcast
   end
 
   def upload_appcast
-    sh %{rsync -aCv appcast/build/ #{host}#{remote_dir}}
+    _host = host.blank? ? "" : "#{host}:"
+    sh %{rsync -aCv appcast/build/ #{_host}#{remote_dir}}
   end
   
 end

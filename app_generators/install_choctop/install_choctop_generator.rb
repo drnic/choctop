@@ -8,8 +8,8 @@ class InstallChoctopGenerator < RubiGen::Base
     usage if args.empty?
     @destination_root = File.expand_path(args.shift)
     @name        = base_name
-    @module_name = base_name.gsub(/[-]+/, '_').camelcase
-    @urlname     = base_name.gsub(/[-_]+/, '').underscore
+    @module_name = name.gsub(/[-]+/, '_').camelcase
+    @urlname     = name.gsub(/[-_]+/, '').downcase
     extract_options
   end
 
