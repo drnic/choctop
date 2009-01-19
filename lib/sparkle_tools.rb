@@ -1,6 +1,11 @@
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
+require "fileutils"
+require "rubygems"
+require "builder"
+require "active_support"
+
 class SparkleTools
   VERSION = '0.0.1'
   
@@ -43,8 +48,3 @@ class SparkleTools
 end
 require "sparkle_tools/appcast"
 
-require "fileutils"
-require "builder"
-
-require "rubygems"
-require "active_support"
