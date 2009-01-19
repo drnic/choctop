@@ -19,23 +19,24 @@ All rake tasks:
     rake appcast:feed    # Create/update the appcast file
     rake appcast:upload  # Upload the appcast file to the host
 
-== Why is it called 'Choctop'? 
+== Why is it called 'ChocTop'? 
 
 In Australia, Choc-Tops are ice cream cones, with hardened chocolate on top, 
 normally served at the movie cinemas. When we (http://mocra.com) were brainstorming a name for this
-project we combined "Sparkle" + "Cocoa" + "its almost lunch time and we're hungry" to remember 
+project we combined "Sparkle" + "Cocoa" + "it's almost lunch time and we're hungry" to remember 
 the wonderful Choc-Top ice creams. MMmmm.
 
 Wikipedia: http://en.wikipedia.org/wiki/Choc-Top
 
 == FEATURES/PROBLEMS:
 
-Choctop comes with rake tasks to instantly deploy your latest Cocoa app's version
+ChocTop comes with rake tasks to instantly deploy your latest Cocoa app's version
 to a remote host, instantly activating all your users' Sparkle auto-updates.
 
-* Can build a DMG of your released app using Info.plist configuration (rake appcast:dmg)
-* Can generate Sparkle-formatted XML file
-* Can upload the DMG and XML files to a remote host
+* builds a Release of your project from your Xcode project (via xcodebuild tool)
+* packages a DMG of your released app using Info.plist configuration (rake appcast:dmg)
+* generates Sparkle-formatted XML file
+* uploads the DMG and XML files to a remote host
 
 == SYNOPSIS:
 
@@ -47,7 +48,7 @@ to the end:
 
     require "choctop"
 
-    Choctop.new do |s|
+    ChocTop.new do |s|
       s.host     = 'project.com'
       s.remote_dir = '/path/to/upload/root/of/app'
       
@@ -56,7 +57,7 @@ to the end:
       s.release_notes_link = s.base_url
     end
 
-In your Rakefile, update the Choctop configuration with the host and remote_dir details.
+In your Rakefile, update the ChocTop configuration with the host and remote_dir details.
 The rake tasks use rsync to upload the files, so ensure that you have ssh access to the
 remote server, with a password/ssh keys.
 

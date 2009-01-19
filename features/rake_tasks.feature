@@ -27,7 +27,7 @@ Feature: Rake tasks are available to build and deploy Cocoa apps with Sparkle
   Scenario: rake task to upload the appcast file to the server
     Given a Cocoa app with choctop installed
     And task 'rake appcast:feed' is invoked
-    And Choctop config is configured for local rsync
+    And ChocTop config is configured for local rsync
     When task 'rake appcast:upload' is invoked
     Then remote file 'linker_appcast.xml' is created
     Then remote file 'SampleApp-0.1.0.dmg' is created

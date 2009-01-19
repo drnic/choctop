@@ -5,7 +5,7 @@ require 'rubigen'
 
 if %w(-v --version).include? ARGV.first
   require 'install_choctop/version'
-  puts "#{File.basename($0)} #{InstallChoctop::VERSION}"
+  puts "#{File.basename($0)} #{InstallChocTop::VERSION}"
   exit(0)
 end
 

@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/lib/choctop'
 
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
-$hoe = Hoe.new('choctop', Choctop::VERSION) do |p|
+$hoe = Hoe.new('choctop', ChocTop::VERSION) do |p|
   p.developer('Dr Nic Williams', 'drnicwilliams@gmail.com')
   p.developer('Chris Bailey', 'chris@cobaltedge.com')
   p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")

@@ -8,7 +8,7 @@ require "builder"
 require "active_support"
 require "osx/cocoa"
 
-class Choctop
+class ChocTop
   VERSION = '0.9.0'
   
   # The name of the Cocoa application

@@ -1,4 +1,4 @@
-module Choctop::Appcast
+module ChocTop::Appcast
   def make_build
     sh "xcodebuild -configuration Release"
   end
@@ -50,4 +50,4 @@ module Choctop::Appcast
   end
   
 end
-Choctop.send(:include, Choctop::Appcast)
+ChocTop.send(:include, ChocTop::Appcast)

@@ -10,7 +10,7 @@ Then %r{^remote file '(.*)' (is|is not) created} do |file, is|
   end
 end
 
-Given /^Choctop config is configured for local rsync$/ do
+Given /^ChocTop config is configured for local rsync$/ do
   in_project_folder do
     append_to_file "Rakefile", <<-RUBY.gsub(/^    /, '')
     $sparkle.host = ""
