@@ -62,6 +62,14 @@ class ChocTop
     "appcast/build/#{pkg_name}"
   end
   
+  # The url for the remote package, without the protocol + host
+  # e.g. if absolute url is http://mydomain.com/downloads/MyApp-1.0.dmg
+  # then pkg_relative_url is /downloads/MyApp-1.0.dmg
+  def pkg_relative_url
+    _base_url = base_url.gsub(%r{/$}, '')
+    "#{_base_url}/#{pkg_name}".gsub(%r{^.*#{host}}, '')
+  end
+  
   def info_plist
     @info_plist ||= OSX::NSDictionary.dictionaryWithContentsOfFile(File.expand_path('Info.plist'))
   end
@@ -102,8 +110,9 @@ class ChocTop
       
       file "appcast/build/#{appcast_filename}" => "appcast/build/#{pkg_name}" do
         make_appcast
-      end        
-
+        make_index_redirect
+      end
+      
       desc "Upload the appcast file to the host"
       task :upload do
         upload_appcast

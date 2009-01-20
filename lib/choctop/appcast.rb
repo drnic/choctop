@@ -43,6 +43,12 @@ module ChocTop::Appcast
       end
     end
   end
+  
+  def make_index_redirect
+    File.open("appcast/build/index.php", 'w') do |f|
+      f << %Q{<?php header("Location: #{pkg_relative_url}"); ?>}
+    end
+  end
 
   def upload_appcast
     _host = host.blank? ? "" : "#{host}:"
