@@ -15,7 +15,7 @@ Feature: Can build a customised DMG image from application build
     And folder '/Volumes/SampleApp' is created
     And folder '/Volumes/SampleApp/SampleApp.app' is created
     And folder '/Volumes/SampleApp/SampleApp.app' is editable
-    And file '/Volumes/SampleApp/Application' is created as a symlink to /Application
+    And file '/Volumes/SampleApp/Applications' is a symlink to '/Applications'
   
   Scenario: Freeze the designed DMG by storing the .DS_Store
     Given a Cocoa app with choctop installed

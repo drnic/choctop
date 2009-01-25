@@ -239,3 +239,11 @@ Then /^folder '(.*)' is editable$/ do |folder|
     end
   end
 end
+
+Then /^file '(.*)' is a symlink to '(.*)'$/ do |path, target_path|
+  in_project_folder do
+    stdout = `ls -al #{path}`
+    stdout =~ /\s([^\s]+)\s->\s(.+)$/
+    target_path.should == $2
+  end
+end
