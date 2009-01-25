@@ -221,5 +221,10 @@ Then /^file '(.*)' is modified$/ do |file|
 end
 
 When %r{^in file '(.*)' replace /(.*)/ with '(.*)'$} do |file, from, to|
-  
+  in_project_folder do
+    contents = File.read(file)
+    File.open(file, "w") do |f|
+      f << contents.gsub(/#{from}/, to)
+    end
+  end
 end
