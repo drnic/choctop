@@ -228,3 +228,14 @@ When %r{^in file '(.*)' replace /(.*)/ with '(.*)'$} do |file, from, to|
     end
   end
 end
+
+Then /^folder '(.*)' is editable$/ do |folder|
+  in_project_folder do
+    FileUtils.chdir(folder) do
+      proc { 
+        `touch touchme`
+        `rm touchme`
+      }.should_not raise_error(StandardError)
+    end
+  end
+end

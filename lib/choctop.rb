@@ -57,9 +57,14 @@ class ChocTop
     "#{name}-#{version}.dmg"
   end
   
-  # Path to generated package file
+  # Path to generated package DMG
   def pkg
     "appcast/build/#{pkg_name}"
+  end
+  
+  # Path to generated package DMG for design
+  def design_pkg
+    "appcast/build/#{name}-design.dmg"
   end
   
   # The url for the remote package, without the protocol + host
@@ -98,16 +103,20 @@ class ChocTop
     end
     
     desc "Create the dmg file for appcasting"
-    task :dmg => "appcast/build/#{pkg_name}"
-    
-    file "appcast/build/#{pkg_name}" => "build/Release/#{target}/Contents/Info.plist" do
+    task :dmg => :build do
       make_dmg
     end
     
-    desc "Create/update the appcast file"
-    task :feed => "appcast/build/#{appcast_filename}"
+    namespace :dmg do
+      desc "Create the dmg file read for designing (editable)"
+      task :design => :build do
+        dmg_path = make_dmg_design
+        `open #{dmg_path}`
+      end
+    end
     
-    file "appcast/build/#{appcast_filename}" => "appcast/build/#{pkg_name}" do
+    desc "Create/update the appcast file"
+    task :feed do
       make_appcast
       make_index_redirect
     end
