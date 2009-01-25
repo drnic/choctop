@@ -11,6 +11,9 @@ module ChocTop::Dmg
     sh "hdiutil create -format UDRW -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{design_pkg}' -quiet"
     sh "hdiutil attach '#{design_pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
     sh "ln -s /Applications '#{volume_path}/Applications'"
+    FileUtils.cp "#{design_path}/ds_store", "#{volume_path}/.DS_Store" rescue nil
+    files = Dir["#{design_path}/*"] - ["#{design_path}/ds_store"] - ["#{design_path}/.DS_Store"] - Dir["#{design_path}/*.dmg"]
+    files.each { |file| FileUtils.cp(file, "#{volume_path}/") }
   end
   
   def store_dmg_design

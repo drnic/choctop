@@ -40,3 +40,12 @@ Feature: Can build a customised DMG image from application build
     And task 'rake dmg' is invoked
     Then file 'appcast/build/SampleApp-0.1.0.dmg' is created
 
+  Scenario: Re-designing a DMG will recommence from last freeze point
+    Given a Cocoa app with choctop installed
+    And task 'rake dmg:design' is invoked
+    And dmg has a custom design
+    And task 'rake dmg:freeze' is invoked
+    When task 'rake dmg:design' is invoked
+    Then file '/Volumes/SampleApp/.DS_Store' is created
+    And file '/Volumes/SampleApp/background.jpg' is created
+    
