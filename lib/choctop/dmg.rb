@@ -17,6 +17,7 @@ module ChocTop::Dmg
 
     unless ENV['NO_FINDER']
       sh "open #{volume_path} -a Finder"
+      puts "Opening your DMG for editing."
     end
   end
   
