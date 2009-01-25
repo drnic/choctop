@@ -14,6 +14,10 @@ module ChocTop::Dmg
     FileUtils.cp "#{design_path}/ds_store", "#{volume_path}/.DS_Store" rescue nil
     files = Dir["#{design_path}/*"] - ["#{design_path}/ds_store"] - ["#{design_path}/.DS_Store"] - Dir["#{design_path}/*.dmg"]
     files.each { |file| FileUtils.cp(file, "#{volume_path}/") }
+
+    unless ENV['NO_FINDER']
+      sh "open #{volume_path} -a Finder"
+    end
   end
   
   def store_dmg_design

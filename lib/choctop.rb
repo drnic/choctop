@@ -121,7 +121,6 @@ class ChocTop
       desc "Create the dmg file read for designing (editable)"
       task :design => :build do
         make_design_dmg
-        sh "open #{volume_path}" unless ENV['NO_FINDER']
       end
       
       desc "Freeze the designed dmg volume"
