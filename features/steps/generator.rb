@@ -35,4 +35,5 @@ Given /^a Cocoa app with choctop installed$/ do
   Given "I run local executable 'install_choctop' with arguments '.'"
   Given "Rakefile wired to use development code instead of installed RubyGem"
   Given "Rakefile constants rewired for local rsync"
+  ENV['NO_FINDER'] = 'YES' # disable Finder during tests
 end

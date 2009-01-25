@@ -67,6 +67,11 @@ class ChocTop
     "appcast/build/#{name}-design.dmg"
   end
   
+  # Path to Volume when DMG is mounted
+  def volume_path
+    "/Volumes/#{name}"    
+  end
+  
   # The url for the remote package, without the protocol + host
   # e.g. if absolute url is http://mydomain.com/downloads/MyApp-1.0.dmg
   # then pkg_relative_url is /downloads/MyApp-1.0.dmg
@@ -110,8 +115,13 @@ class ChocTop
     namespace :dmg do
       desc "Create the dmg file read for designing (editable)"
       task :design => :build do
-        dmg_path = make_dmg_design
-        `open #{dmg_path}`
+        make_design_dmg
+        sh "open #{volume_path}" unless ENV['NO_FINDER']
+      end
+      
+      desc "Freeze the designed dmg volume"
+      task :freeze do
+        detach_dmg
       end
     end
     

@@ -34,3 +34,10 @@ Feature: Can build a customised DMG image from application build
     And task 'rake dmg' is invoked
     Then file 'appcast/build/SampleApp-0.1.0.dmg' is created
   
+  Scenario: Freezing a designed dmg closes the volume
+    Given a Cocoa app with choctop installed
+    And task 'rake dmg:design' is invoked
+    And folder '/Volumes/SampleApp' is created
+    When task 'rake dmg:freeze' is invoked
+    Then folder '/Volumes/SampleApp' is not created
+  
