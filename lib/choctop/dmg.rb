@@ -15,10 +15,9 @@ module ChocTop::Dmg
   
   def store_dmg_design
     FileUtils.cp "#{volume_path}/.DS_Store", "#{design_path}/ds_store" rescue nil
-    %w[jpg png gif].each do |image_type|
-      puts "cp #{volume_path}/*.#{image_type} #{design_path}/"
-      FileUtils.cp "#{volume_path}/*.#{image_type}", "#{design_path}/" rescue nil
-    end
+    files = Dir["#{volume_path}/*"] - ["#{volume_path}/.DS_Store"]
+    files.reject! {|file| File.directory? file}
+    files.each { |file| FileUtils.cp(file, "#{design_path}/") }
     true
   end
   

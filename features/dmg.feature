@@ -30,7 +30,7 @@ Feature: Can build a customised DMG image from application build
     And dmg has a custom design
     When task 'rake dmg:freeze' is invoked
     Then file 'appcast/design/ds_store' is created
-    And file 'appcast/design/background.png' is created
+    And file 'appcast/design/background.jpg' is created
 
   Scenario: Build a designed DMG using files cached from frozen design
     Given a Cocoa app with choctop installed

@@ -1,8 +1,6 @@
 Given /^dmg has a custom design$/ do
-  FileUtils.chdir("/Volumes/SampleApp") do
-    # create a .DS_Store
-    `touch .DS_Store`
-    # add a background.png
-    `touch background.png`
-  end
+  volume_path = "/Volumes/SampleApp"
+  # Create a .DS_Store and add a background.jpg
+  FileUtils.cp(File.dirname(__FILE__) + "/../fixtures/design/ds_store", volume_path)
+  FileUtils.cp(File.dirname(__FILE__) + "/../fixtures/design/background.jpg", volume_path)
 end
