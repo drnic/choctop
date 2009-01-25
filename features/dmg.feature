@@ -19,10 +19,9 @@ Feature: Can build a customised DMG image from application build
     Given a Cocoa app with choctop installed
     And task 'rake dmg' is invoked
     And file 'appcast/build/SampleApp-0.1.0.dmg' timestamp remembered
-    And in file 'build/Debug/SampleApp.app/Contents/Info.plist' replace /1.0/ with '1.0'
-    When task 'rake dmg' is invoked
+    When in file 'build/Debug/SampleApp.app/Contents/Info.plist' replace /1.0/ with '1.0'
+    And task 'rake dmg' is invoked
     Then file 'appcast/build/SampleApp-0.1.0.dmg' is modified
-
     
   Scenario: Build and mount an editable DMG for design purposes
     Given a Cocoa app with choctop installed

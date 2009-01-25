@@ -199,3 +199,27 @@ Then %r{^gem spec key '(.*)' contains \/(.*)\/} do |key, regex|
     spec_value.to_s.should match(/#{regex}/)
   end
 end
+
+Given /^file '(.*)' timestamp remembered$/ do |file|
+  in_project_folder do
+    @timestamp = File.new(file).mtime
+  end
+end
+
+Then /^file '(.*)' is unchanged$/ do |file|
+  raise %Q{ERROR: need to use "Given file '#{file}' timestamp remembered" to set the timestamp} unless @timestamp
+  in_project_folder do
+    File.new(file).mtime.should == @timestamp
+  end
+end
+
+Then /^file '(.*)' is modified$/ do |file|
+  raise %Q{ERROR: need to use "Given file '#{file}' timestamp remembered" to set the timestamp} unless @timestamp
+  in_project_folder do
+    File.new(file).mtime.should_not == @timestamp
+  end
+end
+
+When %r{^in file '(.*)' replace /(.*)/ with '(.*)'$} do |file, from, to|
+  
+end
