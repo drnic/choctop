@@ -3,11 +3,6 @@ module ChocTop::Appcast
     sh "xcodebuild -configuration Release"
   end
   
-  def make_dmg
-    FileUtils.rm_rf pkg
-    sh "hdiutil create -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
-  end
-  
   def make_appcast
     app_name = File.basename(File.expand_path('.'))
     

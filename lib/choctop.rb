@@ -124,4 +124,5 @@ class ChocTop
   end
 end
 require "choctop/appcast"
+require "choctop/dmg"
 
