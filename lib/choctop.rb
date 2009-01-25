@@ -62,9 +62,14 @@ class ChocTop
     "appcast/build/#{pkg_name}"
   end
   
+  # Path to designed DMG and frozen assets for reuse in generated DMGs
+  def design_path
+    "appcast/design"
+  end
+  
   # Path to generated package DMG for design
   def design_pkg
-    "appcast/build/#{name}-design.dmg"
+    "#{design_path}/#{name}-design.dmg"
   end
   
   # Path to Volume when DMG is mounted
@@ -121,7 +126,7 @@ class ChocTop
       
       desc "Freeze the designed dmg volume"
       task :freeze do
-        detach_dmg
+        store_dmg_design and detach_dmg
       end
     end
     
