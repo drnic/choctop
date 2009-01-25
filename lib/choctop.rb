@@ -90,37 +90,35 @@ class ChocTop
   end
   
   def define_tasks
-    namespace :appcast do
-      desc "Build Xcode Release"
-      task :build => "build/Release/#{target}/Contents/Info.plist"
-      
-      task "build/Release/#{target}/Contents/Info.plist" do
-        make_build
-      end
-      
-      desc "Create the dmg file for appcasting"
-      task :dmg => "appcast/build/#{pkg_name}"
-      
-      file "appcast/build/#{pkg_name}" => "build/Release/#{target}/Contents/Info.plist" do
-        make_dmg
-      end
-      
-      desc "Create/update the appcast file"
-      task :feed => "appcast/build/#{appcast_filename}"
-      
-      file "appcast/build/#{appcast_filename}" => "appcast/build/#{pkg_name}" do
-        make_appcast
-        make_index_redirect
-      end
-      
-      desc "Upload the appcast file to the host"
-      task :upload do
-        upload_appcast
-      end
+    desc "Build Xcode Release"
+    task :build => "build/Release/#{target}/Contents/Info.plist"
+    
+    task "build/Release/#{target}/Contents/Info.plist" do
+      make_build
     end
     
+    desc "Create the dmg file for appcasting"
+    task :dmg => "appcast/build/#{pkg_name}"
+    
+    file "appcast/build/#{pkg_name}" => "build/Release/#{target}/Contents/Info.plist" do
+      make_dmg
+    end
+    
+    desc "Create/update the appcast file"
+    task :feed => "appcast/build/#{appcast_filename}"
+    
+    file "appcast/build/#{appcast_filename}" => "appcast/build/#{pkg_name}" do
+      make_appcast
+      make_index_redirect
+    end
+    
+    desc "Upload the appcast file to the host"
+    task :upload do
+      upload_appcast
+    end
+
     desc "Create dmg, update appcast file, and upload to host"
-    task :appcast => %w[appcast:build appcast:feed appcast:upload]
+    task :appcast => %w[force_build dmg force_feed upload]
   end
 end
 require "choctop/appcast"

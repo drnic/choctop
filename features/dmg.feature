@@ -6,7 +6,23 @@ Feature: Can build a customised DMG image from application build
   Scenario: Build a vanilla DMG
     Given a Cocoa app with choctop installed
     When task 'rake dmg' is invoked
-    Then file 'appcast/build/SampleApp.dmg' is created
+    Then file 'appcast/build/SampleApp-0.1.0.dmg' is created
+  
+  Scenario: Don't rebuild the DMG if Info.plist unchanged
+    Given a Cocoa app with choctop installed
+    And task 'rake dmg' is invoked
+    And file 'appcast/build/SampleApp-0.1.0.dmg' timestamp remembered
+    When task 'rake dmg' is invoked
+    Then file 'appcast/build/SampleApp-0.1.0.dmg' is unchanged
+  
+  Scenario: Only rebuild the DMG if Info.plist updated (e.g. new version number)
+    Given a Cocoa app with choctop installed
+    And task 'rake dmg' is invoked
+    And file 'appcast/build/SampleApp-0.1.0.dmg' timestamp remembered
+    And in file 'build/Debug/SampleApp.app/Contents/Info.plist' replace /1.0/ with '1.0'
+    When task 'rake dmg' is invoked
+    Then file 'appcast/build/SampleApp-0.1.0.dmg' is modified
+
     
   Scenario: Build and mount an editable DMG for design purposes
     Given a Cocoa app with choctop installed
@@ -31,5 +47,5 @@ Feature: Can build a customised DMG image from application build
     And a custom .DS_Store is designed with a custom background
     And task 'rake dmg:freeze_design' is invoked
     And task 'rake dmg' is invoked
-    Then file 'appcast/build/SampleApp.dmg' is created
+    Then file 'appcast/build/SampleApp-0.1.0.dmg' is created
   
