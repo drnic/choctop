@@ -3,17 +3,19 @@ module ChocTop::Dmg
     FileUtils.rm_rf pkg
     FileUtils.mkdir_p mountpoint
     sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
-    sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
+    sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}'"
+    # sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
+    sh "bless --folder #{volume_path} --openfolder #{volume_path}"
     sh "ln -s /Applications '#{volume_path}/Applications'"
-    if background_file
-      target_background = "#{volume_path}/#{volume_background}"
-      FileUtils.cp(background_file, target_background) 
-      sh "SetFile -a V #{target_background}"
-    end
+    sh "sleep 1"
     if volume_icon
       FileUtils.cp(volume_icon, "#{volume_path}/.VolumeIcon.icns")
       sh "SetFile -a C #{volume_path}"
     end
+    target_background = "#{volume_path}/#{volume_background}"
+    FileUtils.cp(background_file, target_background) if background_file
+    configure_dmg_window
+    sh "SetFile -a V #{target_background}" if background_file
   end
   
   def volume_background
@@ -50,22 +52,29 @@ module ChocTop::Dmg
            delay 1 -- Sync
            set icon size of the icon view options of container window to #{icon_size}
            set arrangement of the icon view options of container window to not arranged
-           set background picture of the icon view options of container window to file "#{volume_background.gsub('/', ':')}"
            set position of item "#{target}" to {#{app_icon_position.join(", ")}}
            set position of item "Applications" to {#{applications_icon_position.join(", ")}}
            set the bounds of the container window to {#{window_bounds.join(", ")}}
+           set background picture of the icon view options of container window to file "#{volume_background.gsub('/', ':')}"
            update without registering applications
            delay 5 -- Sync
            close
        end tell
        -- Sync
        delay 5
-    end tell" || true
+    end tell
     SCRIPT
     File.open(scriptfile = "/tmp/choctop-script", "w") do |f|
       f << applescript
     end
-    sh "osascript #{scriptfile}"
+    sh("osascript #{scriptfile}") do |ok, res|
+      if ! ok
+        p res
+        puts volume_path
+        exit 1
+      end
+    end
+    applescript
   end
   
   def detach_dmg

@@ -68,7 +68,8 @@ class ChocTop
   end
   
   def mountpoint
-    @mountpoint ||= "/tmp/build/mountpoint#{rand(10000000)}"
+    # @mountpoint ||= "/tmp/build/mountpoint#{rand(10000000)}"
+    @mountpoint ||= "/Volumes"
   end
   
   # Path to Volume when DMG is mounted
@@ -149,6 +150,7 @@ class ChocTop
     
     desc "Create the dmg file for appcasting"
     task :dmg => :build do
+      detach_dmg
       make_dmg
       detach_dmg
       convert_dmg_readonly
