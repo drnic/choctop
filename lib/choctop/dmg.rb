@@ -1,9 +1,9 @@
 module ChocTop::Dmg
   def make_dmg
     FileUtils.rm_rf pkg
-    # need to bundle all files into a src folder + build dmg from there
     sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
-    clone_design_to_volume
+    sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
+    sh "ln -s /Applications '#{volume_path}/Applications'"
   end
   
   def make_design_dmg
@@ -19,20 +19,6 @@ module ChocTop::Dmg
       sh "open #{volume_path} -a Finder"
       puts "Opening your DMG for editing."
     end
-  end
-  
-  def clone_design_to_volume
-    FileUtils.cp "#{design_path}/ds_store", "#{volume_path}/.DS_Store" rescue nil
-    p files = Dir["#{design_path}/*"] - ["#{design_path}/ds_store"] - ["#{design_path}/.DS_Store"] - Dir["#{design_path}/*.dmg"]
-    files.each { |file| FileUtils.cp(file, "#{volume_path}/") }
-  end
-  
-  def store_dmg_design
-    FileUtils.cp "#{volume_path}/.DS_Store", "#{design_path}/ds_store" rescue nil
-    files = Dir["#{volume_path}/*"] - ["#{volume_path}/.DS_Store"]
-    files.reject! {|file| File.directory? file}
-    files.each { |file| FileUtils.cp(file, "#{design_path}/") }
-    true
   end
   
   def detach_dmg

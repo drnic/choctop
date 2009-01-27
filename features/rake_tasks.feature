@@ -5,18 +5,18 @@ Feature: Rake tasks are available to build and deploy Cocoa apps with Sparkle
 
   Scenario: rake task to build Release of app
     Given a Cocoa app with choctop installed
-    When task 'rake appcast:build' is invoked
+    When task 'rake build' is invoked
     Then folder 'build/Release/SampleApp.app' is created
 
   Scenario: rake task to create dmg file of build
-    Given a Cocoa app with choctop installed
-    And task 'rake appcast:build' is invoked
-    When task 'rake appcast:dmg' is invoked
+    Given an unbuilt Cocoa app with choctop installed
+    And task 'rake build' is invoked
+    When task 'rake dmg' is invoked
     Then file 'appcast/build/SampleApp-0.1.0.dmg' is created
 
   Scenario: rake task to create/update the appcast file
     Given a Cocoa app with choctop installed
-    When task 'rake appcast:feed' is invoked
+    When task 'rake feed' is invoked
     Then file 'appcast/build/linker_appcast.xml' is created
     And contents of file 'appcast/build/linker_appcast.xml' does match /<channel>/
     And contents of file 'appcast/build/linker_appcast.xml' does match /</channel>/
@@ -29,9 +29,9 @@ Feature: Rake tasks are available to build and deploy Cocoa apps with Sparkle
   
   Scenario: rake task to upload the appcast file to the server
     Given a Cocoa app with choctop installed
-    And task 'rake appcast:feed' is invoked
+    And task 'rake feed' is invoked
     And ChocTop config is configured for local rsync
-    When task 'rake appcast:upload' is invoked
+    When task 'rake upload' is invoked
     Then remote file 'linker_appcast.xml' is created
     Then remote file 'SampleApp-0.1.0.dmg' is created
     Then remote file 'index.php' is created

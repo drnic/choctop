@@ -139,18 +139,7 @@ class ChocTop
     desc "Create the dmg file for appcasting"
     task :dmg => :build do
       make_dmg
-    end
-    
-    namespace :dmg do
-      desc "Create the dmg file read for designing (editable)"
-      task :design => :build do
-        make_design_dmg
-      end
-      
-      desc "Freeze the designed dmg volume"
-      task :freeze do
-        store_dmg_design and detach_dmg
-      end
+      detach_dmg
     end
     
     desc "Create/update the appcast file"
