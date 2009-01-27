@@ -67,9 +67,13 @@ class ChocTop
     "appcast/design"
   end
   
+  def mountpoint
+    @mountpoint ||= "/tmp/build/mountpoint#{rand(10000000)}"
+  end
+  
   # Path to Volume when DMG is mounted
   def volume_path
-    "/Volumes/#{name}"    
+    "#{mountpoint}/#{name}"
   end
   
   #
@@ -96,6 +100,10 @@ class ChocTop
   # To get default, boring blank DMG volume icon, set value to +nil+
   attr_accessor :volume_icon
   
+  # Size of icons, in pixels, within custom DMG (between 16 and 128)
+  # Default: 104 - this is nice and big
+  attr_accessor :icon_size
+  
   # The url for the remote package, without the protocol + host
   # e.g. if absolute url is http://mydomain.com/downloads/MyApp-1.0.dmg
   # then pkg_relative_url is /downloads/MyApp-1.0.dmg
@@ -105,7 +113,7 @@ class ChocTop
   end
   
   def info_plist
-    @info_plist ||= OSX::NSDictionary.dictionaryWithContentsOfFile(File.expand_path('Info.plist'))
+    @info_plist ||= OSX::NSDictionary.dictionaryWithContentsOfFile(File.expand_path('Info.plist')) || {}
   end
   
   def initialize
@@ -122,6 +130,7 @@ class ChocTop
     @app_icon_position = [50, 90]
     @applications_icon_position = [150, 90]
     @volume_icon = File.dirname(__FILE__) + "/../assets/DefaultVolumeIcon.icns"
+    @icon_size = 104
     
     yield self if block_given?
 
@@ -129,6 +138,8 @@ class ChocTop
   end
   
   def define_tasks
+    return unless Object.const_defined?("Rake")
+    
     desc "Build Xcode Release"
     task :build => "build/Release/#{target}/Contents/Info.plist"
     
@@ -160,6 +171,10 @@ class ChocTop
     
     task :detach_dmg do
       detach_dmg
+    end
+    
+    task :size do
+      puts configure_dmg_window
     end
   end
 end

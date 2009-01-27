@@ -63,6 +63,7 @@ to the end:
       
       # Custom DMG options
       s.volume_icon = "dmg.icns"
+      s.icon_size = 104
     end
 
 In your Rakefile, update the ChocTop configuration with the host and remote_dir details.

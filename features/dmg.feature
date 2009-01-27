@@ -8,9 +8,9 @@ Feature: Can build a customised DMG image from application build
     When task 'rake dmg' is invoked
     Then file 'appcast/build/SampleApp-0.1.0.dmg' is created
     When dmg 'appcast/build/SampleApp-0.1.0.dmg' is mounted as 'SampleApp'
-    Then folder '/Volumes/SampleApp/SampleApp.app' is created
-    And file '/Volumes/SampleApp/Applications' is created
-    And file '/Volumes/SampleApp/background.jpg' is created
-    And file '/Volumes/SampleApp/background.jpg' is invisible
-    And file '/Volumes/SampleApp/.VolumeIcon.icns' is created
+    Then folder 'SampleApp.app' in mounted volume is created
+    And file 'Applications' in mounted volume is created
+    And file 'background.jpg' in mounted volume is created
+    And file 'background.jpg' in mounted volume is invisible
+    And file '.VolumeIcon.icns' in mounted volume is created
     

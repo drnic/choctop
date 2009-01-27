@@ -1,11 +1,12 @@
 module ChocTop::Dmg
   def make_dmg
     FileUtils.rm_rf pkg
+    FileUtils.mkdir_p mountpoint
     sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
     sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
     sh "ln -s /Applications '#{volume_path}/Applications'"
     if background_file
-      target_background = "#{volume_path}/background#{File.extname(background_file)}"
+      target_background = "#{volume_path}/#{volume_background}"
       FileUtils.cp(background_file, target_background) 
       sh "SetFile -a V #{target_background}"
     end
@@ -13,6 +14,58 @@ module ChocTop::Dmg
       FileUtils.cp(volume_icon, "#{volume_path}/.VolumeIcon.icns")
       sh "SetFile -a C #{volume_path}"
     end
+  end
+  
+  def volume_background
+    "background#{File.extname(background_file)}"
+  end
+  
+  def window_position
+    [50, 100]
+  end
+  
+  def window_bounds
+    window_position + 
+    window_position.zip(background_bounds).map { |w, b| w + b }
+  end
+  
+  def background_bounds
+    return [400, 300] unless background_file
+    OSX::NSImage.alloc.initByReferencingFile(background_file).size.to_a
+  end
+  
+  def configure_dmg_window
+    applescript = <<-SCRIPT
+    tell application "Finder"
+       set mountpoint to POSIX file ("#{volume_path}" as string) as alias
+       tell folder mountpoint
+           open
+           tell container window
+              set toolbar visible to false
+              set statusbar visible to false
+              set current view to icon view
+              delay 1 -- Sync
+              set the bounds to {50, 100, 1000, 1000} -- Big size so the finder won't do silly things
+           end tell
+           delay 1 -- Sync
+           set icon size of the icon view options of container window to #{icon_size}
+           set arrangement of the icon view options of container window to not arranged
+           set background picture of the icon view options of container window to file "#{volume_background.gsub('/', ':')}"
+           set position of item "#{target}" to {#{app_icon_position.join(", ")}}
+           set position of item "Applications" to {#{applications_icon_position.join(", ")}}
+           set the bounds of the container window to {#{window_bounds.join(", ")}}
+           update without registering applications
+           delay 5 -- Sync
+           close
+       end tell
+       -- Sync
+       delay 5
+    end tell" || true
+    SCRIPT
+    File.open(scriptfile = "/tmp/choctop-script", "w") do |f|
+      f << applescript
+    end
+    sh "osascript #{scriptfile}"
   end
   
   def detach_dmg
