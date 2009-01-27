@@ -4,6 +4,11 @@ module ChocTop::Dmg
     sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
     sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
     sh "ln -s /Applications '#{volume_path}/Applications'"
+    target_background = "#{volume_path}/background#{File.extname(background_file)}"
+    if background_file
+      FileUtils.cp(background_file, target_background) 
+      sh "SetFile -a V #{target_background}"
+    end
   end
   
   def make_design_dmg

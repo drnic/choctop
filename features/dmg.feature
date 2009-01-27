@@ -11,5 +11,6 @@ Feature: Can build a customised DMG image from application build
     Then folder '/Volumes/SampleApp/SampleApp.app' is created
     And file '/Volumes/SampleApp/Applications' is created
     And file '/Volumes/SampleApp/background.jpg' is created
+    And file '/Volumes/SampleApp/background.jpg' is invisible
     And file '/Volumes/SampleApp/.VolumeIcon.icns' is created
     
