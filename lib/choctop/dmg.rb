@@ -28,7 +28,7 @@ module ChocTop::Dmg
   
   def convert_dmg_readonly
     tmp_path = "/tmp/rw.dmg"
-    FileUtils.cp(pkg, tmp_path)
+    FileUtils.mv(pkg, tmp_path)
     sh "hdiutil convert '#{tmp_path}' -format UDZO -imagekey zlib-level=9 -o '#{pkg}'"
   end
   
