@@ -1,7 +1,8 @@
 module ChocTop::Dmg
   def make_dmg
     FileUtils.rm_rf pkg
-    FileUtils.mkdir_p mountpoint
+    FileUtils.mkdir_p(File.dirname(pkg))
+    FileUtils.mkdir_p(mountpoint)
     sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
     sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}'"
     # sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
@@ -60,7 +61,7 @@ module ChocTop::Dmg
            set position of item "#{target}" to {#{app_icon_position.join(", ")}}
            set position of item "Applications" to {#{applications_icon_position.join(", ")}}
            set the bounds of the container window to {#{window_bounds.join(", ")}}
-           set background picture of the icon view options of container window to file "#{volume_background.gsub('/', ':')}"
+           set background picture of the icon view options of container window to file "#{File.basename volume_background}"
            update without registering applications
            delay 5 -- Sync
            close
