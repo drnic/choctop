@@ -229,8 +229,8 @@ When %r{^in file '(.*)' replace /(.*)/ with '(.*)'$} do |file, from, to|
   end
 end
 
-Then /^file '(.*)' is invisible$/ do |file|
-  `GetFileInfo -aV '#{file}'`.to_i.should_not == 0
+Then /^file '(.*)' (is|is not) invisible$/ do |file, is|
+  `GetFileInfo -aV '#{file}'`.to_i.should_not == (is == 'is' ? 0 : 1)
 end
 
 Then /^file '(.*)' is a symlink to '(.*)'$/ do |path, target_path|
