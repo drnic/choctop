@@ -36,4 +36,9 @@ Feature: Rake tasks are available to build and deploy Cocoa apps with Sparkle
     Then remote file 'SampleApp-0.1.0.dmg' is created
     Then remote file 'index.php' is created
     
+  Scenario: change the version number in the Info.plist
+    Given a Cocoa app with choctop installed
+    When task 'rake version:set VERSION="1.2.3"' is invoked 
+    Then current xcode project version is '1.2.3'
+  
   
