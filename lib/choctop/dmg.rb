@@ -1,24 +1,30 @@
 module ChocTop::Dmg
   def make_dmg
     FileUtils.rm_rf pkg
-    sh "hdiutil create -quiet -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
+    # need to bundle all files into a src folder + build dmg from there
+    sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
+    clone_design_to_volume
   end
   
   def make_design_dmg
     FileUtils.mkdir_p design_path
     FileUtils.rm_rf design_pkg
     detach_dmg
-    sh "hdiutil create -format UDRW -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{design_pkg}' -quiet"
+    sh "hdiutil create -quiet -format UDRW -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{design_pkg}'"
     sh "hdiutil attach '#{design_pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
     sh "ln -s /Applications '#{volume_path}/Applications'"
-    FileUtils.cp "#{design_path}/ds_store", "#{volume_path}/.DS_Store" rescue nil
-    files = Dir["#{design_path}/*"] - ["#{design_path}/ds_store"] - ["#{design_path}/.DS_Store"] - Dir["#{design_path}/*.dmg"]
-    files.each { |file| FileUtils.cp(file, "#{volume_path}/") }
+    clone_design_to_volume
 
     unless ENV['NO_FINDER']
       sh "open #{volume_path} -a Finder"
       puts "Opening your DMG for editing."
     end
+  end
+  
+  def clone_design_to_volume
+    FileUtils.cp "#{design_path}/ds_store", "#{volume_path}/.DS_Store" rescue nil
+    p files = Dir["#{design_path}/*"] - ["#{design_path}/ds_store"] - ["#{design_path}/.DS_Store"] - Dir["#{design_path}/*.dmg"]
+    files.each { |file| FileUtils.cp(file, "#{volume_path}/") }
   end
   
   def store_dmg_design

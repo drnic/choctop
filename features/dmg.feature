@@ -31,14 +31,7 @@ Feature: Can build a customised DMG image from application build
     When task 'rake dmg:freeze' is invoked
     Then file 'appcast/design/ds_store' is created
     And file 'appcast/design/background.jpg' is created
-
-  Scenario: Build a designed DMG using files cached from frozen design
-    Given a Cocoa app with choctop installed
-    And task 'rake dmg:design' is invoked
-    And dmg has a custom design
-    And task 'rake dmg:freeze' is invoked
-    And task 'rake dmg' is invoked
-    Then file 'appcast/build/SampleApp-0.1.0.dmg' is created
+    And file 'appcast/design/VolumeIcon.icns' is created
 
   Scenario: Re-designing a DMG will recommence from last freeze point
     Given a Cocoa app with choctop installed
@@ -48,4 +41,18 @@ Feature: Can build a customised DMG image from application build
     When task 'rake dmg:design' is invoked
     Then file '/Volumes/SampleApp/.DS_Store' is created
     And file '/Volumes/SampleApp/background.jpg' is created
+    And file '/Volumes/SampleApp/VolumeIcon.icns' is created
+    And file '/Volumes/SampleApp/.VolumeIcon.icns' is created and set as volume icon
     
+  Scenario: Build a DMG from a design
+    Given a Cocoa app with choctop installed
+    And task 'rake dmg:design' is invoked
+    And dmg has a custom design
+    And task 'rake dmg:freeze' is invoked
+    When task 'rake dmg' is invoked
+    Then file 'appcast/build/SampleApp-0.1.0.dmg' is created
+    When volume 'appcast/build/SampleApp-0.1.0.dmg' is mounted as 'SampleApp'
+    Then file '/Volumes/SampleApp/.DS_Store' is created
+    And file '/Volumes/SampleApp/background.jpg' is created
+    And file '/Volumes/SampleApp/.VolumeIcon.icns' is created and set as volume icon
+  
