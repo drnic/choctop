@@ -55,6 +55,14 @@ to the end:
       # Optional, showing defaults
       s.base_url   = "http://#{s.host}"
       s.release_notes_link = s.base_url
+      
+      # Custom DMG
+      s.background_file = "background.jpg"
+      s.app_icon_position = [50, 90]
+      s.applications_icon_position = [150, 90]
+      
+      # Custom DMG options
+      s.volume_icon = "dmg.icns"
     end
 
 In your Rakefile, update the ChocTop configuration with the host and remote_dir details.
