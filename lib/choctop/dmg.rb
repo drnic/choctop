@@ -33,7 +33,12 @@ module ChocTop::Dmg
   
   def background_bounds
     return [400, 300] unless background_file
-    OSX::NSImage.alloc.initByReferencingFile(background_file).size.to_a
+    background = OSX::NSImage.alloc.initByReferencingFile(background_file).size.to_a
+    [background.first, background.last + statusbar_height]
+  end
+  
+  def statusbar_height
+    20
   end
   
   def configure_dmg_window
@@ -44,7 +49,7 @@ module ChocTop::Dmg
            open
            tell container window
               set toolbar visible to false
-              set statusbar visible to false
+              set statusbar visible to false -- doesn't do anything at DMG open time
               set current view to icon view
               delay 1 -- Sync
               set the bounds to {#{window_bounds.join(", ")}}
