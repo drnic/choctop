@@ -77,6 +77,29 @@ class ChocTop
     "/Volumes/#{name}"    
   end
   
+  #
+  # Custom DMG properties
+  #
+  
+  # Path to background .icns image file for custom DMG
+  # Value should be file path relative to root of project
+  # Default: a choctop supplied background image
+  # that matches to default app_icon_position + applications_icon_position
+  attr_accessor :background_file
+  
+  # x, y position of this project's icon on the custom DMG
+  # Default: a useful position for the icon against the default background
+  attr_accessor :app_icon_position
+  
+  # x, y position of the Applications symlink icon on the custom DMG
+  # Default: a useful position for the icon against the default background
+  attr_accessor :applications_icon_position
+  
+  # Path to an .icns file for the DMG's volume icon (looks like a disk or drive)
+  # Default: a DMG icon provided within choctop
+  # To get default, boring blank DMG volume icon, set value to :boring
+  attr_accessor :volume_icon
+  
   # The url for the remote package, without the protocol + host
   # e.g. if absolute url is http://mydomain.com/downloads/MyApp-1.0.dmg
   # then pkg_relative_url is /downloads/MyApp-1.0.dmg
@@ -98,6 +121,11 @@ class ChocTop
     @target = "#{name}.app"
     @appcast_filename = info_plist['SUFeedURL'] ? File.basename(info_plist['SUFeedURL']) : 'linker_appcast.xml'
     @rsync_args = '-aCv'
+    
+    @background_file = File.dirname(__FILE__) + "/../assets/default_background.jpg"
+    @app_icon_position = [50, 90]
+    @applications_icon_position = [150, 90]
+    @volume_icon = File.dirname(__FILE__) + "/../assets/DefaultVolumeIcon.icns"
     
     yield self if block_given?
 

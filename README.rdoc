@@ -59,7 +59,7 @@ to the end:
       # Custom DMG
       s.background_file = "background.jpg"
       s.app_icon_position = [50, 90]
-      s.applications_icon_position = [150, 90]
+      s.applications_icon_position =  [150, 90]
       
       # Custom DMG options
       s.volume_icon = "dmg.icns"
