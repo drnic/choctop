@@ -47,7 +47,7 @@ module ChocTop::Dmg
               set statusbar visible to false
               set current view to icon view
               delay 1 -- Sync
-              set the bounds to {50, 100, 1000, 1000} -- Big size so the finder won't do silly things
+              set the bounds to {#{window_bounds.join(", ")}}
            end tell
            delay 1 -- Sync
            set icon size of the icon view options of container window to #{icon_size}
