@@ -67,11 +67,6 @@ class ChocTop
     "appcast/design"
   end
   
-  # Path to generated package DMG for design
-  def design_pkg
-    "#{design_path}/#{name}-design.dmg"
-  end
-  
   # Path to Volume when DMG is mounted
   def volume_path
     "/Volumes/#{name}"    
@@ -85,6 +80,7 @@ class ChocTop
   # Value should be file path relative to root of project
   # Default: a choctop supplied background image
   # that matches to default app_icon_position + applications_icon_position
+  # To have no custom background, set value to +nil+
   attr_accessor :background_file
   
   # x, y position of this project's icon on the custom DMG
@@ -97,7 +93,7 @@ class ChocTop
   
   # Path to an .icns file for the DMG's volume icon (looks like a disk or drive)
   # Default: a DMG icon provided within choctop
-  # To get default, boring blank DMG volume icon, set value to :boring
+  # To get default, boring blank DMG volume icon, set value to +nil+
   attr_accessor :volume_icon
   
   # The url for the remote package, without the protocol + host
