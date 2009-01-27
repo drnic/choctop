@@ -140,6 +140,8 @@ class ChocTop
     task :dmg => :build do
       make_dmg
       detach_dmg
+      convert_dmg_readonly
+      add_eula
     end
     
     desc "Create/update the appcast file"

@@ -15,21 +15,6 @@ module ChocTop::Dmg
     end
   end
   
-  def make_design_dmg
-    FileUtils.mkdir_p design_path
-    FileUtils.rm_rf design_pkg
-    detach_dmg
-    sh "hdiutil create -quiet -format UDRW -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{design_pkg}'"
-    sh "hdiutil attach '#{design_pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
-    sh "ln -s /Applications '#{volume_path}/Applications'"
-    clone_design_to_volume
-
-    unless ENV['NO_FINDER']
-      sh "open #{volume_path} -a Finder"
-      puts "Opening your DMG for editing."
-    end
-  end
-  
   def detach_dmg
     mounted_paths = `hdiutil info | grep '#{volume_path}' | grep "Apple_HFS"`.split("\n").map { |e| e.split(" ").first }
     mounted_paths.each do |path|
@@ -41,6 +26,20 @@ module ChocTop::Dmg
     end
   end
   
+  def convert_dmg_readonly
+    tmp_path = "/tmp/rw.dmg"
+    FileUtils.cp(pkg, tmp_path)
+    sh "hdiutil convert '#{tmp_path}' -format UDZO -imagekey zlib-level=9 -o '#{pkg}'"
+  end
+  
+  def add_eula
+    # TODO support EULA
+    # hdiutil unflatten $@
+  	# /Developer/Tools/DeRez -useDF SLAResources.rsrc > build/temp/sla.r
+  	# /Developer/Tools/Rez -a build/temp/sla.r -o $@
+  	# hdiutil flatten $@
+  	
+  end
 end
 ChocTop.send(:include, ChocTop::Dmg)
 
