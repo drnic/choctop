@@ -9,7 +9,10 @@ module ChocTop::Dmg
       FileUtils.cp(background_file, target_background) 
       sh "SetFile -a V #{target_background}"
     end
-    FileUtils.cp(volume_icon, "#{volume_path}/.VolumeIcon.icns")  if volume_icon
+    if volume_icon
+      FileUtils.cp(volume_icon, "#{volume_path}/.VolumeIcon.icns")
+      sh "SetFile -a C #{volume_path}"
+    end
   end
   
   def make_design_dmg
