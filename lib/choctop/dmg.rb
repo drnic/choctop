@@ -4,8 +4,7 @@ module ChocTop::Dmg
     FileUtils.mkdir_p(File.dirname(pkg))
     FileUtils.mkdir_p(mountpoint)
     sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
-    sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}'"
-    # sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
+    sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
     sh "bless --folder #{volume_path} --openfolder #{volume_path}"
     sh "ln -s /Applications '#{volume_path}/Applications'"
     sh "sleep 1"

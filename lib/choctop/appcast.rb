@@ -17,7 +17,7 @@ module ChocTop::Appcast
             :version => "2.0") do
       xml.channel do
         xml.title(app_name)
-        xml.description('#{app_name} updates')
+        xml.description("#{app_name} updates")
         xml.link(base_url)
         xml.language('en')
         xml.pubDate Time.now.to_s(:rfc822)
@@ -30,7 +30,7 @@ module ChocTop::Appcast
           xml.tag! "sparkle:releaseNotesLink", release_notes_link
           xml.pubDate Time.now.to_s(:rfc822) #(File.mtime(pkg))
           xml.guid("#{name}-#{version}", :isPermaLink => "false")
-          xml.enclosure(:url => "#{base_url}/#{target}", 
+          xml.enclosure(:url => "#{base_url}/#{pkg_name}", 
                         :length => "#{File.size(pkg)}", 
                         :type => "application/dmg",
                         :"sparkle:version" => version)
