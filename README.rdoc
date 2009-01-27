@@ -14,10 +14,10 @@ and XML file to your remote host via rsync.
 All rake tasks:
 
     rake appcast         # Create dmg, update appcast file, and upload to host
-    rake appcast:build   # Build Xcode Release
-    rake appcast:dmg     # Create the dmg file for appcasting
-    rake appcast:feed    # Create/update the appcast file
-    rake appcast:upload  # Upload the appcast file to the host
+    rake build   # Build Xcode Release
+    rake dmg     # Create the dmg file for appcasting
+    rake feed    # Create/update the appcast file
+    rake upload  # Upload the appcast file to the host
 
 == Why is it called 'ChocTop'? 
 
@@ -34,7 +34,7 @@ ChocTop comes with rake tasks to instantly deploy your latest Cocoa app's versio
 to a remote host, instantly activating all your users' Sparkle auto-updates.
 
 * builds a Release of your project from your Xcode project (via xcodebuild tool)
-* packages a DMG of your released app using Info.plist configuration (rake appcast:dmg)
+* packages a DMG of your released app using Info.plist configuration (rake dmg)
 * generates Sparkle-formatted XML file
 * uploads the DMG and XML files to a remote host
 

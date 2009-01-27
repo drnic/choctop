@@ -8,16 +8,16 @@ Feature: Setup a Cocoa app with sparkle-ruby
     When I run local executable 'install_choctop' with arguments '.'
     And Rakefile wired to use development code instead of installed RubyGem
     Then file 'Rakefile' is created
-    And output does match /rake appcast:build/
-    And output does match /rake appcast:upload/
+    And output does match /rake build/
+    And output does match /rake upload/
   
   Scenario: Install sparkle-ruby into an app that has an existing Rakefile
     Given a Cocoa app that does have an existing Rakefile
     When I run local executable 'install_choctop' with arguments '.'
     And Rakefile wired to use development code instead of installed RubyGem
     And output does match /choctop added to your Rakefile/
-    And output does match /rake appcast:build/
-    And output does match /rake appcast:upload/
+    And output does match /rake build/
+    And output does match /rake upload/
   
   Scenario: Run 'install_choctop' without arguments shows an error
     Given a Cocoa app that does not have an existing Rakefile

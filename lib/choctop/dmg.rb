@@ -24,7 +24,11 @@ module ChocTop::Dmg
   def detach_dmg
     mounted_paths = `hdiutil info | grep '#{volume_path}' | grep "Apple_HFS"`.split("\n").map { |e| e.split(" ").first }
     mounted_paths.each do |path|
-      sh "hdiutil detach '#{path}' -quiet -force"
+      begin
+        sh "hdiutil detach '#{path}' -quiet -force"
+      rescue StandardError => e
+        p e
+      end
     end
   end
   

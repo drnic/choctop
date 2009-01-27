@@ -28,7 +28,7 @@ module ChocTop::Appcast
         xml.item do
           xml.title("#{name} #{version}")
           xml.tag! "sparkle:releaseNotesLink", release_notes_link
-          xml.pubDate(File.mtime(pkg))
+          xml.pubDate Time.now.to_s(:rfc822) #(File.mtime(pkg))
           xml.guid("#{name}-#{version}", :isPermaLink => "false")
           xml.enclosure(:url => "#{base_url}/#{target}", 
                         :length => "#{File.size(pkg)}", 
