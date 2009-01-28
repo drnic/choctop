@@ -5,7 +5,10 @@ Rakefile
 app_generators/install_choctop/install_choctop_generator.rb
 app_generators/install_choctop/templates/Rakefile.erb
 assets/DefaultVolumeIcon.icns
-assets/default_background.jpg
+assets/sky.jpg
+assets/sky_background.jpg
+assets/vanillia_dmg_icon.png
+assets/wood.jpg
 bin/install_choctop
 features/development.feature
 features/dmg.feature
@@ -165,6 +168,7 @@ features/steps/dmg_steps.rb
 features/steps/env.rb
 features/steps/generator.rb
 features/steps/remote.rb
+features/steps/xcode_steps.rb
 lib/choctop.rb
 lib/choctop/appcast.rb
 lib/choctop/dmg.rb
