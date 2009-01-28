@@ -98,6 +98,7 @@ its set to Debug for development) and then Build. The "rake appcast" task should
 * Chris Bailey at http://codeintensity.blogspot.com/2008/03/creating-sparkle-appcast-via-rake-tasks.html
 * Eloy Duran's Rucola at http://github.com/alloy/rucola
 * Emanuele Vicentini's rake_dmg at http://github.com/baldowl/rake_dmg
+* AppleScript ideas from http://svn.tribler.org/abc/branches/old-mainbranch-till-4.1.7plus/mac/Makefile-from-vlc-ready
 
     
 == SPONSORED BY:
