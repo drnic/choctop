@@ -127,9 +127,9 @@ class ChocTop
     @appcast_filename = info_plist['SUFeedURL'] ? File.basename(info_plist['SUFeedURL']) : 'linker_appcast.xml'
     @rsync_args = '-aCv'
     
-    @background_file = File.dirname(__FILE__) + "/../assets/default_background.jpg"
-    @app_icon_position = [50, 90]
-    @applications_icon_position = [150, 90]
+    @background_file = File.dirname(__FILE__) + "/../assets/sky_background.jpg"
+    @app_icon_position = [175, 65]
+    @applications_icon_position = [347, 270]
     @volume_icon = File.dirname(__FILE__) + "/../assets/DefaultVolumeIcon.icns"
     @icon_size = 104
     
