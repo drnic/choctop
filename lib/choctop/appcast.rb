@@ -54,8 +54,8 @@ module ChocTop::Appcast
   end
   
   def release_notes_content
-    if File.exists?("ReleaseNotes.txt")
-      File.read("ReleaseNotes.txt")
+    if File.exists?("release_notes.txt")
+      File.read("release_notes.txt")
     else
       <<-TEXTILE.gsub(/^      /, '')
       h1. #{version} #{Date.today}

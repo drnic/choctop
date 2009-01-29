@@ -18,7 +18,7 @@ class InstallChoctopGenerator < RubiGen::Base
       %w( appcast/build ).each { |path| m.directory path }
 
       m.template "Rakefile.erb", "Rakefile"
-      m.template "ReleaseNotes.txt.erb", "ReleaseNotes.txt"
+      m.template "release_notes.txt.erb", "release_notes.txt"
       m.file "release_notes_template.html.erb", "release_notes_template.html.erb"
     end
   end

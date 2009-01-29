@@ -38,7 +38,7 @@ class ChocTop
   # Default: release_notes.html
   attr_accessor :release_notes
 
-  # The path for an HTML template into which the ReleaseNotes.txt are inserted
+  # The path for an HTML template into which the release_notes.txt are inserted
   # after conversion to HTML
   #
   # The template file is an ERb template, with <%= yield %> as the placeholder

@@ -1,7 +1,9 @@
+* ReleaseNotes.txt renamed to release_notes.txt in applications
+
 == 0.9.3 2009-01-29
 
-* install_choctop generates a ReleaseNotes.txt file
-* 'rake feed' converts ReleaseNotes.txt into release_notes.html file for upload
+* install_choctop generates a release_notes.txt file
+* 'rake feed' converts release_notes.txt into release_notes.html file for upload
 * #name is the project's folder name if info_plist['CFBundleExecutable'] == "${EXECUTABLE}"
 * builder of xml feed flushes immediately now so no more 0 length xml feeds
 
