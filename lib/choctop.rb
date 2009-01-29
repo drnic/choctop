@@ -9,7 +9,7 @@ require "active_support"
 require "osx/cocoa"
 
 class ChocTop
-  VERSION = '0.9.0'
+  VERSION = '0.9.2'
   
   # The name of the Cocoa application
   # Default: info_plist['CFBundleExecutable']
@@ -121,7 +121,7 @@ class ChocTop
     @name = info_plist['CFBundleExecutable']
     @version = info_plist['CFBundleVersion']
     @target = "#{name}.app"
-    @appcast_filename = info_plist['SUFeedURLKey'] ? File.basename(info_plist['SUFeedURLKey']) : 'linker_appcast.xml'
+    @appcast_filename = info_plist['SUFeedURL'] ? File.basename(info_plist['SUFeedURL']) : 'linker_appcast.xml'
     @release_notes = 'release_notes.html'
     @rsync_args = '-aCv'
     

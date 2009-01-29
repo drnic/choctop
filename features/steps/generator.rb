@@ -1,6 +1,6 @@
 Given /^a Cocoa app that does not have an existing Rakefile$/ do
   Given "a safe folder"
-  setup_active_project_folder "sample_app"
+  setup_active_project_folder "SampleApp"
 end
 
 Given /^a Cocoa app that does have an existing Rakefile$/ do

@@ -18,7 +18,8 @@ Feature: Generate an XML file for Sparkle to use for updates
     And file 'appcast/build/index.php' is created
     And contents of file 'appcast/build/index.php' does match /Location/
     And contents of file 'appcast/build/index.php' does match /SampleApp-0.1.0.dmg/
-  
+    And file 'appcast/build/release_notes.html' is created
+    And contents of file 'appcast/build/release_notes.html' does match /<html>/
   
 
   

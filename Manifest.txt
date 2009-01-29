@@ -12,8 +12,6 @@ assets/wood.jpg
 bin/install_choctop
 features/development.feature
 features/dmg.feature
-features/fixtures/SampleApp-AlreadyBuilt/SampleApp.xcodeproj/drnic.mode1v3
-features/fixtures/SampleApp-AlreadyBuilt/SampleApp.xcodeproj/drnic.pbxuser
 features/fixtures/SampleApp/English.lproj/InfoPlist.strings
 features/fixtures/SampleApp/English.lproj/MainMenu.xib
 features/fixtures/SampleApp/Info.plist
@@ -163,6 +161,7 @@ features/fixtures/design/background.jpg
 features/fixtures/design/ds_store
 features/initial_generator.feature
 features/rake_tasks.feature
+features/sparkle_feed.feature
 features/steps/common.rb
 features/steps/dmg_steps.rb
 features/steps/env.rb

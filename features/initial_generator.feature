@@ -1,9 +1,9 @@
-Feature: Setup a Cocoa app with sparkle-ruby
+Feature: Setup a Cocoa app with choctop
   In order to reduce cost of using Sparkle to generate appcasts
   As a Cocoa developer or Cocoa application deployer
   I want a generator to install rake tasks that make using Sparkle easy-peasy
   
-  Scenario: Install sparkle-ruby into an app that has no existing Rakefile
+  Scenario: Install choctop into an app that has no existing Rakefile
     Given a Cocoa app that does not have an existing Rakefile
     When I run local executable 'install_choctop' with arguments '.'
     And Rakefile wired to use development code instead of installed RubyGem
@@ -11,7 +11,7 @@ Feature: Setup a Cocoa app with sparkle-ruby
     And output does match /rake build/
     And output does match /rake upload/
   
-  Scenario: Install sparkle-ruby into an app that has an existing Rakefile
+  Scenario: Install choctop into an app that has an existing Rakefile
     Given a Cocoa app that does have an existing Rakefile
     When I run local executable 'install_choctop' with arguments '.'
     And Rakefile wired to use development code instead of installed RubyGem
@@ -24,3 +24,9 @@ Feature: Setup a Cocoa app with sparkle-ruby
     When I run local executable 'install_choctop' with arguments ''
     Then output does match /USAGE: install_choctop path\/to\/CocoaApp/
   
+  Scenario: Install choctop and generate a ReleaseNotes file
+    Given a Cocoa app that does not have an existing Rakefile
+    When I run local executable 'install_choctop' with arguments '.'
+    Then file 'ReleaseNotes.txt' is created
+    And contents of file 'ReleaseNotes.txt' does match /0.1.0/
+    

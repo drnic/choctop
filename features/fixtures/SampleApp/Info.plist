@@ -24,7 +24,7 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>SUFeedURLKey</key>
+	<key>SUFeedURL</key>
 	<string>http://mocra.com/sample_app/my_feed.xml</string>
 </dict>
 </plist>
