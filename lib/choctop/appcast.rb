@@ -70,7 +70,6 @@ module ChocTop::Appcast
   end
 
   def upload_appcast
-    puts `ls -al #{build_path}/`
     _host = host.blank? ? "" : "#{host}:"
     sh %{rsync #{rsync_args} #{build_path}/ #{_host}#{remote_dir}}
   end
@@ -85,6 +84,12 @@ module ChocTop::Appcast
       `openssl gendsa dsaparam.pem -out dsa_priv.pem`
       `openssl dsa -in dsa_priv.pem -pubout -out dsa_pub.pem`
       `rm dsaparam.pem`
+      puts <<-EOS.gsub(/^      /, '')
+      
+      WARNING: DO NOT PUT dsa_priv.pem IN YOUR SOURCE CONTROL
+               Remember to add it to your ignore list
+      
+      EOS
     end
     File.expand_path('dsa_priv.pem')
   end

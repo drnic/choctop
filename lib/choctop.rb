@@ -137,7 +137,7 @@ class ChocTop
     @appcast_filename = info_plist['SUFeedURL'] ? File.basename(info_plist['SUFeedURL']) : 'linker_appcast.xml'
     @release_notes = 'release_notes.html'
     @release_notes_template = File.dirname(__FILE__) + "/../assets/release_notes_template.html.erb"
-    @rsync_args = '-aCv'
+    @rsync_args = '-aCv --progress'
     
     @background_file = File.dirname(__FILE__) + "/../assets/sky_background.jpg"
     @app_icon_position = [175, 65]
