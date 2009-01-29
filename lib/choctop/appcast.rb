@@ -51,6 +51,9 @@ module ChocTop::Appcast
     sh %{rsync -aCv appcast/build/ #{_host}#{remote_dir}}
   end
   
+  # Returns a file path to the dsa_priv.pem file
+  # If private key + public key haven't been generated yet then
+  # generate them
   def private_key
     unless File.exists?('dsa_priv.pem')
       puts "Creating new private and public keys for signing the DMG..."
