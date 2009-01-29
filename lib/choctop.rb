@@ -34,11 +34,8 @@ class ChocTop
   end
   
   # The url to display the release notes for the latest release
-  # Default: base_url
-  attr_writer :release_notes_link
-  def release_notes_link
-    @release_notes_link ||= base_url
-  end
+  # Default: release_notes.html
+  attr_accessor :release_notes
 
   # The name of the local xml file containing the Sparkle item details
   # Default: info_plist['SUFeedURL'] or linker_appcast.xml
@@ -124,7 +121,8 @@ class ChocTop
     @name = info_plist['CFBundleExecutable']
     @version = info_plist['CFBundleVersion']
     @target = "#{name}.app"
-    @appcast_filename = info_plist['SUFeedURL'] ? File.basename(info_plist['SUFeedURL']) : 'linker_appcast.xml'
+    @appcast_filename = info_plist['SUFeedURLKey'] ? File.basename(info_plist['SUFeedURLKey']) : 'linker_appcast.xml'
+    @release_notes = 'release_notes.html'
     @rsync_args = '-aCv'
     
     @background_file = File.dirname(__FILE__) + "/../assets/sky_background.jpg"

@@ -18,3 +18,13 @@ Given /^ChocTop config is configured for local rsync$/ do
     RUBY
   end
 end
+
+Given /^ChocTop config is configured for remote Sparkle$/ do
+  in_project_folder do
+    append_to_file "Rakefile", <<-RUBY.gsub(/^    /, '')
+    $sparkle.host = "mocra.com"
+    $sparkle.base_url = "http://mocra.com/sample_app"
+    $sparkle.remote_dir = "/opt/apps/mocra/downloads/sample_app"
+    RUBY
+  end
+end
