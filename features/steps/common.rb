@@ -50,6 +50,12 @@ Given %r{'(.*)' folder is deleted} do |folder|
   end
 end
 
+Given %r{file '(.*)' is deleted} do |file|
+  in_project_folder do
+    FileUtils.rm_rf file
+  end
+end
+
 When %r{^'(.*)' generator is invoked with arguments '(.*)'$} do |generator, arguments|
   @stdout = StringIO.new
   FileUtils.chdir(@active_project_folder) do

@@ -45,6 +45,30 @@ module ChocTop::Appcast
       f << %Q{<?php header("Location: #{pkg_relative_url}"); ?>}
     end
   end
+  
+  def make_release_notes
+    File.open("#{build_path}/#{release_notes}", "w") do |f|
+      puts release_notes_template
+      puts template = File.read(release_notes_template)
+      f << ERB.new(template).result(binding)
+    end
+  end
+  
+  def release_notes_content
+    if File.exists?("ReleaseNotes.txt")
+      File.read("ReleaseNotes.txt")
+    else
+      <<-TEXTILE.gsub(/^      /, '')
+      h1. #{version} #{Date.today}
+      
+      h2. Another awesome release!
+      TEXTILE
+    end
+  end
+  
+  def release_notes_html
+    RedCloth.new(release_notes_content).to_html
+  end
 
   def upload_appcast
     _host = host.blank? ? "" : "#{host}:"

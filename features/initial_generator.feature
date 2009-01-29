@@ -28,5 +28,5 @@ Feature: Setup a Cocoa app with choctop
     Given a Cocoa app that does not have an existing Rakefile
     When I run local executable 'install_choctop' with arguments '.'
     Then file 'ReleaseNotes.txt' is created
-    And contents of file 'ReleaseNotes.txt' does match /0.1.0/
+    And contents of file 'ReleaseNotes.txt' does match /Initial release/
     

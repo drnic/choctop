@@ -3,16 +3,17 @@ $:.unshift(File.dirname(__FILE__)) unless
 
 require "fileutils"
 require "yaml"
-require "rubygems"
 require "builder"
-require "active_support"
+require "erb"
 require "osx/cocoa"
+require "active_support"
+require "RedCloth"
 
 class ChocTop
   VERSION = '0.9.2'
   
   # The name of the Cocoa application
-  # Default: info_plist['CFBundleExecutable']
+  # Default: info_plist['CFBundleExecutable'] or project folder name if "${EXECUTABLE}"
   attr_accessor :name
   
   # The version of the Cocoa application
@@ -33,9 +34,20 @@ class ChocTop
     @base_url ||= "http://#{host}"
   end
   
-  # The url to display the release notes for the latest release
+  # The file name for generated release notes for the latest release
   # Default: release_notes.html
   attr_accessor :release_notes
+
+  # The path for an HTML template into which the ReleaseNotes.txt are inserted
+  # after conversion to HTML
+  #
+  # The template file is an ERb template, with <%= yield %> as the placeholder
+  # for the generated release notes.
+  #
+  # Currently, any CSS or JavaScript must be inline
+  #
+  # Default: a choctop supplied HTML template for release notes
+  attr_accessor :release_notes_template
 
   # The name of the local xml file containing the Sparkle item details
   # Default: info_plist['SUFeedURL'] or linker_appcast.xml
@@ -119,10 +131,12 @@ class ChocTop
     
     # Defaults
     @name = info_plist['CFBundleExecutable']
+    @name = File.basename(File.expand_path(".")) if name == "${EXECUTABLE}"
     @version = info_plist['CFBundleVersion']
     @target = "#{name}.app"
     @appcast_filename = info_plist['SUFeedURL'] ? File.basename(info_plist['SUFeedURL']) : 'linker_appcast.xml'
     @release_notes = 'release_notes.html'
+    @release_notes_template = File.dirname(__FILE__) + "/../assets/release_notes_template.html.erb"
     @rsync_args = '-aCv'
     
     @background_file = File.dirname(__FILE__) + "/../assets/sky_background.jpg"
@@ -159,6 +173,7 @@ class ChocTop
     task :feed => :dmg do
       make_appcast
       make_index_redirect
+      make_release_notes
     end
     
     desc "Upload the appcast file to the host"

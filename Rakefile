@@ -9,7 +9,8 @@ $hoe = Hoe.new('choctop', ChocTop::VERSION) do |p|
   p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
   p.extra_deps         = [
     ['activesupport'],
-    ['builder','>= 2.1.2']
+    ['builder','>= 2.1.2'],
+    ['RedCloth', '>=4.1.1']
   ]
   p.extra_dev_deps = [
     ['newgem', ">= #{::Newgem::VERSION}"]

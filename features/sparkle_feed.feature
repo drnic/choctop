@@ -19,7 +19,20 @@ Feature: Generate an XML file for Sparkle to use for updates
     And contents of file 'appcast/build/index.php' does match /Location/
     And contents of file 'appcast/build/index.php' does match /SampleApp-0.1.0.dmg/
     And file 'appcast/build/release_notes.html' is created
+    And contents of file 'appcast/build/release_notes.html' does match /0.1.0/
+    And contents of file 'appcast/build/release_notes.html' does match /<h2>Initial release</h2>/
+    And contents of file 'appcast/build/release_notes.html' does match /<p>Yay! First release.</p>/
     And contents of file 'appcast/build/release_notes.html' does match /<html>/
   
+  Scenario: generate default release notes if no ReleaseNotes.txt
+    Given a Cocoa app with choctop installed
+    And ChocTop config is configured for remote Sparkle
+    And file 'ReleaseNotes.txt' is deleted
+    When task 'rake feed' is invoked
+    Then file 'appcast/build/release_notes.html' is created
+    And contents of file 'appcast/build/release_notes.html' does match /0.1.0/
+    And contents of file 'appcast/build/release_notes.html' does match /<h2>Another awesome release!</h2>/
+    And contents of file 'appcast/build/release_notes.html' does match /<html>/
 
-  
+
+
