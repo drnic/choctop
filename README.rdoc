@@ -4,6 +4,9 @@
 
 == DESCRIPTION:
 
+Package up your OS X/Cocoa applications into Custom DMGs, generate Sparkle XML, and
+upload. Instead of hours, its only 30 seconds to release each new version of an application.
+
 Build and deploy tools for Cocoa apps using Sparkle for distributions and upgrades; it's
 like Hoe but for Cocoa apps.
 

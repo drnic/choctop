@@ -1,3 +1,5 @@
+== 0.9.3 2009-01-29
+
 * install_choctop generates a ReleaseNotes.txt file
 * 'rake feed' converts ReleaseNotes.txt into release_notes.html file for upload
 * #name is the project's folder name if info_plist['CFBundleExecutable'] == "${EXECUTABLE}"

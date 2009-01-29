@@ -19,6 +19,7 @@ class InstallChoctopGenerator < RubiGen::Base
 
       m.template "Rakefile.erb", "Rakefile"
       m.template "ReleaseNotes.txt.erb", "ReleaseNotes.txt"
+      m.file "release_notes_template.html.erb", "release_notes_template.html.erb"
     end
   end
 
