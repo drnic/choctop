@@ -1,6 +1,7 @@
 * install_choctop generates a ReleaseNotes.txt file
 * 'rake feed' converts ReleaseNotes.txt into release_notes.html file for upload
 * #name is the project's folder name if info_plist['CFBundleExecutable'] == "${EXECUTABLE}"
+* builder of xml feed flushes immediately now so no more 0 length xml feeds
 
 == 0.9.2 2009-01-29
 

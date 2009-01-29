@@ -170,7 +170,7 @@ class ChocTop
     end
     
     desc "Create/update the appcast file"
-    task :feed => :dmg do
+    task :feed do
       make_appcast
       make_index_redirect
       make_release_notes

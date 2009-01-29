@@ -4,7 +4,9 @@ README.rdoc
 Rakefile
 app_generators/install_choctop/install_choctop_generator.rb
 app_generators/install_choctop/templates/Rakefile.erb
+app_generators/install_choctop/templates/ReleaseNotes.txt.erb
 assets/DefaultVolumeIcon.icns
+assets/release_notes_template.html.erb
 assets/sky.jpg
 assets/sky_background.jpg
 assets/vanillia_dmg_icon.png

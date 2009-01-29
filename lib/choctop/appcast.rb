@@ -7,36 +7,36 @@ module ChocTop::Appcast
     app_name = File.basename(File.expand_path('.'))
     
     FileUtils.mkdir_p "#{build_path}"
-    appcast = File.open("#{build_path}/#{appcast_filename}", 'w')
+    appcast = File.open("#{build_path}/#{appcast_filename}", 'w') do |f|
+      xml = Builder::XmlMarkup.new(:indent => 2)
+      xml.instruct!
+      xml_string = xml.rss('xmlns:atom' => "http://www.w3.org/2005/Atom",
+              'xmlns:sparkle' => "http://www.andymatuschak.org/xml-namespaces/sparkle", 
+              :version => "2.0") do
+        xml.channel do
+          xml.title(app_name)
+          xml.description("#{app_name} updates")
+          xml.link(base_url)
+          xml.language('en')
+          xml.pubDate Time.now.to_s(:rfc822)
+          # xml.lastBuildDate(Time.now.rfc822)
+          xml.atom(:link, :href => "#{base_url}/#{appcast_filename}", 
+                   :rel => "self", :type => "application/rss+xml")
 
-    xml = Builder::XmlMarkup.new(:target => appcast, :indent => 2)
-
-    xml.instruct!
-    xml.rss('xmlns:atom' => "http://www.w3.org/2005/Atom",
-            'xmlns:sparkle' => "http://www.andymatuschak.org/xml-namespaces/sparkle", 
-            :version => "2.0") do
-      xml.channel do
-        xml.title(app_name)
-        xml.description("#{app_name} updates")
-        xml.link(base_url)
-        xml.language('en')
-        xml.pubDate Time.now.to_s(:rfc822)
-        # xml.lastBuildDate(Time.now.rfc822)
-        xml.atom(:link, :href => "#{base_url}/#{appcast_filename}", 
-                 :rel => "self", :type => "application/rss+xml")
-
-        xml.item do
-          xml.title("#{name} #{version}")
-          xml.tag! "sparkle:releaseNotesLink", "#{base_url}/#{release_notes}"
-          xml.pubDate Time.now.to_s(:rfc822) #(File.mtime(pkg))
-          xml.guid("#{name}-#{version}", :isPermaLink => "false")
-          xml.enclosure(:url => "#{base_url}/#{pkg_name}", 
-                        :length => "#{File.size(pkg)}", 
-                        :type => "application/dmg",
-                        :"sparkle:version" => version,
-                        :"sparkle:dsaSignature" => dsa_signature)
+          xml.item do
+            xml.title("#{name} #{version}")
+            xml.tag! "sparkle:releaseNotesLink", "#{base_url}/#{release_notes}"
+            xml.pubDate Time.now.to_s(:rfc822) #(File.mtime(pkg))
+            xml.guid("#{name}-#{version}", :isPermaLink => "false")
+            xml.enclosure(:url => "#{base_url}/#{pkg_name}", 
+                          :length => "#{File.size(pkg)}", 
+                          :type => "application/dmg",
+                          :"sparkle:version" => version,
+                          :"sparkle:dsaSignature" => dsa_signature)
+          end
         end
       end
+      f << xml_string
     end
   end
   
@@ -48,8 +48,7 @@ module ChocTop::Appcast
   
   def make_release_notes
     File.open("#{build_path}/#{release_notes}", "w") do |f|
-      puts release_notes_template
-      puts template = File.read(release_notes_template)
+      template = File.read(release_notes_template)
       f << ERB.new(template).result(binding)
     end
   end
@@ -71,8 +70,9 @@ module ChocTop::Appcast
   end
 
   def upload_appcast
+    puts `ls -al #{build_path}/`
     _host = host.blank? ? "" : "#{host}:"
-    sh %{rsync -aCv appcast/build/ #{_host}#{remote_dir}}
+    sh %{rsync #{rsync_args} #{build_path}/ #{_host}#{remote_dir}}
   end
   
   # Returns a file path to the dsa_priv.pem file

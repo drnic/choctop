@@ -6,7 +6,7 @@ Feature: Generate an XML file for Sparkle to use for updates
   Scenario: rake task to create/update the appcast file
     Given a Cocoa app with choctop installed
     And ChocTop config is configured for remote Sparkle
-    When task 'rake feed' is invoked
+    When task 'rake dmg feed' is invoked
     Then file 'appcast/build/my_feed.xml' is created
     And contents of file 'appcast/build/my_feed.xml' does match /<channel>/
     And contents of file 'appcast/build/my_feed.xml' does match /</channel>/
@@ -28,7 +28,7 @@ Feature: Generate an XML file for Sparkle to use for updates
     Given a Cocoa app with choctop installed
     And ChocTop config is configured for remote Sparkle
     And file 'ReleaseNotes.txt' is deleted
-    When task 'rake feed' is invoked
+    When task 'rake dmg feed' is invoked
     Then file 'appcast/build/release_notes.html' is created
     And contents of file 'appcast/build/release_notes.html' does match /0.1.0/
     And contents of file 'appcast/build/release_notes.html' does match /<h2>Another awesome release!</h2>/
