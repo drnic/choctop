@@ -9,8 +9,7 @@ Feature: Rake tasks are available to build and deploy Cocoa apps with Sparkle
     Then folder 'build/Release/SampleApp.app' is created
 
   Scenario: rake task to create dmg file of build
-    Given an unbuilt Cocoa app with choctop installed
-    And task 'rake build' is invoked
+    Given a Cocoa app with choctop installed
     When task 'rake dmg' is invoked
     Then file 'appcast/build/SampleApp-0.1.0.dmg' is created
 

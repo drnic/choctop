@@ -1,6 +1,7 @@
 * default DMG theme is a sky background and plain volume icon
+* sparkle xml feed includes a DSA signature
 
-== 0.0.1 2009-01-19
+== 0.9.0 2009-01-28
 
 * 1 major enhancement:
   * Initial release
