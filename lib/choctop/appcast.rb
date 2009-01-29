@@ -6,8 +6,8 @@ module ChocTop::Appcast
   def make_appcast
     app_name = File.basename(File.expand_path('.'))
     
-    FileUtils.mkdir_p "appcast/build"
-    appcast = File.open("appcast/build/#{appcast_filename}", 'w')
+    FileUtils.mkdir_p "#{build_path}"
+    appcast = File.open("#{build_path}/#{appcast_filename}", 'w')
 
     xml = Builder::XmlMarkup.new(:target => appcast, :indent => 2)
 
@@ -33,14 +33,15 @@ module ChocTop::Appcast
           xml.enclosure(:url => "#{base_url}/#{pkg_name}", 
                         :length => "#{File.size(pkg)}", 
                         :type => "application/dmg",
-                        :"sparkle:version" => version)
+                        :"sparkle:version" => version,
+                        :"sparkle:dsaSignature" => dsa_signature)
         end
       end
     end
   end
   
   def make_index_redirect
-    File.open("appcast/build/index.php", 'w') do |f|
+    File.open("#{build_path}/index.php", 'w') do |f|
       f << %Q{<?php header("Location: #{pkg_relative_url}"); ?>}
     end
   end
@@ -50,5 +51,19 @@ module ChocTop::Appcast
     sh %{rsync -aCv appcast/build/ #{_host}#{remote_dir}}
   end
   
+  def private_key
+    unless File.exists?('dsa_priv.pem')
+      puts "Creating new private and public keys for signing the DMG..."
+      `openssl dsaparam 2048 < /dev/urandom > dsaparam.pem`
+      `openssl gendsa dsaparam.pem -out dsa_priv.pem`
+      `openssl dsa -in dsa_priv.pem -pubout -out dsa_pub.pem`
+      `rm dsaparam.pem`
+    end
+    File.expand_path('dsa_priv.pem')
+  end
+  
+  def dsa_signature
+    @dsa_signature ||= `openssl dgst -sha1 -binary < "#{pkg}" | openssl dgst -dss1 -sign "#{private_key}" | openssl enc -base64`
+  end
 end
 ChocTop.send(:include, ChocTop::Appcast)

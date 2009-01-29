@@ -59,12 +59,12 @@ class ChocTop
   
   # Path to generated package DMG
   def pkg
-    "appcast/build/#{pkg_name}"
+    "#{build_path}/#{pkg_name}"
   end
   
-  # Path to designed DMG and frozen assets for reuse in generated DMGs
-  def design_path
-    "appcast/design"
+  # Path to built DMG, sparkle's xml file and other assets to be uploaded to remote server
+  def build_path
+    "appcast/build"
   end
   
   def mountpoint
