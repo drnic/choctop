@@ -7,6 +7,7 @@ app_generators/install_choctop/templates/Rakefile.erb
 app_generators/install_choctop/templates/release_notes.txt.erb
 app_generators/install_choctop/templates/release_notes_template.html.erb
 assets/DefaultVolumeIcon.icns
+assets/choctop-logo.png
 assets/sky.jpg
 assets/sky_background.jpg
 assets/vanillia_dmg_icon.png
