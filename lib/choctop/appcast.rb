@@ -70,7 +70,7 @@ module ChocTop::Appcast
   end
 
   def upload_appcast
-    _host = host.blank? ? "" : "#{host}:"
+    _host = host.blank? ? "" : "#{host_user}@#{host}:"
     sh %{rsync #{rsync_args} #{build_path}/ #{_host}#{remote_dir}}
   end
   

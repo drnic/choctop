@@ -1,4 +1,8 @@
+== 0.9.4 2009-01-31
+
 * ReleaseNotes.txt renamed to release_notes.txt in applications
+* host_user used for rsync authentication to remote host, defaults to current user
+* "rake dmg NO_BUILD=1" will not perform the build step
 
 == 0.9.3 2009-01-29
 

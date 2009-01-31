@@ -13,4 +13,10 @@ Feature: Can build a customised DMG image from application build
     And file 'background.jpg' in mounted volume is created
     And file 'background.jpg' in mounted volume is invisible
     And file '.VolumeIcon.icns' in mounted volume is created
-    
+  
+  Scenario: Build a DMG without doing the build step
+    Given a Cocoa app with choctop installed
+    And task 'rake build' is invoked
+    When task 'rake dmg NO_BUILD=1' is invoked
+    Then file 'appcast/build/SampleApp-0.1.0.dmg' is created
+    And output does match /Skipping build step.../

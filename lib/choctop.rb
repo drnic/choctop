@@ -27,6 +27,10 @@ class ChocTop
   # The host name, e.g. some-domain.com
   attr_accessor :host
   
+  # The username for rsync to the remote host
+  # Default: current username (via +whoami+)
+  attr_accessor :host_user
+  
   # The url from where the xml + dmg files will be downloaded
   # Default: http://#{host}
   attr_writer :base_url
@@ -57,7 +61,7 @@ class ChocTop
   attr_accessor :remote_dir
   
   # The argument flags passed to rsync
-  # Default: -aCv
+  # Default: -aCv --progress
   attr_accessor :rsync_args
   
   # Generated filename for a distribution, from name, version and .dmg
@@ -138,6 +142,7 @@ class ChocTop
     @release_notes = 'release_notes.html'
     @release_notes_template = "release_notes_template.html.erb"
     @rsync_args = '-aCv --progress'
+    @host_user = `whoami`
     
     @background_file = File.dirname(__FILE__) + "/../assets/sky_background.jpg"
     @app_icon_position = [175, 65]
@@ -157,7 +162,12 @@ class ChocTop
     task :build => "build/Release/#{target}/Contents/Info.plist"
     
     task "build/Release/#{target}/Contents/Info.plist" do
-      make_build
+      if ENV['NO_BUILD']
+        puts "Skipping build step..."
+        puts
+      else
+        make_build
+      end
     end
     
     desc "Create the dmg file for appcasting"
