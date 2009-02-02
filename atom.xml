@@ -1,0 +1,27 @@
+---
+layout: nil
+---
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>ChocTop</title>
+ <link href="http://drnic.github.com/choctop/atom.xml" rel="self"/>
+ <link href="http://drnic.github.com/choctop/"/>
+ <updated>{{ site.time | date_to_xmlschema }}</updated>
+ <id>http://drnic.github.com/choctop/</id>
+ <author>
+   <name>Dr Nic Williams</name>
+   <email>drnicwilliams@gmail.com</email>
+ </author>
+
+ {% for post in site.posts %}
+ <entry>
+   <title>{{ post.title }}</title>
+   <link href="http://drnic.github.com/choctop{{ post.url }}"/>
+   <updated>{{ post.date | date_to_xmlschema }}</updated>
+   <id>http://drnic.github.com/choctop{{ post.id }}</id>
+   <content type="html">{{ post.content | xml_escape }}</content>
+ </entry>
+ {% endfor %}
+ 
+</feed>
