@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>ChocTop</title>
+ <link href="http://drnic.github.com/choctop/atom.xml" rel="self"/>
+ <link href="http://drnic.github.com/choctop/"/>
+ <updated>2009-02-02T16:54:27+10:00</updated>
+ <id>http://drnic.github.com/choctop/</id>
+ <author>
+   <name>Dr Nic Williams</name>
+   <email>drnicwilliams@gmail.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Welcome to 'ChocTop'</title>
+   <link href="http://drnic.github.com/choctop/2009/02/02/first-post.html"/>
+   <updated>2009-02-02T00:00:00+10:00</updated>
+   <id>http://drnic.github.com/choctop/2009/02/02/first-post</id>
+   <content type="html">&lt;p&gt;ChocTop is going to be an awesome project.&lt;/p&gt;</content>
+ </entry>
+ 
+ 
+</feed>

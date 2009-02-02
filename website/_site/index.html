@@ -5,7 +5,7 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width = 750">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css" charset="utf-8">
-    <title>{{ page.title }}</title>
+    <title>ChocTop</title>
   </head>
   <body id="intro">
     <div id="wrapper">
@@ -27,7 +27,7 @@
       </div>
       <div id="page_body">
         <div id="content">
-          {{ content }}
+          <p>This is a page</p>
         </div>
         <div id="sidebar">
           <div class="item">
@@ -42,9 +42,9 @@
             <!-- Blog   -->
             <h4><a href="atom.xml" id="rss_feed" name="rss_feed">Blog Posts</a></h4>
             <p>
-              {% for post in site.posts %} 
-                <span>{{ post.date | date_to_string }}</span> » <a href="/choctop{{ post.url }}">{{ post.title }}</a><br>
-              {% endfor %}
+               
+                <span>02 Feb 2009</span> » <a href="/choctop/2009/02/02/first-post.html">Welcome to 'ChocTop'</a><br>
+              
             </p>
           </div>
           <div class="item">
