@@ -9,8 +9,8 @@
   </head>
   <body id="intro">
     <div id="wrapper">
+      <img src="images/title-slide.png" id="logo"/>
       <div id="header" onclick="javascript:window.location='/choctop/'">
-        <h1>ChocTop</h1>
       </div>
       <div id="navigation">
         <ul>
@@ -27,35 +27,56 @@
       </div>
       <div id="page_body">
         <div id="content">
-          <p>This is a page</p>
-        </div>
-        <div id="sidebar">
-          <div class="item">
-            <!-- Tickets   -->
-            <h4><a href="http://drnic.lighthouseapp.com/projects/24673-choctop/tickets">Tickets</a></h4>
-            <p>
-              Found a bug?<br />
-              Request a feature?
-            </p>
-          </div>
-          <div class="item">
-            <!-- Blog   -->
-            <h4><a href="atom.xml" id="rss_feed" name="rss_feed">Blog Posts</a></h4>
-            <p>
-               
-                <span>02 Feb 2009</span> » <a href="/choctop/2009/02/02/first-post.html">Welcome to 'ChocTop'</a><br>
-              
-            </p>
-          </div>
-          <div class="item">
-            <script type="text/javascript" src="http://disqus.com/forums/choctop/combination_widget.js?num_items=5&color=orange&default_tab=recent"></script>
-          </div>
+          <h3 id='introducing_choctop'>Introducing ChocTop</h3>
+
+<p>ChocTop packages and deploys any Cocoa application in a custom DMG, with generated Sparkle XML support.</p>
+
+<h3 id='screencast'>Screencast</h3>
+<object height='375' width='500'><param name='allowfullscreen' value='true' /><param name='allowscriptaccess' value='always' /><param name='movie' value='http://vimeo.com/moogaloop.swf?clip_id=3049180&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=01AAEA&amp;fullscreen=1' /><embed src='http://vimeo.com/moogaloop.swf?clip_id=3049180&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=0&amp;color=01AAEA&amp;fullscreen=1' type='application/x-shockwave-flash' allowfullscreen='true' allowscriptaccess='always' height='375' width='500' /></object>
+<p><a href='http://www.vimeo.com/download/video:87685244?e=1233561345&amp;amp;h=73e93c78ab63146ed2f460e963bcdb72&amp;amp;uh=ea4240c7d2ca97bf2c67dd997754d4b3'>Download QuickTime Movie</a> from <a href='http://www.vimeo.com'>Vimeo</a> (275Mb)</p>
+
+<h3 id='instructions'>Instructions</h3>
+
+<p>ChocTop is a command-line installer plus rake tasks (watch the screencast if this is confusing), bundled as a RubyGem:</p>
+<pre>sudo gem install choctop
+install_choctop path/to/xcode/project</pre>
+<p>Your project is given a Rakefile, a release_notes.txt and a release_notes_template.html.erb</p>
+
+<p>You edit the Rakefile with your custom DMG asset information and/or remote file locations for the rsync upload process. CommitChat&#8217;s Rakefile includes:</p>
+<pre lang='ruby'>ChocTop.new do |s|
+  s.host     = 'commitchat.com'
+  s.base_url = 'http://commitchat.com/secret_path_to_beta'
+  s.remote_dir = '/opt/apps/commitchat/secret_path_to_beta'
+  
+  s.background_file = "dmgbg.png"
+  s.volume_icon = 'VolumeIcon.icns'
+  s.app_icon_position = [106, 83]
+  s.applications_icon_position = [422, 83]
+end</pre>
+<p>You also need to add <a href='http://sparkle.andymatuschak.org/' title='Sparkle: a free software update framework for the Mac'>Sparkle</a> to your project, and the Info.plist properties such as <code>SUFeedURL</code>.</p>
+
+<p>To generate a new DMG, run:</p>
+<pre>rake dmg</pre>
+<p>To generate a new DMG and push it up to the remote server, and subsequently have users automatically start downloading the latest + greatest automatically via Sparkle:</p>
+<pre>rake dmg upload</pre>
+<p>I&#8217;m very sorry. It is perhaps too easy. It probably should be harder to make it seem more useful.</p>
+
+<p>The very cool part is that when the DMG is being designed + constructed from your Rakefile settings you actually can see it happening on the screen. The AppleScript that is executed actually operates upon the DMG whilst it is mounted, before unmounting it, compressing and read-only-ifying it. Its pretty to watch.</p>
+
+<h3 id='more_information'>More information</h3>
+
+<ul>
+<li>Homepage - <a href='http://drnic.github.com/choctop'>http://drnic.github.com/choctop</a></li>
+
+<li>Source - <a href='http://github.com/drnic/choctop' title='drnic&apos;s choctop at master - GitHub'>http://github.com/drnic/choctop</a></li>
+
+<li>Tickets - <a href='http://drnic.lighthouseapp.com/projects/24673-choctop'>http://drnic.lighthouseapp.com/projects/24673-choctop</a></li>
+</ul>
         </div>
       </div>
       <div id="footer">
         <p>made by <a href="http://drnicwilliams.com">Dr Nic</a> | sponsored by <a href="http://mocra.com">Mocra</a> | thank you to all contributors!</p>
       </div>
     </div>
-    <a href="http://github.com/drnic/choctop"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
   </body>
 </html>

@@ -16,25 +16,26 @@ a[href] {
 #wrapper { /* IE workaround */
 	margin: 0 auto;
 	padding: 0;
-	width: 750px;
+	width: 550px;
 }
 html>body #wrapper {
 	margin: 0 auto;
 	padding: 0;
 	width: auto;
-	max-width: 750px;
+	max-width: 550px;
 }
 
+#logo {
+  padding-top: 10px;
+  text-align: center;
+}
 #header {
 	position: relative;
-	background: #aaa;
-	height: 113px;
 }
 #header h1 {
 	position: absolute;
 	left: 60px;
 	top: 40px;
-	width: 380px;
 	height: 50px;
 	cursor: pointer;
 	color: white;
@@ -84,56 +85,23 @@ html>body #wrapper {
 #content { /* IE workaround */
 	margin: 0;
 	padding: 25px;
-	width: 430px;
+	width: 100%;
 	height: 584px; /* (64+2*20+2)*6 - 2 - 2*25 */
-	background: #fff;
+	background: #D6C086;
 }
 html>body #content {
 	margin: 0;
 	padding: 25px;
 	width: auto;
 	height: auto;
-	max-width: 430px;
 	min-height: 584px; /* (64+2*20+2)*6 - 2 - 2*25 */
-	background: #fff;
+	background: #D6C086;
 }
 #content :first-child {
 	margin-top: 0px;
 }
 #content :first-child + h1 {
 	margin-top: 0px;
-}
-
-#sidebar {
-	margin: 0;
-	padding: 0;
-	top: 0px;
-	left: 480px;
-	width: 270px;
-	background-color: #e8eaea;
-	position: absolute;
-}
-#sidebar .item {
-	color: #5b5b5b;
-	border-bottom: 2px solid #fff;
-	padding: 20px;
-	min-height: 64px;
-}
-#sidebar .item * {
-	margin: 0px;
-}
-#sidebar .item h4 {
-	margin-bottom: 1em;
-	font-size: 120%;
-}
-#sidebar .item p {
-	font-size: 90%;
-}
-#sidebar .item a {
-	text-decoration: none;
-}		  
-#sidebar .item a:hover {
-	text-decoration: underline;
 }
 
 #footer {
