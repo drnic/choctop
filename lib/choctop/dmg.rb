@@ -5,17 +5,17 @@ module ChocTop::Dmg
     FileUtils.mkdir_p mountpoint # TODO can we remove random mountpoints?
     sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
     sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
-    sh "bless --folder #{volume_path} --openfolder #{volume_path}"
+    sh "bless --folder '#{volume_path}' --openfolder #{volume_path}"
     sh "ln -s /Applications '#{volume_path}/Applications'"
     sh "sleep 1"
     if volume_icon
       FileUtils.cp(volume_icon, "#{volume_path}/.VolumeIcon.icns")
-      sh "SetFile -a C #{volume_path}"
+      sh "SetFile -a C '#{volume_path}'"
     end
     target_background = "#{volume_path}/#{volume_background}"
     FileUtils.cp(background_file, target_background) if background_file
     configure_dmg_window
-    sh "SetFile -a V #{target_background}" if background_file
+    sh "SetFile -a V '#{target_background}'" if background_file
   end
   
   def volume_background
