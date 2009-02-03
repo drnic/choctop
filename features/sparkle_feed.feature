@@ -4,7 +4,7 @@ Feature: Generate an XML file for Sparkle to use for updates
   I want to generate an XML file for the Sparkle framework
   
   Scenario: rake task to create/update the appcast file
-    Given a Cocoa app with choctop installed
+    Given a Cocoa app with choctop installed called 'SampleApp'
     And ChocTop config is configured for remote Sparkle
     When task 'rake dmg feed' is invoked
     Then file 'appcast/build/my_feed.xml' is created
@@ -25,7 +25,7 @@ Feature: Generate an XML file for Sparkle to use for updates
     And contents of file 'appcast/build/release_notes.html' does match /<html>/
   
   Scenario: generate default release notes if no release_notes.txt
-    Given a Cocoa app with choctop installed
+    Given a Cocoa app with choctop installed called 'SampleApp'
     And ChocTop config is configured for remote Sparkle
     And file 'release_notes.txt' is deleted
     When task 'rake dmg feed' is invoked

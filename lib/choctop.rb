@@ -13,7 +13,7 @@ class ChocTop
   VERSION = '0.9.3'
   
   # The name of the Cocoa application
-  # Default: info_plist['CFBundleExecutable'] or project folder name if "${EXECUTABLE}"
+  # Default: info_plist['CFBundleExecutable'] or project folder name if "${EXECUTABLE_NAME}"
   attr_accessor :name
   
   # The version of the Cocoa application
@@ -131,7 +131,7 @@ class ChocTop
     
     # Defaults
     @name = info_plist['CFBundleExecutable']
-    @name = File.basename(File.expand_path(".")) if name == "${EXECUTABLE}"
+    @name = File.basename(File.expand_path(".")) if name == "${EXECUTABLE_NAME}"
     @version = info_plist['CFBundleVersion']
     @target = "#{name}.app"
     @appcast_filename = info_plist['SUFeedURL'] ? File.basename(info_plist['SUFeedURL']) : 'linker_appcast.xml'
