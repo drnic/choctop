@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'App With Whitespace' target in the 'App With Whitespace' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
