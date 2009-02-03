@@ -1,3 +1,9 @@
+== 0.9.5 2009-02-03
+
+* Fixed whitespace in project names bug
+
+== 0.9.4 2009-01-31
+
 * ReleaseNotes.txt renamed to release_notes.txt in applications
 
 == 0.9.3 2009-01-29

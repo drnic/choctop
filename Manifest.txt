@@ -14,150 +14,33 @@ assets/wood.jpg
 bin/install_choctop
 features/development.feature
 features/dmg.feature
+features/fixtures/App With Whitespace/App With Whitespace.xcodeproj/TemplateIcon.icns
+features/fixtures/App With Whitespace/App With Whitespace.xcodeproj/drnic.mode1v3
+features/fixtures/App With Whitespace/App With Whitespace.xcodeproj/drnic.pbxuser
+features/fixtures/App With Whitespace/App With Whitespace.xcodeproj/project.pbxproj
+features/fixtures/App With Whitespace/App With Whitespace_Prefix.pch
+features/fixtures/App With Whitespace/English.lproj/InfoPlist.strings
+features/fixtures/App With Whitespace/English.lproj/MainMenu.xib
+features/fixtures/App With Whitespace/Info.plist
+features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/categories.pbxbtree
+features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/cdecls.pbxbtree
+features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/decls.pbxbtree
+features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/files.pbxbtree
+features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/imports.pbxbtree
+features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/pbxindex.header
+features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/protocols.pbxbtree
+features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/refs.pbxbtree
+features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/strings.pbxstrings/control
+features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/strings.pbxstrings/strings
+features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/subclasses.pbxbtree
+features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/symbols0.pbxsymbols
+features/fixtures/App With Whitespace/main.m
 features/fixtures/SampleApp/English.lproj/InfoPlist.strings
 features/fixtures/SampleApp/English.lproj/MainMenu.xib
 features/fixtures/SampleApp/Info.plist
 features/fixtures/SampleApp/SampleApp.xcodeproj/TemplateIcon.icns
-features/fixtures/SampleApp/SampleApp.xcodeproj/drnic.mode1v3
-features/fixtures/SampleApp/SampleApp.xcodeproj/drnic.pbxuser
 features/fixtures/SampleApp/SampleApp.xcodeproj/project.pbxproj
 features/fixtures/SampleApp/SampleApp_Prefix.pch
-features/fixtures/SampleApp/build/Debug/SampleApp.app/Contents/Info.plist
-features/fixtures/SampleApp/build/Debug/SampleApp.app/Contents/MacOS/SampleApp
-features/fixtures/SampleApp/build/Debug/SampleApp.app/Contents/PkgInfo
-features/fixtures/SampleApp/build/Debug/SampleApp.app/Contents/Resources/English.lproj/InfoPlist.strings
-features/fixtures/SampleApp/build/Debug/SampleApp.app/Contents/Resources/English.lproj/MainMenu.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app.dSYM/Contents/Info.plist
-features/fixtures/SampleApp/build/Release/SampleApp.app.dSYM/Contents/Resources/DWARF/SampleApp
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Sparkle
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Headers/SUAppcast.h
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Headers/SUAppcastItem.h
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Headers/SUUpdater.h
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Headers/SUVersionComparisonProtocol.h
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Headers/Sparkle.h
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/Info.plist
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/License.txt
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/SUModelTranslation.plist
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/SUStatus.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/SUStatus.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/SUStatus.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/de.lproj/SUAutomaticUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/de.lproj/SUAutomaticUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/de.lproj/SUAutomaticUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/de.lproj/SUUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/de.lproj/SUUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/de.lproj/SUUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/de.lproj/SUUpdatePermissionPrompt.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/de.lproj/SUUpdatePermissionPrompt.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/de.lproj/SUUpdatePermissionPrompt.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/de.lproj/Sparkle.strings
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/en.lproj/SUAutomaticUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/en.lproj/SUAutomaticUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/en.lproj/SUAutomaticUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/en.lproj/SUUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/en.lproj/SUUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/en.lproj/SUUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/en.lproj/SUUpdatePermissionPrompt.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/en.lproj/SUUpdatePermissionPrompt.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/en.lproj/SUUpdatePermissionPrompt.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/en.lproj/Sparkle.strings
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/es.lproj/SUAutomaticUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/es.lproj/SUAutomaticUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/es.lproj/SUAutomaticUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/es.lproj/SUUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/es.lproj/SUUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/es.lproj/SUUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/es.lproj/SUUpdatePermissionPrompt.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/es.lproj/SUUpdatePermissionPrompt.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/es.lproj/SUUpdatePermissionPrompt.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/es.lproj/Sparkle.strings
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/fr.lproj/SUAutomaticUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/fr.lproj/SUAutomaticUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/fr.lproj/SUAutomaticUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/fr.lproj/SUUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/fr.lproj/SUUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/fr.lproj/SUUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/fr.lproj/SUUpdatePermissionPrompt.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/fr.lproj/SUUpdatePermissionPrompt.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/fr.lproj/SUUpdatePermissionPrompt.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/fr.lproj/Sparkle.strings
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/it.lproj/SUAutomaticUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/it.lproj/SUAutomaticUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/it.lproj/SUAutomaticUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/it.lproj/SUUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/it.lproj/SUUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/it.lproj/SUUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/it.lproj/SUUpdatePermissionPrompt.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/it.lproj/SUUpdatePermissionPrompt.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/it.lproj/SUUpdatePermissionPrompt.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/it.lproj/Sparkle.strings
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/nl.lproj/SUAutomaticUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/nl.lproj/SUAutomaticUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/nl.lproj/SUAutomaticUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/nl.lproj/SUUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/nl.lproj/SUUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/nl.lproj/SUUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/nl.lproj/SUUpdatePermissionPrompt.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/nl.lproj/SUUpdatePermissionPrompt.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/nl.lproj/SUUpdatePermissionPrompt.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/nl.lproj/Sparkle.strings
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/relaunch
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/ru.lproj/SUAutomaticUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/ru.lproj/SUAutomaticUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/ru.lproj/SUAutomaticUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/ru.lproj/SUUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/ru.lproj/SUUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/ru.lproj/SUUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/ru.lproj/SUUpdatePermissionPrompt.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/ru.lproj/SUUpdatePermissionPrompt.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/ru.lproj/SUUpdatePermissionPrompt.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/ru.lproj/Sparkle.strings
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/sv.lproj/SUAutomaticUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/sv.lproj/SUAutomaticUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/sv.lproj/SUAutomaticUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/sv.lproj/SUUpdateAlert.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/sv.lproj/SUUpdateAlert.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/sv.lproj/SUUpdateAlert.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/sv.lproj/SUUpdatePermissionPrompt.nib/classes.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/sv.lproj/SUUpdatePermissionPrompt.nib/info.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/sv.lproj/SUUpdatePermissionPrompt.nib/keyedobjects.nib
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/sv.lproj/Sparkle.strings
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Frameworks/Sparkle.framework/Versions/A/Sparkle
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Info.plist
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/MacOS/SampleApp
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/PkgInfo
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Resources/English.lproj/InfoPlist.strings
-features/fixtures/SampleApp/build/Release/SampleApp.app/Contents/Resources/English.lproj/MainMenu.nib
-features/fixtures/SampleApp/build/SampleApp.build/Debug/SampleApp.build/Objects-normal/i386/SampleApp.LinkFileList
-features/fixtures/SampleApp/build/SampleApp.build/Debug/SampleApp.build/SampleApp-all-target-headers.hmap
-features/fixtures/SampleApp/build/SampleApp.build/Debug/SampleApp.build/SampleApp-generated-files.hmap
-features/fixtures/SampleApp/build/SampleApp.build/Debug/SampleApp.build/SampleApp-own-target-headers.hmap
-features/fixtures/SampleApp/build/SampleApp.build/Debug/SampleApp.build/SampleApp-project-headers.hmap
-features/fixtures/SampleApp/build/SampleApp.build/Debug/SampleApp.build/SampleApp.dep
-features/fixtures/SampleApp/build/SampleApp.build/Debug/SampleApp.build/SampleApp.hmap
-features/fixtures/SampleApp/build/SampleApp.build/Release/SampleApp.build/Objects-normal/i386/SampleApp
-features/fixtures/SampleApp/build/SampleApp.build/Release/SampleApp.build/Objects-normal/i386/SampleApp.LinkFileList
-features/fixtures/SampleApp/build/SampleApp.build/Release/SampleApp.build/Objects-normal/ppc/SampleApp
-features/fixtures/SampleApp/build/SampleApp.build/Release/SampleApp.build/Objects-normal/ppc/SampleApp.LinkFileList
-features/fixtures/SampleApp/build/SampleApp.build/Release/SampleApp.build/SampleApp-all-target-headers.hmap
-features/fixtures/SampleApp/build/SampleApp.build/Release/SampleApp.build/SampleApp-generated-files.hmap
-features/fixtures/SampleApp/build/SampleApp.build/Release/SampleApp.build/SampleApp-own-target-headers.hmap
-features/fixtures/SampleApp/build/SampleApp.build/Release/SampleApp.build/SampleApp-project-headers.hmap
-features/fixtures/SampleApp/build/SampleApp.build/Release/SampleApp.build/SampleApp.dep
-features/fixtures/SampleApp/build/SampleApp.build/Release/SampleApp.build/SampleApp.hmap
-features/fixtures/SampleApp/build/SampleApp.build/Release/SampleApp.build/SampleApp~.dep
-features/fixtures/SampleApp/build/SampleApp.build/SampleApp.pbxindex/categories.pbxbtree
-features/fixtures/SampleApp/build/SampleApp.build/SampleApp.pbxindex/cdecls.pbxbtree
-features/fixtures/SampleApp/build/SampleApp.build/SampleApp.pbxindex/decls.pbxbtree
-features/fixtures/SampleApp/build/SampleApp.build/SampleApp.pbxindex/files.pbxbtree
-features/fixtures/SampleApp/build/SampleApp.build/SampleApp.pbxindex/imports.pbxbtree
-features/fixtures/SampleApp/build/SampleApp.build/SampleApp.pbxindex/pbxindex.header
-features/fixtures/SampleApp/build/SampleApp.build/SampleApp.pbxindex/protocols.pbxbtree
-features/fixtures/SampleApp/build/SampleApp.build/SampleApp.pbxindex/refs.pbxbtree
-features/fixtures/SampleApp/build/SampleApp.build/SampleApp.pbxindex/strings.pbxstrings/control
-features/fixtures/SampleApp/build/SampleApp.build/SampleApp.pbxindex/strings.pbxstrings/strings
-features/fixtures/SampleApp/build/SampleApp.build/SampleApp.pbxindex/subclasses.pbxbtree
-features/fixtures/SampleApp/build/SampleApp.build/SampleApp.pbxindex/symbols0.pbxsymbols
 features/fixtures/SampleApp/main.m
 features/fixtures/design/background.jpg
 features/fixtures/design/ds_store
@@ -176,3 +59,29 @@ lib/choctop/dmg.rb
 script/console
 script/destroy
 script/generate
+website/_layouts/default.html
+website/_layouts/post.html
+website/_posts/2009-02-02-first-post.markdown
+website/_site/2009/02/02/first-post.html
+website/_site/atom.xml
+website/_site/config.yml
+website/_site/css/stylesheet.css
+website/_site/images/logo.gif
+website/_site/images/logo.jpg
+website/_site/images/logo.png
+website/_site/images/love-16.gif
+website/_site/images/love.gif
+website/_site/images/mocra-keynote-bg.jpg
+website/_site/images/title slide.jpg
+website/_site/images/title-slide.png
+website/_site/index.html
+website/atom.xml
+website/config.yml
+website/css/stylesheet.css
+website/images/logo.gif
+website/images/logo.png
+website/images/love-16.gif
+website/images/love.gif
+website/images/mocra-keynote-bg.jpg
+website/images/title-slide.png
+website/index.markdown
