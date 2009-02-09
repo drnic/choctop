@@ -1,6 +1,10 @@
 module ChocTop::Appcast
   def make_build
-    sh "xcodebuild -configuration Release"
+    if ENV['NO_BUILD']
+      puts "Skipping build task..."
+    else
+      sh "xcodebuild -configuration Release"
+    end
   end
   
   def make_appcast
