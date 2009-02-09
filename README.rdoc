@@ -106,7 +106,7 @@ its set to Debug for development) and then Build. The "rake appcast" task should
     
 == SPONSORED BY:
 
-http//mocra.com - Mocra - the premier Rails/iPhone consultancy
+http://mocra.com - Mocra - the premier Rails/iPhone consultancy
 
 == LICENSE:
 
