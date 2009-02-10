@@ -9,8 +9,8 @@ Then /^file '(.*)' in mounted volume has GetFileInfo (.*) '(.*)'/ do |file, file
   end
 end
 
-# Then /^file '(.*)' in mounted volume is aliased to '(.*)'/ do |file, target|
-#   in_mounted_volume do
-#     
-#   end
-# end
+Then /^file '(.*)' in mounted volume is aliased to '(.*)'/ do |file, target|
+  in_mounted_volume do
+    puts "TODO - how to get applescript to test this?"
+  end
+end
