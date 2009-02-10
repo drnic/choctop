@@ -24,3 +24,13 @@ Feature: Can build a customised DMG image from application build
     And file 'background.jpg' in mounted volume is created
     And file 'background.jpg' in mounted volume is invisible
     And file '.VolumeIcon.icns' in mounted volume is created
+
+  Scenario: Build a DMG with custom Applications symlink icon
+    Given a Cocoa app with choctop installed called 'SampleApp'
+    And is configured for custom Applications icon
+    When task 'rake dmg' is invoked
+    And dmg 'appcast/build/SampleApp-0.1.0.dmg' is mounted as 'SampleApp'
+    Then folder 'SampleApp.app' in mounted volume is created
+    And file 'Applications' in mounted volume is created
+    And file 'appicon.icns' in mounted volume is created
+    And file 'appicon.icns' in mounted volume is invisible

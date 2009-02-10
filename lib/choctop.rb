@@ -110,11 +110,16 @@ class ChocTop
   # To get default, boring blank DMG volume icon, set value to +nil+
   attr_accessor :volume_icon
   
+  # Custom icon for the Applications symlink icon
+  # Default: none
+  attr_accessor :applications_icon
+  
   # Size of icons, in pixels, within custom DMG (between 16 and 128)
   # Default: 104 - this is nice and big
   attr_accessor :icon_size
   
   # Icon text size
+  # Can pass integer (12) or string ("12" or "12 px")
   # Default: 12 (px)
   attr_reader :icon_text_size
   
