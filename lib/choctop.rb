@@ -10,7 +10,7 @@ require "active_support"
 require "RedCloth"
 
 class ChocTop
-  VERSION = '0.9.5'
+  VERSION = '0.9.6'
   
   # The name of the Cocoa application
   # Default: info_plist['CFBundleExecutable'] or project folder name if "${EXECUTABLE_NAME}"

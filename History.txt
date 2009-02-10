@@ -1,3 +1,7 @@
+== 0.9.6 2009-02-10
+
+* Custom Applications Icons!!!
+* New config option: s.application_icon = "xxx.png"
 * New config option: s.icon_text_size = 12
 * rake dmg NO_BUILD=1 will skip the build step
 * The background image no longer appears in the "real time" design of the DMG as its in .background folder

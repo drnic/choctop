@@ -79,9 +79,9 @@ module ChocTop::Dmg
   end
   
   def configure_applications_icon
-    run_applescript <<-SCRIPT.gsub(/^        /, ''), "apps_icon_script"
+    run_applescript <<-SCRIPT.gsub(/^      /, ''), "apps_icon_script"
       tell application "Finder"
-        set dest to disk "SampleApp"
+        set dest to disk "#{name}"
         set src to folder "Applications" of startup disk
         make new alias at dest to src
       end tell
@@ -89,7 +89,6 @@ module ChocTop::Dmg
     if applications_icon
       applications_path = "#{volume_path}/Applications"
       OSX::NSApplicationLoad()
-      # - (BOOL)setIcon:(NSImage *)image forFile:(NSString *)fullPath options:(NSWorkspaceIconCreationOptions)options
       image = OSX::NSImage.alloc.initWithContentsOfFile(applications_icon)
       OSX::NSWorkspace.sharedWorkspace.setIcon_forFile_options(image, applications_path, nil)
     end
