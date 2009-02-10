@@ -12,6 +12,10 @@ require "RedCloth"
 class ChocTop
   VERSION = '0.9.6'
   
+  # Path to the Info.plist
+  # Default: "Info.plist"
+  attr_accessor :info_plist_path
+  
   # The name of the Cocoa application
   # Default: info_plist['CFBundleExecutable'] or project folder name if "${EXECUTABLE_NAME}"
   attr_accessor :name
@@ -136,31 +140,32 @@ class ChocTop
   end
   
   def info_plist
-    @info_plist ||= OSX::NSDictionary.dictionaryWithContentsOfFile(File.expand_path('Info.plist')) || {}
+    @info_plist ||= OSX::NSDictionary.dictionaryWithContentsOfFile(File.expand_path(info_plist_path)) || {}
   end
   
   def initialize
     $sparkle = self # define a global variable for this object
     
-    # Defaults
-    @name = info_plist['CFBundleExecutable']
-    @name = File.basename(File.expand_path(".")) if name == "${EXECUTABLE_NAME}"
-    @version = info_plist['CFBundleVersion']
-    @target = "#{name}.app"
-    @appcast_filename = info_plist['SUFeedURL'] ? File.basename(info_plist['SUFeedURL']) : 'linker_appcast.xml'
-    @release_notes = 'release_notes.html'
-    @release_notes_template = "release_notes_template.html.erb"
-    @rsync_args = '-aCv --progress'
-    
-    @background_file = File.dirname(__FILE__) + "/../assets/sky_background.jpg"
-    @app_icon_position = [175, 65]
-    @applications_icon_position = [347, 270]
-    @volume_icon = File.dirname(__FILE__) + "/../assets/DefaultVolumeIcon.icns"
-    @icon_size = 104
-    @icon_text_size = 12
-    
     yield self if block_given?
-
+    
+    # Defaults
+    @info_plist_path ||= 'Info.plist'
+    @name ||= info_plist['CFBundleExecutable']
+    @name = File.basename(File.expand_path(".")) if name.to_s == "${EXECUTABLE_NAME}"
+    @version ||= info_plist['CFBundleVersion']
+    @target ||= "#{name}.app"
+    @appcast_filename ||= info_plist['SUFeedURL'] ? File.basename(info_plist['SUFeedURL']) : 'linker_appcast.xml'
+    @release_notes ||= 'release_notes.html'
+    @release_notes_template ||= "release_notes_template.html.erb"
+    @rsync_args ||= '-aCv --progress'
+    
+    @background_file ||= File.dirname(__FILE__) + "/../assets/sky_background.jpg"
+    @app_icon_position ||= [175, 65]
+    @applications_icon_position ||= [347, 270]
+    @volume_icon ||= File.dirname(__FILE__) + "/../assets/DefaultVolumeIcon.icns"
+    @icon_size ||= 104
+    @icon_text_size ||= 12
+    
     define_tasks
   end
   
