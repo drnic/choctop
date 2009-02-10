@@ -30,7 +30,10 @@ Feature: Can build a customised DMG image from application build
     And is configured for custom Applications icon
     When task 'rake dmg' is invoked
     And dmg 'appcast/build/SampleApp-0.1.0.dmg' is mounted as 'SampleApp'
-    Then folder 'SampleApp.app' in mounted volume is created
-    And file 'Applications' in mounted volume is created
-    And file 'appicon.icns' in mounted volume is created
-    And file 'appicon.icns' in mounted volume is invisible
+    Then file 'Applications' in mounted volume is created
+    And file 'Applications' in mounted volume has GetFileInfo type '"fdrp"'
+    And file 'Applications' in mounted volume has GetFileInfo alias '1'
+    And file 'Applications' in mounted volume is aliased to '/Applications'
+    And file 'Applications' in mounted volume has GetFileInfo custom icon '1'  # GetFileInfo -ac Applications; SetFile -a C Applications
+
+

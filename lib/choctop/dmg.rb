@@ -6,17 +6,11 @@ module ChocTop::Dmg
     sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
     sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
     sh "bless --folder '#{volume_path}' --openfolder '#{volume_path}'"
-    sh "ln -s /Applications '#{volume_path}/Applications'"
     sh "sleep 1"
-    if volume_icon
-      FileUtils.cp(volume_icon, "#{volume_path}/.VolumeIcon.icns")
-      sh "SetFile -a C '#{volume_path}'"
-    end
-    target_background = "#{volume_path}/#{volume_background}"
-    FileUtils.mkdir_p(File.dirname(target_background))
-    FileUtils.cp(background_file, target_background) if background_file
+
+    configure_volume_icon
+    configure_applications_icon
     configure_dmg_window
-    sh "SetFile -a V '#{target_background}'" if background_file
   end
   
   def volume_background
@@ -38,50 +32,67 @@ module ChocTop::Dmg
     [background.first, background.last + statusbar_height]
   end
   
-  def statusbar_height
-    20
+  def statusbar_height; 20; end
+  
+  def configure_volume_icon
+    if volume_icon
+      FileUtils.cp(volume_icon, "#{volume_path}/.VolumeIcon.icns")
+      sh "SetFile -a C '#{volume_path}'"
+    end
+  end
+
+  def configure_dmg_window
+    if background_file
+      target_background = "#{volume_path}/#{volume_background}"
+      FileUtils.mkdir_p(File.dirname(target_background))
+      FileUtils.cp(background_file, target_background) 
+    end
+    run_applescript <<-SCRIPT.gsub(/^      /, '')
+      tell application "Finder"
+         set mountpoint to POSIX file ("#{volume_path}" as string) as alias
+         tell folder mountpoint
+             open
+             tell container window
+                set toolbar visible to false
+                set statusbar visible to false -- doesn't do anything at DMG open time
+                set current view to icon view
+                delay 1 -- Sync
+                set the bounds to {#{window_bounds.join(", ")}}
+             end tell
+             delay 1 -- Sync
+             set icon size of the icon view options of container window to #{icon_size}
+             set text size of the icon view options of container window to #{icon_text_size}
+             set arrangement of the icon view options of container window to not arranged
+             set position of item "#{target}" to {#{app_icon_position.join(", ")}}
+             set position of item "Applications" to {#{applications_icon_position.join(", ")}}
+             set the bounds of the container window to {#{window_bounds.join(", ")}}
+             set background picture of the icon view options of container window to file "#{volume_background.gsub(/\//,':')}"
+             update without registering applications
+             delay 5 -- Sync
+             close
+         end tell
+         -- Sync
+         delay 5
+      end tell
+    SCRIPT
+    sh "SetFile -a V '#{target_background}'" if background_file
   end
   
-  def configure_dmg_window
-    applescript = <<-SCRIPT
-    tell application "Finder"
-       set mountpoint to POSIX file ("#{volume_path}" as string) as alias
-       tell folder mountpoint
-           open
-           tell container window
-              set toolbar visible to false
-              set statusbar visible to false -- doesn't do anything at DMG open time
-              set current view to icon view
-              delay 1 -- Sync
-              set the bounds to {#{window_bounds.join(", ")}}
-           end tell
-           delay 1 -- Sync
-           set icon size of the icon view options of container window to #{icon_size}
-           set text size of the icon view options of container window to #{icon_text_size}
-           set arrangement of the icon view options of container window to not arranged
-           set position of item "#{target}" to {#{app_icon_position.join(", ")}}
-           set position of item "Applications" to {#{applications_icon_position.join(", ")}}
-           set the bounds of the container window to {#{window_bounds.join(", ")}}
-           set background picture of the icon view options of container window to file "#{volume_background.gsub(/\//,':')}"
-           update without registering applications
-           delay 5 -- Sync
-           close
-       end tell
-       -- Sync
-       delay 5
-    end tell
+  def configure_applications_icon
+    run_applescript <<-SCRIPT.gsub(/^        /, ''), "apps_icon_script"
+      tell application "Finder"
+        set dest to disk "SampleApp"
+        set src to folder "Applications" of startup disk
+        make new alias at dest to src
+      end tell
     SCRIPT
-    File.open(scriptfile = "/tmp/choctop-script", "w") do |f|
-      f << applescript
+    if applications_icon
+      applications_path = "#{volume_path}/Applications"
+      OSX::NSApplicationLoad()
+      # - (BOOL)setIcon:(NSImage *)image forFile:(NSString *)fullPath options:(NSWorkspaceIconCreationOptions)options
+      image = OSX::NSImage.alloc.initWithContentsOfFile(applications_icon)
+      OSX::NSWorkspace.sharedWorkspace.setIcon_forFile_options(image, applications_path, nil)
     end
-    sh("osascript #{scriptfile}") do |ok, res|
-      if ! ok
-        p res
-        puts volume_path
-        exit 1
-      end
-    end
-    applescript
   end
   
   def detach_dmg
@@ -108,6 +119,20 @@ module ChocTop::Dmg
   	# /Developer/Tools/Rez -a build/temp/sla.r -o $@
   	# hdiutil flatten $@
   	
+  end
+  
+  def run_applescript(applescript, tmp_file = "choctop-script")
+    File.open(scriptfile = "/tmp/#{tmp_file}", "w") do |f|
+      f << applescript
+    end
+    sh("osascript #{scriptfile}") do |ok, res|
+      if ! ok
+        p res
+        puts volume_path
+        exit 1
+      end
+    end
+    applescript
   end
 end
 ChocTop.send(:include, ChocTop::Dmg)

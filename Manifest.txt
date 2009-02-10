@@ -49,6 +49,7 @@ features/sparkle_feed.feature
 features/steps/common.rb
 features/steps/dmg_steps.rb
 features/steps/env.rb
+features/steps/file_attribute_steps.rb
 features/steps/generator.rb
 features/steps/remote.rb
 features/steps/xcode_steps.rb
