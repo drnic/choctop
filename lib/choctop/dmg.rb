@@ -56,6 +56,7 @@ module ChocTop::Dmg
            end tell
            delay 1 -- Sync
            set icon size of the icon view options of container window to #{icon_size}
+           set text size of the icon view options of container window to #{icon_text_size}
            set arrangement of the icon view options of container window to not arranged
            set position of item "#{target}" to {#{app_icon_position.join(", ")}}
            set position of item "Applications" to {#{applications_icon_position.join(", ")}}

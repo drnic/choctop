@@ -1,3 +1,4 @@
+* New config option: s.icon_text_size = 12
 * rake dmg NO_BUILD=1 will skip the build step
 
 == 0.9.5 2009-02-03

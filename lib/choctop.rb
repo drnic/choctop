@@ -114,6 +114,14 @@ class ChocTop
   # Default: 104 - this is nice and big
   attr_accessor :icon_size
   
+  # Icon text size
+  # Default: 12 (px)
+  attr_reader :icon_text_size
+  
+  def icon_text_size=(size)
+    @icon_text_size = size.to_i
+  end
+  
   # The url for the remote package, without the protocol + host
   # e.g. if absolute url is http://mydomain.com/downloads/MyApp-1.0.dmg
   # then pkg_relative_url is /downloads/MyApp-1.0.dmg
@@ -144,6 +152,7 @@ class ChocTop
     @applications_icon_position = [347, 270]
     @volume_icon = File.dirname(__FILE__) + "/../assets/DefaultVolumeIcon.icns"
     @icon_size = 104
+    @icon_text_size = 12
     
     yield self if block_given?
 
