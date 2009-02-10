@@ -42,8 +42,7 @@ features/fixtures/SampleApp/SampleApp.xcodeproj/TemplateIcon.icns
 features/fixtures/SampleApp/SampleApp.xcodeproj/project.pbxproj
 features/fixtures/SampleApp/SampleApp_Prefix.pch
 features/fixtures/SampleApp/main.m
-features/fixtures/design/background.jpg
-features/fixtures/design/ds_store
+features/fixtures/custom_assets/appicon.icns
 features/initial_generator.feature
 features/rake_tasks.feature
 features/sparkle_feed.feature

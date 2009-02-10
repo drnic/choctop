@@ -13,13 +13,14 @@ module ChocTop::Dmg
       sh "SetFile -a C '#{volume_path}'"
     end
     target_background = "#{volume_path}/#{volume_background}"
+    FileUtils.mkdir_p(File.dirname(target_background))
     FileUtils.cp(background_file, target_background) if background_file
     configure_dmg_window
     sh "SetFile -a V '#{target_background}'" if background_file
   end
   
   def volume_background
-    "background#{File.extname(background_file)}"
+    ".background/background#{File.extname(background_file)}"
   end
   
   def window_position
@@ -61,7 +62,7 @@ module ChocTop::Dmg
            set position of item "#{target}" to {#{app_icon_position.join(", ")}}
            set position of item "Applications" to {#{applications_icon_position.join(", ")}}
            set the bounds of the container window to {#{window_bounds.join(", ")}}
-           set background picture of the icon view options of container window to file "#{File.basename volume_background}"
+           set background picture of the icon view options of container window to file "#{volume_background.gsub(/\//,':')}"
            update without registering applications
            delay 5 -- Sync
            close

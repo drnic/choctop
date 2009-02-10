@@ -1,5 +1,6 @@
 * New config option: s.icon_text_size = 12
 * rake dmg NO_BUILD=1 will skip the build step
+* The background image no longer appears in the "real time" design of the DMG as its in .background folder
 
 == 0.9.5 2009-02-03
 
