@@ -8,3 +8,4 @@ tmp
 *.pbxuser
 .DS_Store
 features/fixtures/*/build
+*.tmproj
