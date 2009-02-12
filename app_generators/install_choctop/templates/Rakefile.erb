@@ -4,9 +4,8 @@ require "rake"
 require "choctop"
 
 ChocTop.new do |s|
-  # Remote upload target
-  s.host     = '<%= urlname %>.com'
-  # s.base_url   = "http://#{s.host}"
+  # Remote upload target (set host if not same as Info.plist['SUFeedURL'])
+  # s.host     = '<%= urlname %>.com'
   s.remote_dir = '/path/to/upload/root/of/app'
 
   # Custom DMG

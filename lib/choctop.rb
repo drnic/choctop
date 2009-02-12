@@ -5,6 +5,7 @@ require "fileutils"
 require "yaml"
 require "builder"
 require "erb"
+require "uri"
 require "osx/cocoa"
 require "active_support"
 require "RedCloth"
@@ -28,15 +29,17 @@ class ChocTop
   # Default: #{name}.app
   attr_accessor :target
   
+  # The Sparkle feed URL
+  # Default: info_plist['SUFeedURL']
+  attr_accessor :su_feed_url
+  
   # The host name, e.g. some-domain.com
+  # Default: host from base_url
   attr_accessor :host
   
   # The url from where the xml + dmg files will be downloaded
-  # Default: http://#{host}
-  attr_writer :base_url
-  def base_url
-    @base_url ||= "http://#{host}"
-  end
+  # Default: dir path from appcast_filename
+  attr_accessor :base_url
   
   # The file name for generated release notes for the latest release
   # Default: release_notes.html
@@ -154,7 +157,10 @@ class ChocTop
     @name = File.basename(File.expand_path(".")) if name.to_s == "${EXECUTABLE_NAME}"
     @version ||= info_plist['CFBundleVersion']
     @target ||= "#{name}.app"
-    @appcast_filename ||= info_plist['SUFeedURL'] ? File.basename(info_plist['SUFeedURL']) : 'linker_appcast.xml'
+    @su_feed_url = info_plist['SUFeedURL']
+    @appcast_filename ||= File.basename(su_feed_url)
+    @base_url ||= File.dirname(su_feed_url)
+    @host ||= URI.parse(base_url).host
     @release_notes ||= 'release_notes.html'
     @release_notes_template ||= "release_notes_template.html.erb"
     @rsync_args ||= '-aCv --progress'
