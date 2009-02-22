@@ -52,11 +52,11 @@ to the end:
     require "choctop"
 
     ChocTop.new do |s|
-      s.host     = 'project.com'
       s.remote_dir = '/path/to/upload/root/of/app'
       
       # Optional, showing defaults
-      s.base_url   = "http://#{s.host}"
+      s.host          = host from Info.plist['SUFeedURL']
+      s.base_url      = "http://#{s.host}"
       s.release_notes = "release_notes.html"
       
       # Custom DMG
