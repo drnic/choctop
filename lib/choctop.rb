@@ -206,9 +206,6 @@ class ChocTop
       upload_appcast
     end
 
-    desc "Create dmg, update appcast file, and upload to host"
-    task :appcast => %w[force_build dmg force_feed upload]
-    
     task :detach_dmg do
       detach_dmg
     end
