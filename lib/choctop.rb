@@ -28,7 +28,11 @@ class ChocTop
   # The target name of the distributed DMG file
   # Default: #{name}.app
   attr_accessor :target
-  
+
+  # The build type of the distributed DMG file
+  # Default: Release
+  attr_accessor :build_type
+
   # The Sparkle feed URL
   # Default: info_plist['SUFeedURL']
   attr_accessor :su_feed_url
@@ -157,6 +161,7 @@ class ChocTop
     @name = File.basename(File.expand_path(".")) if name.to_s == "${EXECUTABLE_NAME}"
     @version ||= info_plist['CFBundleVersion']
     @target ||= "#{name}.app"
+    @build_type = "Release"
     @su_feed_url = info_plist['SUFeedURL']
     @appcast_filename ||= File.basename(su_feed_url)
     @base_url ||= File.dirname(su_feed_url)
@@ -178,10 +183,10 @@ class ChocTop
   def define_tasks
     return unless Object.const_defined?("Rake")
     
-    desc "Build Xcode Release"
-    task :build => "build/Release/#{target}/Contents/Info.plist"
+    desc "Build Xcode #{build_type}"
+    task :build => "build/#{build_type}/#{target}/Contents/Info.plist"
     
-    task "build/Release/#{target}/Contents/Info.plist" do
+    task "build/#{build_type}/#{target}/Contents/Info.plist" do
       make_build
     end
     
