@@ -1,4 +1,5 @@
 * removed unused 'appcast' rake task
+* New config option: s.build_type = 'Release' [kdbdallas]
 
 == 0.9.6 2009-02-10
 
