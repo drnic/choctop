@@ -3,7 +3,7 @@ module ChocTop::Appcast
     if ENV['NO_BUILD']
       puts "Skipping build task..."
     else
-      sh "xcodebuild -configuration Release"
+      sh "xcodebuild -configuration #{build_type}"
     end
   end
   
