@@ -3,7 +3,7 @@ module ChocTop::Dmg
     FileUtils.rm_rf build_path
     FileUtils.mkdir_p build_path
     FileUtils.mkdir_p mountpoint # TODO can we remove random mountpoints?
-    sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder 'build/Release/#{target}' '#{pkg}'"
+    sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder 'build/#{build_type}/#{target}' '#{pkg}'"
     sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
     sh "bless --folder '#{volume_path}' --openfolder '#{volume_path}'"
     sh "sleep 1"
