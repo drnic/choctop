@@ -11,7 +11,7 @@ require "active_support"
 require "RedCloth"
 
 class ChocTop
-  VERSION = '0.9.6'
+  VERSION = '0.9.7'
   
   # Path to the Info.plist
   # Default: "Info.plist"
@@ -162,10 +162,13 @@ class ChocTop
     @version ||= info_plist['CFBundleVersion']
     @target ||= "#{name}.app"
     @build_type = "Release"
-    @su_feed_url = info_plist['SUFeedURL']
-    @appcast_filename ||= File.basename(su_feed_url)
-    @base_url ||= File.dirname(su_feed_url)
-    @host ||= URI.parse(base_url).host
+    if @su_feed_url = info_plist['SUFeedURL']
+      @appcast_filename ||= File.basename(su_feed_url)
+      @base_url ||= File.dirname(su_feed_url)
+    end
+    if @base_url
+      @host ||= URI.parse(base_url).host
+    end
     @release_notes ||= 'release_notes.html'
     @release_notes_template ||= "release_notes_template.html.erb"
     @rsync_args ||= '-aCv --progress'

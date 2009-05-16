@@ -1,3 +1,4 @@
+* permit SUFeedURL to not be specified (cleanly exit from deploy rake tasks)
 * removed unused 'appcast' rake task
 * New config option: s.build_type = 'Release' [kdbdallas]
 
