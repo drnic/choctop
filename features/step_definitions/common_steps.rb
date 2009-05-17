@@ -20,7 +20,7 @@ Given %r{^this project is active project folder} do
   @active_project_folder = File.expand_path(File.dirname(__FILE__) + "/../..")
 end
 
-Given %r{^env variable \$([\w_]+) set to '(.*)'} do |env_var, value|
+Given %r{^env variable \$([\w_]+) set to "(.*)"} do |env_var, value|
   ENV[env_var] = value
 end
 
@@ -44,19 +44,19 @@ def setup_active_project_folder project_name
   @project_name = project_name
 end
 
-Given %r{'(.*)' folder is deleted} do |folder|
+Given %r{"(.*)" folder is deleted} do |folder|
   in_project_folder do
     FileUtils.rm_rf folder
   end
 end
 
-Given %r{file '(.*)' is deleted} do |file|
+Given %r{file "(.*)" is deleted} do |file|
   in_project_folder do
     FileUtils.rm_rf file
   end
 end
 
-When %r{^'(.*)' generator is invoked with arguments '(.*)'$} do |generator, arguments|
+When %r{^"(.*)" generator is invoked with arguments "(.*)"$} do |generator, arguments|
   @stdout = StringIO.new
   FileUtils.chdir(@active_project_folder) do
     if Object.const_defined?("APP_ROOT")
@@ -72,21 +72,21 @@ When %r{^'(.*)' generator is invoked with arguments '(.*)'$} do |generator, argu
   end
 end
 
-When %r{run executable '(.*)' with arguments '(.*)'} do |executable, arguments|
+When %r{run executable "(.*)" with arguments "(.*)"} do |executable, arguments|
   @stdout = File.expand_path(File.join(@tmp_root, "executable.out"))
   in_project_folder do
     system "#{executable} #{arguments} > #{@stdout} 2> #{@stdout}"
   end
 end
 
-When %r{run project executable '(.*)' with arguments '(.*)'} do |executable, arguments|
+When %r{run project executable "(.*)" with arguments "(.*)"} do |executable, arguments|
   @stdout = File.expand_path(File.join(@tmp_root, "executable.out"))
   in_project_folder do
     system "ruby #{executable} #{arguments} > #{@stdout} 2> #{@stdout}"
   end
 end
 
-When %r{run local executable '(.*)' with arguments '(.*)'} do |executable, arguments|
+When %r{run local executable "(.*)" with arguments "(.*)"} do |executable, arguments|
   @stdout = File.expand_path(File.join(@tmp_root, "executable.out"))
   executable = File.expand_path(File.join(File.dirname(__FILE__), "/../../bin", executable))
   in_project_folder do
@@ -94,32 +94,32 @@ When %r{run local executable '(.*)' with arguments '(.*)'} do |executable, argum
   end
 end
 
-When %r{^task 'rake (.*)' is invoked$} do |task|
+When %r{^task "rake (.*)" is invoked$} do |task|
   @stdout = File.expand_path(File.join(@tmp_root, "tests.out"))
   FileUtils.chdir(@active_project_folder) do
     system "rake #{task} --trace > #{@stdout} 2> #{@stdout}"
   end
 end
 
-Then %r{^folder '(.*)' (is|is not) created} do |folder, is|
+Then %r{^folder "(.*)" (is|is not) created} do |folder, is|
   in_project_folder do
     File.exists?(folder).should(is == 'is' ? be_true : be_false)
   end
 end
 
-Then %r{^file '(.*)' (is|is not) created} do |file, is|
+Then %r{^file "(.*)" (is|is not) created} do |file, is|
   in_project_folder do
     File.exists?(file).should(is == 'is' ? be_true : be_false)
   end
 end
 
-Then %r{^file with name matching '(.*)' is created} do |pattern|
+Then %r{^file with name matching "(.*)" is created} do |pattern|
   in_project_folder do
     Dir[pattern].should_not be_empty
   end
 end
 
-Then %r{gem file '(.*)' and generated file '(.*)' should be the same} do |gem_file, project_file|
+Then %r{gem file "(.*)" and generated file "(.*)" should be the same} do |gem_file, project_file|
   File.exists?(gem_file).should be_true
   File.exists?(project_file).should be_true
   gem_file_contents = File.read(File.dirname(__FILE__) + "/../../#{gem_file}")
@@ -127,20 +127,20 @@ Then %r{gem file '(.*)' and generated file '(.*)' should be the same} do |gem_fi
   project_file_contents.should == gem_file_contents
 end
 
-Then %r{^output same as contents of '(.*)'$} do |file|
+Then %r{^output same as contents of "(.*)"$} do |file|
   expected_output = File.read(File.join(File.dirname(__FILE__) + "/../expected_outputs", file))
   actual_output = File.read(@stdout)
   actual_output.should == expected_output
 end
 
-Then %r{^(does|does not) invoke generator '(.*)'$} do |does_invoke, generator|
+Then %r{^(does|does not) invoke generator "(.*)"$} do |does_invoke, generator|
   actual_output = File.read(@stdout)
   does_invoke == "does" ?
     actual_output.should(match(/dependency\s+#{generator}/)) :
     actual_output.should_not(match(/dependency\s+#{generator}/))
 end
 
-Then %r{help options '(.*)' and '(.*)' are displayed} do |opt1, opt2|
+Then %r{help options "(.*)" and "(.*)" are displayed} do |opt1, opt2|
   actual_output = File.read(@stdout)
   actual_output.should match(/#{opt1}/)
   actual_output.should match(/#{opt2}/)
@@ -153,7 +153,7 @@ Then %r{^output (does|does not) match \/(.*)\/} do |does, regex|
     actual_output.should_not(match(/#{regex}/)) 
 end
 
-Then %r{^contents of file '(.*)' (does|does not) match \/(.*)\/} do |file, does, regex|
+Then %r{^contents of file "(.*)" (does|does not) match \/(.*)\/} do |file, does, regex|
   in_project_folder do
     actual_output = File.read(file)
     (does == 'does') ?
@@ -174,7 +174,7 @@ Then %r{^all (\d+) examples pass} do |expected_test_count|
   actual_output.should match(expected)
 end
 
-Then %r{^yaml file '(.*)' contains (\{.*\})} do |file, yaml|
+Then %r{^yaml file "(.*)" contains (\{.*\})} do |file, yaml|
   in_project_folder do
     yaml = eval yaml
     YAML.load(File.read(file)).should == yaml
@@ -190,14 +190,14 @@ Then %r{^Rakefile can display tasks successfully} do
   actual_output.should match(/^rake\s+\w+\s+#\s.*/)
 end
 
-Then %r{^task 'rake (.*)' is executed successfully} do |task|
+Then %r{^task "rake (.*)" is executed successfully} do |task|
   @stdout.should_not be_nil
   actual_output = File.read(@stdout)
   actual_output.should_not match(/^Don't know how to build task '#{task}'/)
   actual_output.should_not match(/Error/i)
 end
 
-Then %r{^gem spec key '(.*)' contains \/(.*)\/} do |key, regex|
+Then %r{^gem spec key "(.*)" contains \/(.*)\/} do |key, regex|
   in_project_folder do
     gem_file = Dir["pkg/*.gem"].first
     gem_spec = Gem::Specification.from_yaml(`gem spec #{gem_file}`)
@@ -206,27 +206,27 @@ Then %r{^gem spec key '(.*)' contains \/(.*)\/} do |key, regex|
   end
 end
 
-Given /^file '(.*)' timestamp remembered$/ do |file|
+Given /^file "(.*)" timestamp remembered$/ do |file|
   in_project_folder do
     @timestamp = File.new(file).mtime
   end
 end
 
-Then /^file '(.*)' is unchanged$/ do |file|
+Then /^file "(.*)" is unchanged$/ do |file|
   raise %Q{ERROR: need to use "Given file '#{file}' timestamp remembered" to set the timestamp} unless @timestamp
   in_project_folder do
     File.new(file).mtime.should == @timestamp
   end
 end
 
-Then /^file '(.*)' is modified$/ do |file|
+Then /^file "(.*)" is modified$/ do |file|
   raise %Q{ERROR: need to use "Given file '#{file}' timestamp remembered" to set the timestamp} unless @timestamp
   in_project_folder do
     File.new(file).mtime.should_not == @timestamp
   end
 end
 
-When %r{^in file '(.*)' replace /(.*)/ with '(.*)'$} do |file, from, to|
+When %r{^in file "(.*)" replace /(.*)/ with "(.*)"$} do |file, from, to|
   in_project_folder do
     contents = File.read(file)
     File.open(file, "w") do |f|
@@ -235,11 +235,11 @@ When %r{^in file '(.*)' replace /(.*)/ with '(.*)'$} do |file, from, to|
   end
 end
 
-Then /^file '(.*)' (is|is not) invisible$/ do |file, is|
+Then /^file "(.*)" (is|is not) invisible$/ do |file, is|
   `GetFileInfo -aV '#{file}'`.to_i.should_not == (is == 'is' ? 0 : 1)
 end
 
-Then /^file '(.*)' is a symlink to '(.*)'$/ do |path, target_path|
+Then /^file "(.*)" is a symlink to "(.*)"$/ do |path, target_path|
   in_project_folder do
     stdout = `ls -al #{path}`
     stdout =~ /\s([^\s]+)\s->\s(.+)$/

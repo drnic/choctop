@@ -24,7 +24,7 @@ end
 Given /Rakefile constants rewired for local rsync/ do
 end
 
-Given /^a Cocoa app with choctop installed called '(.*)'$/ do |name|
+Given /^a Cocoa app with choctop installed called "(.*)"$/ do |name|
   Given "a safe folder"
   @remote_folder = File.expand_path(File.join(@tmp_root, 'website'))
   FileUtils.rm_rf   @remote_folder
