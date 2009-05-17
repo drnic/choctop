@@ -161,7 +161,7 @@ class ChocTop
     @name = File.basename(File.expand_path(".")) if name.to_s == "${EXECUTABLE_NAME}"
     @version ||= info_plist['CFBundleVersion']
     @target ||= "#{name}.app"
-    @build_type = "Release"
+    @build_type = ENV['BUILD_TYPE'] || 'Release'
     if @su_feed_url = info_plist['SUFeedURL']
       @appcast_filename ||= File.basename(su_feed_url)
       @base_url ||= File.dirname(su_feed_url)

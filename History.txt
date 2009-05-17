@@ -1,6 +1,8 @@
+== 0.9.7 2009-05-17
+
+* New config option: s.build_type = ENV['BUILD_TYPE'] || 'Release' [kdbdallas]
 * permit SUFeedURL to not be specified (cleanly exit from deploy rake tasks)
 * removed unused 'appcast' rake task
-* New config option: s.build_type = 'Release' [kdbdallas]
 
 == 0.9.6 2009-02-10
 
