@@ -11,7 +11,7 @@ require "active_support"
 require "RedCloth"
 
 class ChocTop
-  VERSION = '0.9.7'
+  VERSION = '0.10.0'
   
   # Path to the Info.plist
   # Default: "Info.plist"
@@ -48,6 +48,9 @@ class ChocTop
   # The file name for generated release notes for the latest release
   # Default: release_notes.html
   attr_accessor :release_notes
+  
+  # List of files/bundles to be packaged into the DMG
+  attr_accessor :files
 
   # The path for an HTML template into which the release_notes.txt are inserted
   # after conversion to HTML
@@ -70,6 +73,13 @@ class ChocTop
   # The argument flags passed to rsync
   # Default: -aCv
   attr_accessor :rsync_args
+  
+  # Folder from where all files will be copied into the DMG
+  # Files are copied here if specified with +add_file+ before DMG creation
+  attr_accessor :src_folder
+  def src_folder
+    @src_folder ||= "build/#{build_type}/dmg"
+  end
   
   # Generated filename for a distribution, from name, version and .dmg
   # e.g. MyApp-1.0.0.dmg
@@ -150,6 +160,15 @@ class ChocTop
     @info_plist ||= OSX::NSDictionary.dictionaryWithContentsOfFile(File.expand_path(info_plist_path)) || {}
   end
   
+  # Add an explicit file/bundle/folder into the DMG
+  # Required option:
+  #  +:position+ - two item array [x, y] window position
+  def add_file(path, options)
+    throw "add_files #{path}, :position => [x,y] option is missing" unless options[:position]
+    self.files ||= {}
+    files[path] = options
+  end
+  
   def initialize
     $sparkle = self # define a global variable for this object
     
@@ -162,6 +181,7 @@ class ChocTop
     @version ||= info_plist['CFBundleVersion']
     @target ||= "#{name}.app"
     @build_type = ENV['BUILD_TYPE'] || 'Release'
+    
     if @su_feed_url = info_plist['SUFeedURL']
       @appcast_filename ||= File.basename(su_feed_url)
       @base_url ||= File.dirname(su_feed_url)
@@ -179,6 +199,8 @@ class ChocTop
     @volume_icon ||= File.dirname(__FILE__) + "/../assets/DefaultVolumeIcon.icns"
     @icon_size ||= 104
     @icon_text_size ||= 12
+
+    add_file "build/#{build_type}/#{target}", :position => app_icon_position
     
     define_tasks
   end

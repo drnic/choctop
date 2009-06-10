@@ -1,3 +1,7 @@
+== 0.10.0 2009-06-11
+
+* Extra files supported: +add_file 'project/path/to/file_or_folder_or_bundle', :position => [x, y]+
+
 == 0.9.7 2009-05-17
 
 * New config option: s.build_type = ENV['BUILD_TYPE'] || 'Release' [kdbdallas]

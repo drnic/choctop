@@ -1,9 +1,18 @@
 module ChocTop::Dmg
+  def prepare_files
+    FileUtils.mkdir_p(src_folder)
+    files.each do |file|
+      path, options = file
+      FileUtils.cp_r(path, src_folder)
+    end
+  end
+  
   def make_dmg
+    prepare_files
     FileUtils.rm_rf build_path
     FileUtils.mkdir_p build_path
     FileUtils.mkdir_p mountpoint # TODO can we remove random mountpoints?
-    sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder 'build/#{build_type}/#{target}' '#{pkg}'"
+    sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder '#{src_folder}' '#{pkg}'"
     sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
     sh "bless --folder '#{volume_path}' --openfolder '#{volume_path}'"
     sh "sleep 1"
@@ -47,7 +56,7 @@ module ChocTop::Dmg
       FileUtils.mkdir_p(File.dirname(target_background))
       FileUtils.cp(background_file, target_background) 
     end
-    run_applescript <<-SCRIPT.gsub(/^      /, '')
+    script = <<-SCRIPT.gsub(/^      /, '')
       tell application "Finder"
          set mountpoint to POSIX file ("#{volume_path}" as string) as alias
          tell folder mountpoint
@@ -63,7 +72,7 @@ module ChocTop::Dmg
              set icon size of the icon view options of container window to #{icon_size}
              set text size of the icon view options of container window to #{icon_text_size}
              set arrangement of the icon view options of container window to not arranged
-             set position of item "#{target}" to {#{app_icon_position.join(", ")}}
+             #{set_position_of_files}
              set position of item "Applications" to {#{applications_icon_position.join(", ")}}
              set the bounds of the container window to {#{window_bounds.join(", ")}}
              set background picture of the icon view options of container window to file "#{volume_background.gsub(/\//,':')}"
@@ -75,7 +84,17 @@ module ChocTop::Dmg
          delay 5
       end tell
     SCRIPT
+    run_applescript(script)
     sh "SetFile -a V '#{target_background}'" if background_file
+  end
+  
+  def set_position_of_files
+    files.map do |file_options|
+      path, options = file_options
+      target        = File.basename(path)
+      position      = options[:position].join(", ")
+      %Q{set position of item "#{target}" to {#{position}}}
+    end.join("\n")
   end
   
   def configure_applications_icon

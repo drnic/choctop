@@ -65,6 +65,9 @@ to the end:
       s.applications_icon_position =  [400, 90]
       s.applications_icon =  "applications.icns"
       
+      # Extra files
+      s.add_file 'path/to/README.txt', :position => [250, 90]
+      
       # Custom DMG options
       s.volume_icon = "dmg.icns"
       s.icon_size = 104

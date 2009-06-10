@@ -11,7 +11,7 @@ end
 Given /^is configured for an asset file "([^\"]*)" to be included in dmg$/ do |file|
   in_project_folder do
     append_to_file "Rakefile", <<-RUBY.gsub(/^    /, '')
-    $sparkle.add_file = "#{file}", :position=> [50, 50]
+    $sparkle.add_file "#{file}", :position=> [347, 65]
     RUBY
   end
 end
