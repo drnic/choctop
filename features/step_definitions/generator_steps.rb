@@ -33,7 +33,7 @@ Given /^a Cocoa app with choctop installed called "(.*)"$/ do |name|
   `cp -r '#{app_path}' #{@tmp_root}/ 2> /dev/null`
   `rm -rf '#{@tmp_root}/#{name}/build'`
   setup_active_project_folder name
-  Given "I run local executable 'install_choctop' with arguments '.'"
+  Given %Q{I run local executable "install_choctop" with arguments "."}
   Given "Rakefile wired to use development code instead of installed RubyGem"
   Given "Rakefile constants rewired for local rsync"
   ENV['NO_FINDER'] = 'YES' # disable Finder during tests
