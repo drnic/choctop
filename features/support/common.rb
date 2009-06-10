@@ -22,6 +22,7 @@ module CommonHelpers
 
   def setup_active_project_folder project_name
     @active_project_folder = File.join(@tmp_root, project_name)
+    FileUtils.mkdir_p(@active_project_folder)
     @project_name = project_name
   end
 
