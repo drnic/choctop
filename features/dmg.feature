@@ -35,3 +35,10 @@ Feature: Can build a customised DMG image from application build
     And file "Applications" in mounted volume has GetFileInfo alias "1"
     And file "Applications" in mounted volume has GetFileInfo custom icon "1"
     And file "Applications" in mounted volume is aliased to "/Applications"
+  
+  Scenario: Build a DMG with extra included file such as README in the build folder
+    Given a Cocoa app with choctop installed called "SampleApp"
+    And is configured for an asset file "README.txt" to be included in dmg
+    When I invoke task "rake dmg"
+    And dmg "appcast/build/SampleApp-0.1.0.dmg" is mounted as "SampleApp"
+    And file "README.txt" in mounted volume is created
