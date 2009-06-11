@@ -41,7 +41,12 @@ Given /^a non\-Xcode chcotop project "([^\"]*)" with files: (.*)$/ do |name, fil
   files = files.strip.split(/\s*,\s*/)
   setup_active_project_folder name
   Given %Q{I run local executable "install_choctop" with arguments "."}
+  Given "Rakefile wired to use development code instead of installed RubyGem"
+  Given "Rakefile constants rewired for local rsync"
+  ENV['NO_FINDER'] = 'YES' # disable Finder during tests
   in_project_folder do
+    puts `ls -al`
     files.each { |file| `touch #{file}` }
   end
+  files.each { |file| choctop_add_file(file) }
 end

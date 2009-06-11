@@ -3,7 +3,7 @@ module ChocTop::Dmg
     FileUtils.mkdir_p(src_folder)
     files.each do |file|
       path, options = file
-      FileUtils.cp_r(path, src_folder)
+      FileUtils.cp_r(path, src_folder) if File.exists?(path)
     end
   end
   

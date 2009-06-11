@@ -1,6 +1,6 @@
 module ChocTop::Appcast
   def make_build
-    if ENV['NO_BUILD']
+    if skip_build
       puts "Skipping build task..."
     else
       sh "xcodebuild -configuration #{build_type}"
@@ -48,6 +48,13 @@ module ChocTop::Appcast
     File.open("#{build_path}/index.php", 'w') do |f|
       f << %Q{<?php header("Location: #{pkg_relative_url}"); ?>}
     end
+  end
+  
+  def skip_build
+    return true if ENV['NO_BUILD']
+    return false if File.exists?('Info.plist')
+    return false if Dir['*.xcodeproj'].size > 0
+    true
   end
   
   def make_release_notes

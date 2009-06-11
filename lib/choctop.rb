@@ -84,7 +84,7 @@ class ChocTop
   # Generated filename for a distribution, from name, version and .dmg
   # e.g. MyApp-1.0.0.dmg
   def pkg_name
-    "#{name}-#{version}.dmg"
+    version ? "#{name}-#{version}.dmg" : "#{name}.dmg"
   end
   
   # Path to generated package DMG
@@ -170,14 +170,14 @@ class ChocTop
   end
   
   def initialize
-    $sparkle = self # define a global variable for this object
+    $choctop = $sparkle = self # define a global variable for this object ($sparkle is legacy)
     
     yield self if block_given?
     
     # Defaults
     @info_plist_path ||= 'Info.plist'
     @name ||= info_plist['CFBundleExecutable']
-    @name = File.basename(File.expand_path(".")) if name.to_s == "${EXECUTABLE_NAME}"
+    @name = File.basename(File.expand_path(".")) if name.to_s == "${EXECUTABLE_NAME}" || @name.nil?
     @version ||= info_plist['CFBundleVersion']
     @target ||= "#{name}.app"
     @build_type = ENV['BUILD_TYPE'] || 'Release'

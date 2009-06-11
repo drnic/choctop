@@ -14,4 +14,5 @@ Before do
   FileUtils.rm_rf   @tmp_root
   FileUtils.mkdir_p @home_path
   ENV['HOME'] = @home_path
+  @lib_path = File.expand_path(File.dirname(__FILE__) + '/../../lib')
 end

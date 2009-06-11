@@ -47,6 +47,7 @@ Feature: Can build a customised DMG image from application build
   Scenario: Build a DMG for non-Xcode project
     Given a non-Xcode chcotop project "MyProject" with files: README.txt, SomeBundle.thingy
     When I invoke task "rake dmg"
-    And dmg "appcast/build/MyProject-0.1.0.dmg" is mounted as "MyProject"
+    And dmg "appcast/build/MyProject.dmg" is mounted as "MyProject"
     And file "README.txt" in mounted volume is created
     And file "SomeBundle.thingy" in mounted volume is created
+    And file "Applications" in mounted volume is not created

@@ -13,8 +13,8 @@ end
 Given /^ChocTop config is configured for local rsync$/ do
   in_project_folder do
     append_to_file "Rakefile", <<-RUBY.gsub(/^    /, '')
-    $sparkle.host = ""
-    $sparkle.remote_dir = #{@remote_folder.inspect}
+    $choctop.host = ""
+    $choctop.remote_dir = #{@remote_folder.inspect}
     RUBY
   end
 end
@@ -22,9 +22,9 @@ end
 Given /^ChocTop config is configured for remote Sparkle$/ do
   in_project_folder do
     append_to_file "Rakefile", <<-RUBY.gsub(/^    /, '')
-    $sparkle.host = "mocra.com"
-    $sparkle.base_url = "http://mocra.com/sample_app"
-    $sparkle.remote_dir = "/opt/apps/mocra/downloads/sample_app"
+    $choctop.host = "mocra.com"
+    $choctop.base_url = "http://mocra.com/sample_app"
+    $choctop.remote_dir = "/opt/apps/mocra/downloads/sample_app"
     RUBY
   end
 end

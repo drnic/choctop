@@ -2,18 +2,14 @@ Given /is configured for custom Applications icon$/ do
   appicon = File.expand_path(File.dirname(__FILE__) + "/../fixtures/custom_assets/appicon.icns")
   in_project_folder do
     append_to_file "Rakefile", <<-RUBY.gsub(/^    /, '')
-    $sparkle.applications_icon = "appicon.icns"
+    $choctop.applications_icon = "appicon.icns"
     RUBY
     FileUtils.cp(appicon, "appicon.icns")
   end
 end
 
 Given /^is configured for an asset file "([^\"]*)" to be included in dmg$/ do |file|
-  in_project_folder do
-    append_to_file "Rakefile", <<-RUBY.gsub(/^    /, '')
-    $sparkle.add_file "#{file}", :position=> [347, 65]
-    RUBY
-  end
+  choctop_add_file(file)
 end
 
 When /^dmg "(.*)" is mounted as "(.*)"$/ do |dmg, name|

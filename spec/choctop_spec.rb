@@ -82,4 +82,26 @@ describe ChocTop do
     end
 
   end
+
+  describe "add_files for non-Cocoa app" do
+    before(:each) do
+      @my_project_path = File.dirname(__FILE__) + "/../tmp/MyProject"
+      FileUtils.rm_rf(@my_project_path)
+      FileUtils.mkdir_p(@my_project_path)
+      `touch #{File.join(@my_project_path, 'README.txt')}`
+      `touch #{File.join(@my_project_path, 'some_other_file.txt')}`
+      FileUtils.chdir(@my_project_path) do
+        @choctop = ChocTop.new
+        @choctop.add_file "README.txt", :position => [50, 100]
+        @choctop.add_file "some_other_file.txt", :position => [50, 150]
+        @choctop.prepare_files
+      end
+    end
+    
+    it "should have README.txt in build/Release/dmg ready for inclusion in DMG" do
+      FileUtils.chdir(@my_project_path) do
+        File.should be_exists('build/Release/dmg/README.txt')
+      end
+    end
+  end
 end
