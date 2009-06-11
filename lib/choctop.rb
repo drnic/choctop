@@ -167,11 +167,12 @@ class ChocTop
   # Add an explicit file/bundle/folder into the DMG
   # Required option:
   #  +:position+ - two item array [x, y] window position
-  def add_file(path, options)
+  def file(path, options)
     throw "add_files #{path}, :position => [x,y] option is missing" unless options[:position]
     self.files ||= {}
     files[path] = options
   end
+  alias_method :add_file, :file
   
   def initialize
     $choctop = $sparkle = self # define a global variable for this object ($sparkle is legacy)

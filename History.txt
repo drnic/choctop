@@ -1,3 +1,7 @@
+
+* ChocTop no longer solely for Cocoa applications
+* Applications shortcut only included if the primary target is a .app bundle
+
 == 0.10.0 2009-06-11
 
 * Extra files supported: +add_file 'project/path/to/file_or_folder_or_bundle', :position => [x, y]+
