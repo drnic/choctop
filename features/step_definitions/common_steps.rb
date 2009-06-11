@@ -1,13 +1,4 @@
-Given /^a safe folder/ do
-  FileUtils.rm_rf   @tmp_root = File.dirname(__FILE__) + "/../../tmp"
-  FileUtils.mkdir_p @tmp_root
-  FileUtils.mkdir_p @home_path = File.expand_path(File.join(@tmp_root, "home"))
-  @lib_path = File.expand_path(File.dirname(__FILE__) + '/../../lib')
-  Given %Q{env variable $HOME set to "#{@home_path}"}
-end
-
 Given /^this project is active project folder/ do
-  Given "a safe folder"
   @active_project_folder = File.expand_path(File.dirname(__FILE__) + "/../..")
 end
 

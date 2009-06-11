@@ -1,5 +1,4 @@
 Given /^a Cocoa app that does not have an existing Rakefile$/ do
-  Given "a safe folder"
   setup_active_project_folder "SampleApp"
 end
 
@@ -25,7 +24,6 @@ Given /Rakefile constants rewired for local rsync/ do
 end
 
 Given /^a Cocoa app with choctop installed called "(.*)"$/ do |name|
-  Given "a safe folder"
   @remote_folder = File.expand_path(File.join(@tmp_root, 'website'))
   FileUtils.rm_rf   @remote_folder
   FileUtils.mkdir_p @remote_folder
@@ -37,4 +35,13 @@ Given /^a Cocoa app with choctop installed called "(.*)"$/ do |name|
   Given "Rakefile wired to use development code instead of installed RubyGem"
   Given "Rakefile constants rewired for local rsync"
   ENV['NO_FINDER'] = 'YES' # disable Finder during tests
+end
+
+Given /^a non\-Xcode chcotop project "([^\"]*)" with files: (.*)$/ do |name, files|
+  files = files.strip.split(/\s*,\s*/)
+  setup_active_project_folder name
+  Given %Q{I run local executable "install_choctop" with arguments "."}
+  in_project_folder do
+    files.each { |file| `touch #{file}` }
+  end
 end
