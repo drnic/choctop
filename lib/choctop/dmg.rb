@@ -1,9 +1,13 @@
 module ChocTop::Dmg
   def prepare_files
     FileUtils.mkdir_p(src_folder)
+    self.files = files.find_all do |file|
+      path, options = file
+      File.exists?(path)
+    end
     files.each do |file|
       path, options = file
-      FileUtils.cp_r(path, src_folder) if File.exists?(path)
+      FileUtils.cp_r(path, src_folder)
     end
   end
   
@@ -18,7 +22,7 @@ module ChocTop::Dmg
     sh "sleep 1"
 
     configure_volume_icon
-    configure_applications_icon
+    configure_applications_icon if include_applications_icon?
     configure_dmg_window
   end
   
@@ -73,7 +77,7 @@ module ChocTop::Dmg
              set text size of the icon view options of container window to #{icon_text_size}
              set arrangement of the icon view options of container window to not arranged
              #{set_position_of_files}
-             set position of item "Applications" to {#{applications_icon_position.join(", ")}}
+             #{set_position_of_shortcuts}
              set the bounds of the container window to {#{window_bounds.join(", ")}}
              set background picture of the icon view options of container window to file "#{volume_background.gsub(/\//,':')}"
              update without registering applications
@@ -95,6 +99,18 @@ module ChocTop::Dmg
       position      = options[:position].join(", ")
       %Q{set position of item "#{target}" to {#{position}}}
     end.join("\n")
+  end
+  
+  def set_position_of_shortcuts
+    if include_applications_icon?
+      %Q{set position of item "Applications" to {#{applications_icon_position.join(", ")}}}
+    else
+      ""
+    end
+  end
+  
+  def include_applications_icon?
+    target =~ /.app$/
   end
   
   def configure_applications_icon

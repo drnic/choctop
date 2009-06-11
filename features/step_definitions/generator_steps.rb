@@ -45,7 +45,6 @@ Given /^a non\-Xcode chcotop project "([^\"]*)" with files: (.*)$/ do |name, fil
   Given "Rakefile constants rewired for local rsync"
   ENV['NO_FINDER'] = 'YES' # disable Finder during tests
   in_project_folder do
-    puts `ls -al`
     files.each { |file| `touch #{file}` }
   end
   files.each { |file| choctop_add_file(file) }

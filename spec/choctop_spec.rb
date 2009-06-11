@@ -79,6 +79,10 @@ describe ChocTop do
       it "should position README.txt at [50, 100]" do
         @choctop.set_position_of_files.should =~ /set position of item "README.txt" to \{50, 100\}/
       end
+
+      it "should render an Applications shortcut" do
+        @choctop.set_position_of_shortcuts.should =~ /"Applications"/
+      end
     end
 
   end
@@ -102,6 +106,10 @@ describe ChocTop do
       FileUtils.chdir(@my_project_path) do
         File.should be_exists('build/Release/dmg/README.txt')
       end
+    end
+
+    it "should not render an Applications shortcut" do
+      @choctop.set_position_of_shortcuts.should_not =~ /"Applications"/
     end
   end
 end

@@ -28,6 +28,10 @@ class ChocTop
   # The target name of the distributed DMG file
   # Default: #{name}.app
   attr_accessor :target
+  def target
+    @target ||= "#{name}.app" if File.exists?("build/#{build_type}/#{name}.app")
+    @target ||= name
+  end
 
   # The build type of the distributed DMG file
   # Default: Release
@@ -179,7 +183,6 @@ class ChocTop
     @name ||= info_plist['CFBundleExecutable']
     @name = File.basename(File.expand_path(".")) if name.to_s == "${EXECUTABLE_NAME}" || @name.nil?
     @version ||= info_plist['CFBundleVersion']
-    @target ||= "#{name}.app"
     @build_type = ENV['BUILD_TYPE'] || 'Release'
     
     if @su_feed_url = info_plist['SUFeedURL']
