@@ -1,12 +1,12 @@
-gem 'hoe', '>= 2.1.1'
+gem 'hoe', '>= 2.3'
 require 'hoe'
 gem 'newgem', '>= 1.5.0'
 require 'newgem'
 require './lib/choctop'
 
-# Generate all the Rake tasks
-# Run 'rake -T' to see list of generated tasks (from gem root directory)
-$hoe = Hoe.spec 'choctop' do
+Hoe.plugin :newgem
+
+Hoe.spec 'choctop' do
   developer 'Dr Nic Williams', 'drnicwilliams@gmail.com'
   developer 'Chris Bailey', 'chris@cobaltedge.com'
   
@@ -18,11 +18,6 @@ $hoe = Hoe.spec 'choctop' do
   self.extra_dev_deps = [
     ['newgem', ">= #{::Newgem::VERSION}"]
   ]
-  
-  self.clean_globs |= %w[**/.DS_Store tmp *.log]
-  path = (self.rubyforge_name == self.name) ? self.rubyforge_name : "\#{self.rubyforge_name}/\#{self.name}"
-  self.remote_rdoc_dir = File.join(path.gsub(/^#{self.rubyforge_name}\/?/,''), 'rdoc')
-  self.rsync_args = '-av --delete --ignore-errors'
   
 end
 
