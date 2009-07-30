@@ -87,7 +87,8 @@ module ChocTop::Appcast
 
   def upload_appcast
     _host = host.blank? ? "" : "#{host}:"
-    sh %{rsync #{rsync_args} #{build_path}/ #{_host}#{remote_dir}}
+    _user = user.blank? ? "" : "#{user}@"
+    sh %{rsync #{rsync_args} #{build_path}/ #{_user}#{_host}#{remote_dir}}
   end
   
   # Returns a file path to the dsa_priv.pem file

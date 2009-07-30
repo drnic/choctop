@@ -46,7 +46,11 @@ class ChocTop
   
   # The host name, e.g. some-domain.com
   # Default: host from base_url
-  attr_accessor :host
+  attr_accessor :host 
+  
+  # The user to log in on the remote server.
+  # Default: empty
+  attr_accessor :user
   
   # The url from where the xml + dmg files will be downloaded
   # Default: dir path from appcast_filename
