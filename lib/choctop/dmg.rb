@@ -62,6 +62,7 @@ module ChocTop::Dmg
     end
     script = <<-SCRIPT.gsub(/^      /, '')
       tell application "Finder"
+         set applications_folder to displayed name of (path to applications folder) -- i18n
          set mountpoint to POSIX file ("#{volume_path}" as string) as alias
          tell folder mountpoint
              open
@@ -103,7 +104,7 @@ module ChocTop::Dmg
   
   def set_position_of_shortcuts
     if include_applications_icon?
-      %Q{set position of item "Applications" to {#{applications_icon_position.join(", ")}}}
+      %Q{set position of item applications_folder to {#{applications_icon_position.join(", ")}}}
     else
       ""
     end
@@ -116,8 +117,9 @@ module ChocTop::Dmg
   def configure_applications_icon
     run_applescript <<-SCRIPT.gsub(/^      /, ''), "apps_icon_script"
       tell application "Finder"
+        set applications_folder to displayed name of (path to applications folder) -- i18n
         set dest to disk "#{name}"
-        set src to folder "Applications" of startup disk
+        set src to folder applications_folder of startup disk
         make new alias at dest to src
       end tell
     SCRIPT
