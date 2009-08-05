@@ -9,6 +9,8 @@ require './lib/choctop'
 $hoe = Hoe.spec 'choctop' do
   developer 'Dr Nic Williams', 'drnicwilliams@gmail.com'
   developer 'Chris Bailey', 'chris@cobaltedge.com'
+
+  self.summary = 'Build and deploy tools for Cocoa apps using Sparkle for distributions and upgrades; it’s like Hoe but for Cocoa apps.'
   
   self.extra_deps         = [
     ['activesupport'],

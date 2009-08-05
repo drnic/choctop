@@ -11,7 +11,7 @@ require "active_support"
 require "RedCloth"
 
 class ChocTop
-  VERSION = '0.10.0'
+  VERSION = '0.10.1'
   
   # Path to the Info.plist
   # Default: "Info.plist"
