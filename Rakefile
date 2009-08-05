@@ -1,4 +1,4 @@
-gem 'hoe', '>= 2.1.1'
+gem 'hoe', '>= 2.3.2'
 require 'hoe'
 gem 'newgem', '>= 1.5.0'
 require 'newgem'
