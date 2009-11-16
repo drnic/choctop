@@ -67,6 +67,9 @@ to the end:
       
       # Extra files
       s.add_file 'path/to/README.txt', :position => [250, 90]
+      s.file :target_bundle, :position => [50, 100]
+      s.file proc { 'README.txt' }, :position => [50, 100]
+      s.file :position => [50, 100] { 'README.txt' }
       
       # Custom DMG options
       s.volume_icon = "dmg.icns"

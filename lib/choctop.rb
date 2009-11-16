@@ -95,7 +95,7 @@ class ChocTop
   # Generated filename for a distribution, from name, version and .dmg
   # e.g. MyApp-1.0.0.dmg
   def pkg_name
-    version ? "#{name}-#{version}.dmg" : "#{versionless_pkg_name}.dmg"
+    version ? "#{name}-#{version}.dmg" : versionless_pkg_name
   end
   
   # Version-less generated filename for a distribution, from name and .dmg
@@ -200,8 +200,7 @@ class ChocTop
     
     # Defaults
     @info_plist_path ||= 'Info.plist'
-    @name ||= info_plist['CFBundleExecutable'].to_s
-    @name = File.basename(File.expand_path(".")) if name.to_s == "${EXECUTABLE_NAME}" || @name.nil?
+    @name ||= info_plist['CFBundleExecutable'] || File.basename(File.expand_path("."))
     @version ||= info_plist['CFBundleVersion']
     @build_type = ENV['BUILD_TYPE'] || 'Release'
     

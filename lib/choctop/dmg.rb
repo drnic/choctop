@@ -1,6 +1,5 @@
 module ChocTop::Dmg
   def prepare_files
-    FileUtils.mkdir_p(src_folder)
     self.files = files.inject({}) do |files, file|
       path_or_helper, options = file
       path = case path_or_helper
@@ -11,14 +10,14 @@ module ChocTop::Dmg
         else
           path_or_helper
       end
-      files[path] = options if File.exists?(File.join(path))
+      files[path] = options if path && File.exists?(path) && File.basename(path) != '.'
       files
     end
   end
   
   def copy_files
-    files.each do |file|
-      path, options = file
+    FileUtils.mkdir_p(src_folder)
+    files.each do |path, options|
       FileUtils.cp_r(path, src_folder)
     end
   end
