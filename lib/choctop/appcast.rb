@@ -9,8 +9,7 @@ module ChocTop::Appcast
   
   def make_appcast
     app_name = File.basename(File.expand_path('.'))
-    
-    FileUtils.mkdir_p "#{build_path}"
+    FileUtils.mkdir_p(build_path)
     appcast = File.open("#{build_path}/#{appcast_filename}", 'w') do |f|
       xml = Builder::XmlMarkup.new(:indent => 2)
       xml.instruct!
@@ -51,7 +50,6 @@ module ChocTop::Appcast
   end
   
   def make_index_redirect
-    p "make_index_redirect"
     File.open("#{build_path}/index.php", 'w') do |f|
       f << %Q{<?php header("Location: #{pkg_relative_url}"); ?>}
     end

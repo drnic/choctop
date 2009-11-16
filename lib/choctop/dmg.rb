@@ -1,10 +1,22 @@
 module ChocTop::Dmg
   def prepare_files
     FileUtils.mkdir_p(src_folder)
-    self.files = files.find_all do |file|
-      path, options = file
-      File.exists?(path)
+    self.files = files.inject({}) do |files, file|
+      path_or_helper, options = file
+      path = case path_or_helper
+        when Symbol
+          send path_or_helper
+        when Proc
+          path_or_helper.call
+        else
+          path_or_helper
+      end
+      files[path] = options if File.exists?(File.join(path))
+      files
     end
+  end
+  
+  def copy_files
     files.each do |file|
       path, options = file
       FileUtils.cp_r(path, src_folder)
@@ -13,7 +25,7 @@ module ChocTop::Dmg
   
   def make_dmg
     prepare_files
-    FileUtils.rm_rf build_path
+    copy_files
     FileUtils.mkdir_p build_path
     FileUtils.mkdir_p mountpoint # TODO can we remove random mountpoints?
     sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder '#{src_folder}' '#{pkg}'"
@@ -21,6 +33,8 @@ module ChocTop::Dmg
     sh "bless --folder '#{volume_path}' --openfolder '#{volume_path}'"
     sh "sleep 1"
 
+    puts "volume_icon: #{volume_icon.inspect}"
+    puts "include_applications_icon?: #{include_applications_icon?.inspect}"
     configure_volume_icon
     configure_applications_icon if include_applications_icon?
     configure_dmg_window
@@ -110,7 +124,8 @@ module ChocTop::Dmg
   end
   
   def include_applications_icon?
-    target.to_s =~ /.app$/
+    puts "target: #{target.inspect}"
+    target =~ /.app$/
   end
   
   def configure_applications_icon

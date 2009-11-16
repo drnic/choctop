@@ -2,6 +2,13 @@
 * ChocTop no longer solely for Cocoa applications
 * Applications shortcut only included if the primary target is a .app bundle
 * Creates a non-versioned symlink to latest released DMG
+* Files to be included can be specified by relative path, method helper (as a symbol) or a proc that returns a string path. 
+  Examples:
+    file 'build/Release/SampleApp.app', :position => [50, 100]
+    file :target_bundle, :position => [50, 100]
+    file proc { 'README.txt' }, :position => [50, 100]
+    file :position => [50, 100] { 'README.txt' }
+
 
 == 0.10.0 2009-06-11
 

@@ -29,8 +29,11 @@ class ChocTop
   # Default: #{name}.app
   attr_accessor :target
   def target
-    @target ||= "#{name}.app" if File.exists?("build/#{build_type}/#{name}.app")
-    @target ||= name
+    @target ||= File.basename(target_bundle) if target_bundle
+  end
+
+  def target_bundle
+    @target_bundle ||= Dir["build/#{build_type}/#{name}.*"].first
   end
 
   # The build type of the distributed DMG file
@@ -52,6 +55,10 @@ class ChocTop
   # The file name for generated release notes for the latest release
   # Default: release_notes.html
   attr_accessor :release_notes
+  
+  # The file name for the project readme file
+  # Default: README.txt
+  attr_accessor :readme
   
   # List of files/bundles to be packaged into the DMG
   attr_accessor :files
@@ -171,15 +178,21 @@ class ChocTop
   end
   
   # Add an explicit file/bundle/folder into the DMG
+  # Examples:
+  #   file 'build/Release/SampleApp.app', :position => [50, 100]
+  #   file :target_bundle, :position => [50, 100]
+  #   file proc { 'README.txt' }, :position => [50, 100]
+  #   file :position => [50, 100] { 'README.txt' }
   # Required option:
   #  +:position+ - two item array [x, y] window position
-  def file(path, options)
-    throw "add_files #{path}, :position => [x,y] option is missing" unless options[:position]
+  def file(*args, &block)
+    path_or_helper, options = args.first.is_a?(Hash) ? [block, args.first] : [args.first, args.last]
+    throw "add_files #{path_or_helper}, :position => [x,y] option is missing" unless options[:position]
     self.files ||= {}
-    files[path] = options
+    files[path_or_helper] = options
   end
   alias_method :add_file, :file
-  
+
   def initialize
     $choctop = $sparkle = self # define a global variable for this object ($sparkle is legacy)
     
@@ -187,7 +200,7 @@ class ChocTop
     
     # Defaults
     @info_plist_path ||= 'Info.plist'
-    @name ||= info_plist['CFBundleExecutable']
+    @name ||= info_plist['CFBundleExecutable'].to_s
     @name = File.basename(File.expand_path(".")) if name.to_s == "${EXECUTABLE_NAME}" || @name.nil?
     @version ||= info_plist['CFBundleVersion']
     @build_type = ENV['BUILD_TYPE'] || 'Release'
@@ -200,6 +213,7 @@ class ChocTop
       @host ||= URI.parse(base_url).host
     end
     @release_notes ||= 'release_notes.html'
+    @readme        ||= 'README.txt'
     @release_notes_template ||= "release_notes_template.html.erb"
     @rsync_args ||= '-aCv --progress'
     
@@ -210,7 +224,7 @@ class ChocTop
     @icon_size ||= 104
     @icon_text_size ||= 12
 
-    add_file "build/#{build_type}/#{target}", :position => app_icon_position
+    add_file :target_bundle, :position => app_icon_position
     
     define_tasks
   end
