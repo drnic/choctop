@@ -88,7 +88,13 @@ class ChocTop
   # Generated filename for a distribution, from name, version and .dmg
   # e.g. MyApp-1.0.0.dmg
   def pkg_name
-    version ? "#{name}-#{version}.dmg" : "#{name}.dmg"
+    version ? "#{name}-#{version}.dmg" : "#{versionless_pkg_name}.dmg"
+  end
+  
+  # Version-less generated filename for a distribution, from name and .dmg
+  # e.g. MyApp.dmg
+  def versionless_pkg_name
+    "#{name}.dmg"
   end
   
   # Path to generated package DMG
@@ -231,6 +237,7 @@ class ChocTop
     desc "Create/update the appcast file"
     task :feed do
       make_appcast
+      make_dmg_symlink
       make_index_redirect
       make_release_notes
     end

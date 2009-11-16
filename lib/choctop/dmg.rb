@@ -110,7 +110,7 @@ module ChocTop::Dmg
   end
   
   def include_applications_icon?
-    target =~ /.app$/
+    target.to_s =~ /.app$/
   end
   
   def configure_applications_icon

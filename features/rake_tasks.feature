@@ -20,6 +20,7 @@ Feature: Rake tasks are available to build and deploy Cocoa apps with Sparkle
     When I invoke task "rake upload"
     Then remote file "my_feed.xml" is created
     Then remote file "SampleApp-0.1.0.dmg" is created
+    Then remote file "SampleApp.dmg" is created
     Then remote file "index.php" is created
     
   Scenario: change the version number in the Info.plist

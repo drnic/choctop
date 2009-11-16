@@ -44,7 +44,14 @@ module ChocTop::Appcast
     end
   end
   
+  def make_dmg_symlink
+    FileUtils.chdir(build_path) do
+      `ln -s #{pkg_name} #{versionless_pkg_name}`
+    end
+  end
+  
   def make_index_redirect
+    p "make_index_redirect"
     File.open("#{build_path}/index.php", 'w') do |f|
       f << %Q{<?php header("Location: #{pkg_relative_url}"); ?>}
     end

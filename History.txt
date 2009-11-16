@@ -1,6 +1,7 @@
 
 * ChocTop no longer solely for Cocoa applications
 * Applications shortcut only included if the primary target is a .app bundle
+* Creates a non-versioned symlink to latest released DMG
 
 == 0.10.0 2009-06-11
 
