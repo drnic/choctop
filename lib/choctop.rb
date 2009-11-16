@@ -201,6 +201,7 @@ class ChocTop
     # Defaults
     @info_plist_path ||= 'Info.plist'
     @name ||= info_plist['CFBundleExecutable'] || File.basename(File.expand_path("."))
+    @name = File.basename(File.expand_path(".")) if @name == '${EXECUTABLE_NAME}'
     @version ||= info_plist['CFBundleVersion']
     @build_type = ENV['BUILD_TYPE'] || 'Release'
     
