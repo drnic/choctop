@@ -10,21 +10,12 @@ Hoe.spec 'choctop' do
   developer 'Dr Nic Williams', 'drnicwilliams@gmail.com'
   developer 'Chris Bailey', 'chris@cobaltedge.com'
 
-  self.summary = 'Build and deploy tools for Cocoa apps using Sparkle for distributions and upgrades; it’s like Hoe but for Cocoa apps.'
-  
-  self.extra_deps         = [
-    ['activesupport'],
-    ['builder','>= 2.1.2'],
-    ['RedCloth', '>=4.1.1']
-  ]
-  self.extra_dev_deps = [
-    ['newgem', ">= #{::Newgem::VERSION}"]
-  ]
-  
+  extra_deps << ['activesupport']
+  extra_deps << ['builder','>= 2.1.2']
+  extra_dev_deps << ['newgem', ">= #{::Newgem::VERSION}"]
 end
 
 require 'newgem/tasks' # load /tasks/*.rake
 Dir['tasks/**/*.rake'].each { |t| load t }
 
-# TODO - want other tests/tasks run by default? Add them to the list
 task :default => [:features]
