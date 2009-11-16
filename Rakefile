@@ -1,4 +1,4 @@
-gem 'hoe', '>= 2.3'
+gem 'hoe', '>= 2.3.2'
 require 'hoe'
 gem 'newgem', '>= 1.5.0'
 require 'newgem'
@@ -9,6 +9,8 @@ Hoe.plugin :newgem
 Hoe.spec 'choctop' do
   developer 'Dr Nic Williams', 'drnicwilliams@gmail.com'
   developer 'Chris Bailey', 'chris@cobaltedge.com'
+
+  self.summary = 'Build and deploy tools for Cocoa apps using Sparkle for distributions and upgrades; it’s like Hoe but for Cocoa apps.'
   
   self.extra_deps         = [
     ['activesupport'],

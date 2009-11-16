@@ -14,37 +14,6 @@ assets/wood.jpg
 bin/install_choctop
 features/development.feature
 features/dmg.feature
-features/fixtures/App With Whitespace/App With Whitespace.xcodeproj/TemplateIcon.icns
-features/fixtures/App With Whitespace/App With Whitespace.xcodeproj/drnic.mode1v3
-features/fixtures/App With Whitespace/App With Whitespace.xcodeproj/drnic.pbxuser
-features/fixtures/App With Whitespace/App With Whitespace.xcodeproj/project.pbxproj
-features/fixtures/App With Whitespace/App With Whitespace_Prefix.pch
-features/fixtures/App With Whitespace/English.lproj/InfoPlist.strings
-features/fixtures/App With Whitespace/English.lproj/MainMenu.xib
-features/fixtures/App With Whitespace/Info.plist
-features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/categories.pbxbtree
-features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/cdecls.pbxbtree
-features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/decls.pbxbtree
-features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/files.pbxbtree
-features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/imports.pbxbtree
-features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/pbxindex.header
-features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/protocols.pbxbtree
-features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/refs.pbxbtree
-features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/strings.pbxstrings/control
-features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/strings.pbxstrings/strings
-features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/subclasses.pbxbtree
-features/fixtures/App With Whitespace/build/App With Whitespace.build/App With Whitespace.pbxindex/symbols0.pbxsymbols
-features/fixtures/App With Whitespace/main.m
-features/fixtures/SampleApp/English.lproj/InfoPlist.strings
-features/fixtures/SampleApp/English.lproj/MainMenu.xib
-features/fixtures/SampleApp/Info.plist
-features/fixtures/SampleApp/README.txt
-features/fixtures/SampleApp/SampleApp.xcodeproj/TemplateIcon.icns
-features/fixtures/SampleApp/SampleApp.xcodeproj/project.pbxproj
-features/fixtures/SampleApp/SampleApp_Prefix.pch
-features/fixtures/SampleApp/build/Release/README.txt
-features/fixtures/SampleApp/build/Release/dmg/README.txt
-features/fixtures/SampleApp/main.m
 features/fixtures/custom_assets/appicon.icns
 features/initial_generator.feature
 features/rake_tasks.feature
@@ -68,29 +37,3 @@ spec/choctop_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
 tasks/rspec.rake
-website/_layouts/default.html
-website/_layouts/post.html
-website/_posts/2009-02-02-first-post.markdown
-website/_site/2009/02/02/first-post.html
-website/_site/atom.xml
-website/_site/config.yml
-website/_site/css/stylesheet.css
-website/_site/images/logo.gif
-website/_site/images/logo.jpg
-website/_site/images/logo.png
-website/_site/images/love-16.gif
-website/_site/images/love.gif
-website/_site/images/mocra-keynote-bg.jpg
-website/_site/images/title slide.jpg
-website/_site/images/title-slide.png
-website/_site/index.html
-website/atom.xml
-website/config.yml
-website/css/stylesheet.css
-website/images/logo.gif
-website/images/logo.png
-website/images/love-16.gif
-website/images/love.gif
-website/images/mocra-keynote-bg.jpg
-website/images/title-slide.png
-website/index.markdown

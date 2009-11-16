@@ -79,7 +79,7 @@ describe ChocTop do
       end
 
       it "should render an Applications shortcut" do
-        @choctop.set_position_of_shortcuts.should =~ /"Applications"/
+        @choctop.set_position_of_shortcuts.should =~ /applications_folder/
       end
     end
 
@@ -107,7 +107,7 @@ describe ChocTop do
     end
 
     it "should not render an Applications shortcut" do
-      @choctop.set_position_of_shortcuts.should_not =~ /"Applications"/
+      @choctop.set_position_of_shortcuts.should_not =~ /applications_folder/
     end
   end
 end

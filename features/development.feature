@@ -10,4 +10,4 @@ Feature: Development processes of newgem itself (rake tasks)
     When I invoke task "rake gem"
     Then folder "pkg" is created
     And file with name matching "pkg/*.gem" is created else you should run "rake manifest" to fix this
-    And gem spec key "rdoc_options" contains /--mainREADME.rdoc/
+    And gem spec key "rdoc_options" contains /(--mainREADME.rdoc|\[\"--main\", \"README.rdoc\"\])/
