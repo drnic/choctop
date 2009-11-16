@@ -6,13 +6,17 @@ require './lib/choctop'
 
 Hoe.plugin :newgem
 
-Hoe.spec 'choctop' do
+$hoe = Hoe.spec 'choctop' do
   developer 'Dr Nic Williams', 'drnicwilliams@gmail.com'
   developer 'Chris Bailey', 'chris@cobaltedge.com'
 
   extra_deps << ['activesupport']
   extra_deps << ['builder','>= 2.1.2']
   extra_dev_deps << ['newgem', ">= #{::Newgem::VERSION}"]
+end
+
+task :release do
+  sh "gem push pkg/#{$hoe.name}-#{$hoe.version}.gem"
 end
 
 require 'newgem/tasks' # load /tasks/*.rake
