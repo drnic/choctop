@@ -86,9 +86,14 @@ module ChocTop::Appcast
   end
 
   def upload_appcast
-    _host = host.blank? ? "" : "#{host}:"
+    _host = host.blank? ? "" : host
     _user = user.blank? ? "" : "#{user}@"
-    sh %{rsync #{rsync_args} #{build_path}/ #{_user}#{_host}#{remote_dir}}
+    case transport
+    when :scp
+      sh %{scp #{scp_args} #{build_path}/* #{_user}#{_host}:#{remote_dir}}
+    else # default to rsync as per original
+      sh %{rsync #{rsync_args} #{build_path}/ #{_user}#{_host}:#{remote_dir}}
+    end
   end
   
   # Returns a file path to the dsa_priv.pem file
