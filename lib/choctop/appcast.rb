@@ -8,7 +8,6 @@ module ChocTop::Appcast
   end
   
   def make_appcast
-    app_name = File.basename(File.expand_path('.'))
     FileUtils.mkdir_p(build_path)
     appcast = File.open("#{build_path}/#{appcast_filename}", 'w') do |f|
       xml = Builder::XmlMarkup.new(:indent => 2)
@@ -17,8 +16,8 @@ module ChocTop::Appcast
               'xmlns:sparkle' => "http://www.andymatuschak.org/xml-namespaces/sparkle", 
               :version => "2.0") do
         xml.channel do
-          xml.title(app_name)
-          xml.description("#{app_name} updates")
+          xml.title(@name)
+          xml.description("#{@name} updates")
           xml.link(base_url)
           xml.language('en')
           xml.pubDate Time.now.to_s(:rfc822)
@@ -45,7 +44,7 @@ module ChocTop::Appcast
   
   def make_dmg_symlink
     FileUtils.chdir(build_path) do
-      `ln -s #{pkg_name} #{versionless_pkg_name}`
+      `ln -s "#{pkg_name}" "#{versionless_pkg_name}"`
     end
   end
   
