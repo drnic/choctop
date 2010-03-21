@@ -44,7 +44,7 @@ module ChocTop::Appcast
   
   def make_dmg_symlink
     FileUtils.chdir(build_path) do
-      `ln -s "#{pkg_name}" "#{versionless_pkg_name}"`
+      `ln -sf "#{pkg_name}" "#{versionless_pkg_name}"`
     end
   end
   
