@@ -16,7 +16,6 @@ module ChocTop::Dmg
   end
   
   def copy_files
-    FileUtils.rm_rf(dmg_pkg_folder) # cp_r will barf if files from last build are still present (like in shared build envs)
     FileUtils.mkdir_p(src_folder)
     files.each do |path, options|
       FileUtils.cp_r(path, src_folder)

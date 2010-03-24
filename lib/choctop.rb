@@ -13,6 +13,11 @@ require "RedCloth"
 class ChocTop
   VERSION = '0.11.0'
   
+  attr_accessor :build_opts
+  def build_opts
+    @build_opts ||= ""
+  end
+  
   # Path to the Info.plist
   # Default: "Info.plist"
   attr_accessor :info_plist_path

@@ -3,7 +3,7 @@ module ChocTop::Appcast
     if skip_build
       puts "Skipping build task..."
     else
-      sh "xcodebuild -configuration #{build_type}"
+      sh "xcodebuild -configuration #{build_type} #{build_opts}"
     end
   end
   
