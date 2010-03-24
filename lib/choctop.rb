@@ -15,7 +15,7 @@ class ChocTop
   
   attr_accessor :build_opts
   def build_opts
-    @build_opts ||= ""
+    @build_opts ||= ''
   end
   
   # Path to the Info.plist

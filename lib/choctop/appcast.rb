@@ -45,6 +45,7 @@ module ChocTop::Appcast
   
   def make_dmg_symlink
     FileUtils.chdir(build_path) do
+      `rm #{versionless_pkg_name}`
       `ln -s '#{pkg_name}' '#{versionless_pkg_name}'`
     end
   end
@@ -90,6 +91,7 @@ module ChocTop::Appcast
     _user = user.blank? ? "" : "#{user}@"
     case transport
     when :scp
+      # this is whack, really, work out your rsync options
       sh %{scp #{scp_args} #{build_path}/* #{_user}#{_host}:#{remote_dir}}
     else # default to rsync as per original
       sh %{rsync #{rsync_args} #{build_path}/ #{_user}#{_host}:#{remote_dir}}
