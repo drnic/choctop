@@ -38,7 +38,7 @@ class ChocTop
   end
 
   def target_bundle
-    @target_bundle ||= Dir["build/#{build_type}/#{name}.*"].first
+    @target_bundle ||= Dir["#{build_products}/#{name}.*"].first
   end
 
   # The build type of the distributed DMG file
@@ -103,6 +103,11 @@ class ChocTop
   # Additional arguments to pass to scp
   # e.g. -P 11222
   attr_accessor :scp_args
+
+  attr_accessor :build_products
+  def build_products
+    @build_products ||= "build/#{build_type}"
+  end
   
   # Folder from where all files will be copied into the DMG
   # Files are copied here if specified with +add_file+ before DMG creation

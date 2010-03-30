@@ -16,6 +16,7 @@ module ChocTop::Dmg
   end
   
   def copy_files
+    FileUtils.rm_rf(src_folder)
     FileUtils.mkdir_p(src_folder)
     files.each do |path, options|
       FileUtils.cp_r(path, src_folder)
