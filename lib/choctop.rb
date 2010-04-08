@@ -31,7 +31,15 @@ class ChocTop
   def target
     @target ||= File.basename(target_bundle) if target_bundle
   end
-
+  
+  # The name of the target in Xcode, such as MacRuby's Compile or
+  # Embed.
+  # Uses the application name by default.
+  attr_accessor :build_target
+  def build_target
+    @build_target ||= name
+  end
+  
   def target_bundle
     @target_bundle ||= Dir["build/#{build_type}/#{name}.*"].first
   end
