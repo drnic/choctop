@@ -2,6 +2,17 @@
 
 * http://drnic.github.com/choctop
 
+== Modifications by billymeltdown:
+
+Just some real basic stuff for our internal use here at Zetetic. I'd ignore the :scp business, 
+in the end it turned out to be whack, but I'll preserve it here in case anyone really needs it. 
+Rsync is definitely more appropriate.
+
+The thing I needed in particular was to be able to pass build settings to xcodebuild that I 
+have set in the XCode project and that we use in dependent projects (e.g. -sdk macosx10.5, etc).
+
+Added a gemspec so I can publish it from github, allowing us here at zetetic to use it specifically.
+
 == DESCRIPTION:
 
 Build and deploy tools for Cocoa apps using Sparkle for distributions and upgrades; 

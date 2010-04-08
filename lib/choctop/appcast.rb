@@ -3,10 +3,10 @@ module ChocTop::Appcast
     if skip_build
       puts "Skipping build task..."
     else
-      sh "xcodebuild -configuration #{build_type} -target #{build_target}"
+      sh "xcodebuild -configuration #{build_type} -target #{build_target} #{build_opts}"
     end
   end
-  
+
   def make_appcast
     app_name = File.basename(File.expand_path('.'))
     FileUtils.mkdir_p(build_path)
@@ -14,8 +14,8 @@ module ChocTop::Appcast
       xml = Builder::XmlMarkup.new(:indent => 2)
       xml.instruct!
       xml_string = xml.rss('xmlns:atom' => "http://www.w3.org/2005/Atom",
-              'xmlns:sparkle' => "http://www.andymatuschak.org/xml-namespaces/sparkle", 
-              :version => "2.0") do
+                           'xmlns:sparkle' => "http://www.andymatuschak.org/xml-namespaces/sparkle",
+                           :version => "2.0") do
         xml.channel do
           xml.title(app_name)
           xml.description("#{app_name} updates")
@@ -23,7 +23,7 @@ module ChocTop::Appcast
           xml.language('en')
           xml.pubDate Time.now.to_s(:rfc822)
           # xml.lastBuildDate(Time.now.rfc822)
-          xml.atom(:link, :href => "#{base_url}/#{appcast_filename}", 
+          xml.atom(:link, :href => "#{base_url}/#{appcast_filename}",
                    :rel => "self", :type => "application/rss+xml")
 
           xml.item do
@@ -31,8 +31,8 @@ module ChocTop::Appcast
             xml.tag! "sparkle:releaseNotesLink", "#{base_url}/#{release_notes}"
             xml.pubDate Time.now.to_s(:rfc822) #(File.mtime(pkg))
             xml.guid("#{name}-#{version}", :isPermaLink => "false")
-            xml.enclosure(:url => "#{base_url}/#{pkg_name}", 
-                          :length => "#{File.size(pkg)}", 
+            xml.enclosure(:url => "#{base_url}/#{pkg_name}",
+                          :length => "#{File.size(pkg)}",
                           :type => "application/dmg",
                           :"sparkle:version" => version,
                           :"sparkle:dsaSignature" => dsa_signature)
@@ -42,55 +42,62 @@ module ChocTop::Appcast
       f << xml_string
     end
   end
-  
+
   def make_dmg_symlink
     FileUtils.chdir(build_path) do
-      `ln -s #{pkg_name} #{versionless_pkg_name}`
+      `rm '#{versionless_pkg_name}'`
+      `ln -s '#{pkg_name}' '#{versionless_pkg_name}'`
     end
   end
-  
+
   def make_index_redirect
     File.open("#{build_path}/index.php", 'w') do |f|
       f << %Q{<?php header("Location: #{pkg_relative_url}"); ?>}
     end
   end
-  
+
   def skip_build
     return true if ENV['NO_BUILD']
     return false if File.exists?('Info.plist')
     return false if Dir['*.xcodeproj'].size > 0
     true
   end
-  
+
   def make_release_notes
     File.open("#{build_path}/#{release_notes}", "w") do |f|
       template = File.read(release_notes_template)
       f << ERB.new(template).result(binding)
     end
   end
-  
+
   def release_notes_content
     if File.exists?("release_notes.txt")
       File.read("release_notes.txt")
     else
       <<-TEXTILE.gsub(/^      /, '')
       h1. #{version} #{Date.today}
-      
+
       h2. Another awesome release!
       TEXTILE
     end
   end
-  
+
   def release_notes_html
     RedCloth.new(release_notes_content).to_html
   end
 
   def upload_appcast
-    _host = host.blank? ? "" : "#{host}:"
+    _host = host.blank? ? "" : host
     _user = user.blank? ? "" : "#{user}@"
-    sh %{rsync #{rsync_args} #{build_path}/ #{_user}#{_host}#{remote_dir}}
+    case transport
+    when :scp
+      # this is whack, really, work out your rsync options
+      sh %{scp #{scp_args} #{build_path}/* #{_user}#{_host}:#{remote_dir}}
+    else # default to rsync as per original
+      sh %{rsync #{rsync_args} #{build_path}/ #{_user}#{_host}:#{remote_dir}}
+    end
   end
-  
+
   # Returns a file path to the dsa_priv.pem file
   # If private key + public key haven't been generated yet then
   # generate them
@@ -102,15 +109,15 @@ module ChocTop::Appcast
       `openssl dsa -in dsa_priv.pem -pubout -out dsa_pub.pem`
       `rm dsaparam.pem`
       puts <<-EOS.gsub(/^      /, '')
-      
+
       WARNING: DO NOT PUT dsa_priv.pem IN YOUR SOURCE CONTROL
                Remember to add it to your ignore list
-      
+
       EOS
     end
     File.expand_path('dsa_priv.pem')
   end
-  
+
   def dsa_signature
     @dsa_signature ||= `openssl dgst -sha1 -binary < "#{pkg}" | openssl dgst -dss1 -sign "#{private_key}" | openssl enc -base64`
   end
