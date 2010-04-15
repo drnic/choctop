@@ -9,3 +9,4 @@ tmp
 .DS_Store
 features/fixtures/*/build
 *.tmproj
+*.gem
