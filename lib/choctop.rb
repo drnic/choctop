@@ -13,6 +13,11 @@ require "RedCloth"
 class ChocTop
   VERSION = '0.11.0'
   
+  attr_accessor :build_opts
+  def build_opts
+    @build_opts ||= ''
+  end
+  
   # Path to the Info.plist
   # Default: "Info.plist"
   attr_accessor :info_plist_path
@@ -41,7 +46,7 @@ class ChocTop
   end
   
   def target_bundle
-    @target_bundle ||= Dir["build/#{build_type}/#{name}.*"].first
+    @target_bundle ||= Dir["#{build_products}/#{name}.*"].first
   end
 
   # The build type of the distributed DMG file
@@ -90,12 +95,27 @@ class ChocTop
   # Default: info_plist['SUFeedURL'] or linker_appcast.xml
   attr_accessor :appcast_filename
   
-  # The remote directory where the xml + dmg files will be rsync'd
+  # The remote directory where the xml + dmg files will be uploaded
   attr_accessor :remote_dir
+  
+  # Defines the transport to use for upload, default is :rsync, :scp is also available
+  attr_accessor :transport
+  def transport
+    @transport ||= :rsync # other option is scp
+  end
   
   # The argument flags passed to rsync
   # Default: -aCv
   attr_accessor :rsync_args
+  
+  # Additional arguments to pass to scp
+  # e.g. -P 11222
+  attr_accessor :scp_args
+
+  attr_accessor :build_products
+  def build_products
+    @build_products ||= "build/#{build_type}"
+  end
   
   # Folder from where all files will be copied into the DMG
   # Files are copied here if specified with +add_file+ before DMG creation

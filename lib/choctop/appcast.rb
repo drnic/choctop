@@ -3,7 +3,7 @@ module ChocTop::Appcast
     if skip_build
       puts "Skipping build task..."
     else
-      sh "xcodebuild -configuration #{build_type} -target #{build_target}"
+      sh "xcodebuild -configuration #{build_type} #{build_opts}"
     end
   end
   
@@ -20,7 +20,7 @@ module ChocTop::Appcast
           xml.description("#{@name} updates")
           xml.link(base_url)
           xml.language('en')
-          xml.pubDate Time.now.to_s(:rfc822)
+          xml.pubDate( Time.now.strftime("%a, %d %b %Y %H:%M:%S %z") )
           # xml.lastBuildDate(Time.now.rfc822)
           xml.atom(:link, :href => "#{base_url}/#{appcast_filename}", 
                    :rel => "self", :type => "application/rss+xml")
@@ -28,7 +28,7 @@ module ChocTop::Appcast
           xml.item do
             xml.title("#{name} #{version}")
             xml.tag! "sparkle:releaseNotesLink", "#{base_url}/#{release_notes}"
-            xml.pubDate Time.now.to_s(:rfc822) #(File.mtime(pkg))
+            xml.pubDate Time.now.strftime("%a, %d %b %Y %H:%M:%S %z")
             xml.guid("#{name}-#{version}", :isPermaLink => "false")
             xml.enclosure(:url => "#{base_url}/#{pkg_name}", 
                           :length => "#{File.size(pkg)}", 
@@ -44,7 +44,8 @@ module ChocTop::Appcast
   
   def make_dmg_symlink
     FileUtils.chdir(build_path) do
-      `ln -sf "#{pkg_name}" "#{versionless_pkg_name}"`
+      `rm '#{versionless_pkg_name}'`
+      `ln -s '#{pkg_name}' '#{versionless_pkg_name}'`
     end
   end
   
@@ -85,9 +86,15 @@ module ChocTop::Appcast
   end
 
   def upload_appcast
-    _host = host.blank? ? "" : "#{host}:"
+    _host = host.blank? ? "" : host
     _user = user.blank? ? "" : "#{user}@"
-    sh %{rsync #{rsync_args} #{build_path}/ #{_user}#{_host}#{remote_dir}}
+    case transport
+    when :scp
+      # this is whack, really, work out your rsync options
+      sh %{scp #{scp_args} #{build_path}/* #{_user}#{_host}:#{remote_dir}}
+    else # default to rsync as per original
+      sh %{rsync #{rsync_args} #{build_path}/ #{_user}#{_host}:#{remote_dir}}
+    end
   end
   
   # Returns a file path to the dsa_priv.pem file

@@ -28,6 +28,7 @@ module ChocTop::Dmg
     copy_files
     FileUtils.mkdir_p build_path
     FileUtils.mkdir_p mountpoint # TODO can we remove random mountpoints?
+    FileUtils.rm_f(pkg) # make sure destination pkg doesn't already exist, or hdiutil will barf
     sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder '#{src_folder}' '#{pkg}'"
     sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
     sh "bless --folder '#{volume_path}' --openfolder '#{volume_path}'"
