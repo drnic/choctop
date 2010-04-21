@@ -229,6 +229,9 @@ class ChocTop
   # e.g. if absolute url is http://mydomain.com/downloads/MyApp-1.0.dmg
   # then pkg_relative_url is /downloads/MyApp-1.0.dmg
   def pkg_relative_url
+    unless base_url
+      raise "The base url should be set in order to create a sparkle feed. Set the SUFeedURL in your Info.plist."
+    end
     _base_url = base_url.gsub(%r{/$}, '')
     "#{_base_url}/#{pkg_name}".gsub(%r{^.*#{host}}, '')
   end
