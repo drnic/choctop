@@ -14,17 +14,6 @@ Feature: Can build a customised DMG image from application build
     And file ".background/background.jpg" in mounted volume is invisible
     And file ".VolumeIcon.icns" in mounted volume is created
 
-  Scenario: Build a DMG with a whitespace name
-    Given a Cocoa app with choctop installed called "App With Whitespace"
-    When I invoke task "rake dmg"
-    Then file "appcast/build/App With Whitespace-1.0.dmg" is created
-    When dmg "appcast/build/App With Whitespace-1.0.dmg" is mounted as "App With Whitespace"
-    Then folder "App With Whitespace.app" in mounted volume is created
-    And file "Applications" in mounted volume is created
-    And file ".background/background.jpg" in mounted volume is created
-    And file ".background/background.jpg" in mounted volume is invisible
-    And file ".VolumeIcon.icns" in mounted volume is created
-
   Scenario: Build a DMG with custom Applications symlink icon
     Given a Cocoa app with choctop installed called "SampleApp"
     And is configured for custom Applications icon
