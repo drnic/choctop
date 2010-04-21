@@ -29,6 +29,10 @@ describe ChocTop do
     it "should derive appcast_filename from Info.plist['SUFeedURL']" do
       choctop.appcast_filename.should == 'my_feed.xml'
     end
+    
+    it "should default the appcast_filename to my_feed.xml" do
+      ChocTop.new.appcast_filename.should == 'my_feed.xml'
+    end
   end
   
   describe "add_files" do

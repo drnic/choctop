@@ -55,7 +55,10 @@ class ChocTop
 
   # The Sparkle feed URL
   # Default: info_plist['SUFeedURL']
-  attr_accessor :su_feed_url
+  attr_writer :su_feed_url
+  def su_feed_url
+    @su_feed_url ||= info_plist['SUFeedURL']
+  end
   
   # The host name, e.g. some-domain.com
   # Default: host from base_url
@@ -67,7 +70,14 @@ class ChocTop
   
   # The url from where the xml + dmg files will be downloaded
   # Default: dir path from appcast_filename
-  attr_accessor :base_url
+  attr_writer :base_url
+  def base_url
+    if su_feed_url
+      @base_url ||= File.dirname(su_feed_url)
+    else
+      @base_url
+    end
+  end
   
   # The file name for generated release notes for the latest release
   # Default: release_notes.html
@@ -93,7 +103,10 @@ class ChocTop
 
   # The name of the local xml file containing the Sparkle item details
   # Default: info_plist['SUFeedURL'] or linker_appcast.xml
-  attr_accessor :appcast_filename
+  attr_writer :appcast_filename
+  def appcast_filename
+    @appcast_filename ||= su_feed_url ? File.basename(su_feed_url) : 'my_feed.xml'
+  end  
   
   # The remote directory where the xml + dmg files will be uploaded
   attr_accessor :remote_dir
@@ -237,13 +250,10 @@ class ChocTop
     @version ||= info_plist['CFBundleVersion']
     @build_type = ENV['BUILD_TYPE'] || 'Release'
     
-    if @su_feed_url = info_plist['SUFeedURL']
-      @appcast_filename ||= File.basename(su_feed_url)
-      @base_url ||= File.dirname(su_feed_url)
-    end
-    if @base_url
+    if base_url
       @host ||= URI.parse(base_url).host
     end
+    
     @release_notes ||= 'release_notes.html'
     @readme        ||= 'README.txt'
     @release_notes_template ||= "release_notes_template.html.erb"
