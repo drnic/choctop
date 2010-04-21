@@ -30,6 +30,8 @@ features/support/matchers.rb
 lib/choctop.rb
 lib/choctop/appcast.rb
 lib/choctop/dmg.rb
+lib/choctop/rake_tasks.rb
+lib/choctop/version_helper.rb
 script/console
 script/destroy
 script/generate
