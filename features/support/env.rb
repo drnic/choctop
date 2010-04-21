@@ -1,10 +1,12 @@
-require File.dirname(__FILE__) + "/../../lib/choctop"
+# require File.dirname(__FILE__) + "/../../lib/choctop"
 
 require "rubygems"
 require 'cucumber'
 require 'spec'
 
 require "activesupport"
+$:.unshift(File.dirname(__FILE__) + '/../../lib')
+require 'choctop'
 
 Before do
   @tmp_root = File.dirname(__FILE__) + "/../../tmp"

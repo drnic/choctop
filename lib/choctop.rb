@@ -1,6 +1,3 @@
-$:.unshift(File.dirname(__FILE__)) unless
-  $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
-
 require "fileutils"
 require "yaml"
 require "builder"
@@ -10,10 +7,16 @@ require "osx/cocoa"
 require "active_support"
 require "RedCloth"
 
+require 'choctop/appcast'
+require 'choctop/dmg'
+
 class ChocTop
+  include Appcast
+  include Dmg
+  
   VERSION = '0.11.0'
   
-  attr_accessor :build_opts
+  attr_writer :build_opts
   def build_opts
     @build_opts ||= ''
   end
@@ -312,6 +315,3 @@ class ChocTop
     end
   end
 end
-require "choctop/appcast"
-require "choctop/dmg"
-

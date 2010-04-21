@@ -1,4 +1,4 @@
-module ChocTop::Dmg
+module Dmg
   def prepare_files
     self.files = files.inject({}) do |files, file|
       path_or_helper, options = file
@@ -14,7 +14,7 @@ module ChocTop::Dmg
       files
     end
   end
-  
+
   def copy_files
     FileUtils.rm_r(src_folder) if File.exists? src_folder
     FileUtils.mkdir_p(src_folder)
@@ -22,7 +22,7 @@ module ChocTop::Dmg
       FileUtils.cp_r(path, src_folder)
     end
   end
-  
+
   def make_dmg
     prepare_files
     copy_files
@@ -40,28 +40,28 @@ module ChocTop::Dmg
     configure_applications_icon if include_applications_icon?
     configure_dmg_window
   end
-  
+
   def volume_background
     ".background/background#{File.extname(background_file)}"
   end
-  
+
   def window_position
     [50, 100]
   end
-  
+
   def window_bounds
     window_position + 
     window_position.zip(background_bounds).map { |w, b| w + b }
   end
-  
+
   def background_bounds
     return [400, 300] unless background_file
     background = OSX::NSImage.alloc.initByReferencingFile(background_file).size.to_a
     [background.first, background.last + statusbar_height]
   end
-  
+
   def statusbar_height; 20; end
-  
+
   def configure_volume_icon
     if volume_icon
       FileUtils.cp(volume_icon, "#{volume_path}/.VolumeIcon.icns")
@@ -110,7 +110,7 @@ module ChocTop::Dmg
     run_applescript(script)
     sh "SetFile -a V '#{target_background}'" if background_file
   end
-  
+
   def set_position_of_files
     files.map do |file_options|
       path, options = file_options
@@ -119,7 +119,7 @@ module ChocTop::Dmg
       %Q{set position of item "#{target}" to {#{position}}}
     end.join("\n")
   end
-  
+
   def set_position_of_shortcuts
     if include_applications_icon?
       %Q{set position of item applications_folder to {#{applications_icon_position.join(", ")}}}
@@ -127,11 +127,11 @@ module ChocTop::Dmg
       ""
     end
   end
-  
+
   def include_applications_icon?
     target =~ /.app$/
   end
-  
+
   def configure_applications_icon
     run_applescript <<-SCRIPT.gsub(/^      /, ''), "apps_icon_script"
       tell application "Finder"
@@ -148,7 +148,7 @@ module ChocTop::Dmg
       OSX::NSWorkspace.sharedWorkspace.setIcon_forFile_options(image, applications_path, nil)
     end
   end
-  
+
   def detach_dmg
     mounted_paths = `hdiutil info | grep '#{volume_path}' | grep "Apple_HFS"`.split("\n").map { |e| e.split(" ").first }
     mounted_paths.each do |path|
@@ -159,22 +159,22 @@ module ChocTop::Dmg
       end
     end
   end
-  
+
   def convert_dmg_readonly
     tmp_path = "/tmp/rw.dmg"
     FileUtils.mv(pkg, tmp_path)
     sh "hdiutil convert '#{tmp_path}' -format UDZO -imagekey zlib-level=9 -o '#{pkg}'"
   end
-  
+
   def add_eula
     # TODO support EULA
     # hdiutil unflatten $@
   	# /Developer/Tools/DeRez -useDF SLAResources.rsrc > build/temp/sla.r
   	# /Developer/Tools/Rez -a build/temp/sla.r -o $@
   	# hdiutil flatten $@
-  	
+	
   end
-  
+
   def run_applescript(applescript, tmp_file = "choctop-script")
     File.open(scriptfile = "/tmp/#{tmp_file}", "w") do |f|
       f << applescript
@@ -189,5 +189,3 @@ module ChocTop::Dmg
     applescript
   end
 end
-ChocTop.send(:include, ChocTop::Dmg)
-

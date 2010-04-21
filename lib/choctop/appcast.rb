@@ -1,4 +1,4 @@
-module ChocTop::Appcast
+module Appcast
   def make_build
     if skip_build
       puts "Skipping build task..."
@@ -121,4 +121,3 @@ module ChocTop::Appcast
     @dsa_signature ||= `openssl dgst -sha1 -binary < "#{pkg}" | openssl dgst -dss1 -sign "#{private_key}" | openssl enc -base64`
   end
 end
-ChocTop.send(:include, ChocTop::Appcast)

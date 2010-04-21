@@ -1,8 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
-describe ChocTop::Dmg do
-  attr_reader :choctop
-  
+describe Dmg do
   before(:each) do
     @project_path = File.dirname(__FILE__) + "/../features/fixtures/SampleApp"
     FileUtils.chdir(@project_path) do

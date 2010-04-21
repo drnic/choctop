@@ -2,7 +2,6 @@ gem 'hoe', '>= 2.3.2'
 require 'hoe'
 gem 'newgem', '>= 1.5.0'
 require 'newgem'
-require './lib/choctop'
 
 Hoe.plugin :newgem
 
