@@ -129,7 +129,6 @@ module ChocTop::Dmg
   end
   
   def include_applications_icon?
-    puts "target: #{target.inspect}"
     target =~ /.app$/
   end
   

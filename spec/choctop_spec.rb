@@ -39,8 +39,8 @@ describe ChocTop do
       end
     end
     
-    it "should have build/Release/SampleApp.app as a file/bundle" do
-      @choctop.files.keys.should be_include('build/Release/SampleApp.app')
+    it "should have target_bundle as a file/bundle" do
+      @choctop.files.keys.should include(:target_bundle)
     end
 
     it "should have README.txt as a file" do
@@ -57,29 +57,9 @@ describe ChocTop do
           @choctop.prepare_files
         end
       end
-
-      it "should have SampleApp.app in build/Release/dmg ready for inclusion in DMG" do
-        FileUtils.chdir(File.dirname(__FILE__) + "/../features/fixtures/SampleApp") do
-          File.should be_exists('build/Release/dmg/SampleApp.app')
-        end
-      end
-      
-      it "should position SampleApp.app at [175, 65]" do
-        @choctop.set_position_of_files.should =~ /set position of item "SampleApp.app" to \{175, 65\}/
-      end
-
-      it "should have README.txt in build/Release ready for inclusion in DMG" do
-        FileUtils.chdir(File.dirname(__FILE__) + "/../features/fixtures/SampleApp") do
-          File.should be_exists('build/Release/dmg/README.txt')
-        end
-      end
-      
+            
       it "should position README.txt at [50, 100]" do
         @choctop.set_position_of_files.should =~ /set position of item "README.txt" to \{50, 100\}/
-      end
-
-      it "should render an Applications shortcut" do
-        @choctop.set_position_of_shortcuts.should =~ /applications_folder/
       end
     end
 
@@ -100,12 +80,6 @@ describe ChocTop do
       end
     end
     
-    it "should have README.txt in build/Release/dmg ready for inclusion in DMG" do
-      FileUtils.chdir(@my_project_path) do
-        File.should be_exists('build/Release/dmg/README.txt')
-      end
-    end
-
     it "should not render an Applications shortcut" do
       @choctop.set_position_of_shortcuts.should_not =~ /applications_folder/
     end
