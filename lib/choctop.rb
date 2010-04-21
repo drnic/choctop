@@ -9,6 +9,7 @@ require "RedCloth"
 
 require 'choctop/appcast'
 require 'choctop/dmg'
+require 'choctop/version_helper'
 
 class ChocTop
   include Appcast
@@ -312,6 +313,36 @@ class ChocTop
     
     task :size do
       puts configure_dmg_window
+    end
+    
+    namespace :version do
+      desc "Display the current version"
+      task :current do
+        puts VersionHelper.new(info_plist_path).to_s
+      end
+
+      namespace :bump do
+        desc "Bump the gemspec by a major version."
+        task :major do
+          VersionHelper.new(info_plist_path) do |version|
+            version.bump_major
+          end
+        end
+
+        desc "Bump the gemspec by a minor version."
+        task :minor do
+          VersionHelper.new(info_plist_path) do |version|
+            version.bump_minor
+          end
+        end
+
+        desc "Bump the gemspec by a patch version."
+        task :patch do
+          VersionHelper.new(info_plist_path) do |version|
+            version.bump_patch
+          end
+        end
+      end
     end
   end
 end
