@@ -12,14 +12,14 @@ class VersionHelper
   end
   
   def info_plist
-    @info_plist ||= OSX::NSDictionary.dictionaryWithContentsOfFile(File.expand_path(info_plist_path)) || {}
+    @info_plist ||= OSX::NSDictionary.dictionaryWithContentsOfFile(info_plist_path) || {}
   end
   
   def parse_version
     # http://rubular.com/regexes/10467 -> 3.5.4.a1
     # http://rubular.com/regexes/10468 -> 3.5.4
     # regex on nsstring is broken so convert it to a ruby string
-    if  info_plist['CFBundleVersion'].to_s =~ /^(\d+)\.(\d+)\.(\d+)(?:\.(.*?))?$/
+    if info_plist['CFBundleVersion'].to_s =~ /^(\d+)\.(\d+)\.?(\d+)?(?:\.(.*?))?$/
       @major = $1.to_i
       @minor = $2.to_i
       @patch = $3.to_i
@@ -55,7 +55,7 @@ class VersionHelper
   def write
     info_plist['CFBundleVersion'] =  to_s
     info_plist['CFBundleShortVersionString'] = to_s
-    info_plist.writeToFile_atomically(File.expand_path(info_plist_path),true)
+    info_plist.writeToFile_atomically(info_plist_path,true)
   end
 
   def to_s

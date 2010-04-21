@@ -23,10 +23,19 @@ class ChocTop
   def build_opts
     @build_opts ||= ''
   end
-  
+
   # Path to the Info.plist
+  # Default: project directory
+  def info_plist_path
+    @info_plist_path ||= File.expand_path(info_plist_name)
+  end
+
+  # Name of the Info.plist file
   # Default: "Info.plist"
-  attr_accessor :info_plist_path
+  def info_plist_name
+    @info_plist_name ||= 'Info.plist'
+  end
+  
   
   # The name of the Cocoa application
   # Default: info_plist['CFBundleExecutable'] or project folder name if "${EXECUTABLE_NAME}"
@@ -223,9 +232,9 @@ class ChocTop
     _base_url = base_url.gsub(%r{/$}, '')
     "#{_base_url}/#{pkg_name}".gsub(%r{^.*#{host}}, '')
   end
-  
+    
   def info_plist
-    @info_plist ||= OSX::NSDictionary.dictionaryWithContentsOfFile(File.expand_path(info_plist_path)) || {}
+    @info_plist ||= OSX::NSDictionary.dictionaryWithContentsOfFile(info_plist_path) || {}
   end
   
   # Add an explicit file/bundle/folder into the DMG
@@ -250,7 +259,6 @@ class ChocTop
     yield self if block_given?
     
     # Defaults
-    @info_plist_path ||= 'Info.plist'
     @name ||= info_plist['CFBundleExecutable'] || File.basename(File.expand_path("."))
     @name = File.basename(File.expand_path(".")) if @name == '${EXECUTABLE_NAME}'
     @version ||= info_plist['CFBundleVersion']
