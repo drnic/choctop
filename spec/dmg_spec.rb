@@ -1,10 +1,10 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
-describe Dmg do
+describe ChocTop::Dmg do
   before(:each) do
     @project_path = File.dirname(__FILE__) + "/../features/fixtures/SampleApp"
     FileUtils.chdir(@project_path) do
-      @choctop = ChocTop.new
+      @choctop = ChocTop::Configuration.new
       @choctop.files = {}
     end
   end

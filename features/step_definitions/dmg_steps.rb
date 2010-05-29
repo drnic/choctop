@@ -15,7 +15,7 @@ end
 When /^dmg "(.*)" is mounted as "(.*)"$/ do |dmg, name|
   @stdout = File.expand_path(File.join(@tmp_root, "hdiutil.out"))
   in_project_folder do
-    @mountpoint = ChocTop.new.mountpoint
+    @mountpoint = ChocTop::Configuration.new.mountpoint
     FileUtils.mkdir_p @mountpoint
     @volume_path = "#{@mountpoint}/#{name}"
     `hdiutil attach '#{dmg}' -mountpoint '#{@volume_path}' -noautoopen > #{@stdout}`

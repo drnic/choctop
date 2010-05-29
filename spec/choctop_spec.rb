@@ -1,11 +1,11 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
-describe ChocTop do
+describe ChocTop::Configuration do
   
   describe "default" do
     before(:each) do
       FileUtils.chdir(File.dirname(__FILE__) + "/../features/fixtures/SampleApp") do
-        @choctop = ChocTop.new
+        @choctop = ChocTop::Configuration.new
       end
     end
 
@@ -30,12 +30,12 @@ describe ChocTop do
     end
     
     it "should default the appcast_filename to my_feed.xml" do
-      ChocTop.new.appcast_filename.should == 'my_feed.xml'
+      ChocTop::Configuration.new.appcast_filename.should == 'my_feed.xml'
     end
     
     it "should raise an exception if the base_url is nil" do
       lambda{
-        ChocTop.new.pkg_relative_url
+        ChocTop::Configuration.new.pkg_relative_url
       }.should raise_error(Exception, "The base url should be set in order to create a sparkle feed. Set the SUFeedURL in your Info.plist.")
     end
   end
@@ -43,7 +43,7 @@ describe ChocTop do
   describe "add_files" do
     before(:each) do
       FileUtils.chdir(File.dirname(__FILE__) + "/../features/fixtures/SampleApp") do
-        @choctop = ChocTop.new
+        @choctop = ChocTop::Configuration.new
         @choctop.add_file "README.txt", :position => [50, 100]
       end
     end
@@ -82,7 +82,7 @@ describe ChocTop do
       `touch #{File.join(@my_project_path, 'README.txt')}`
       `touch #{File.join(@my_project_path, 'some_other_file.txt')}`
       FileUtils.chdir(@my_project_path) do
-        @choctop = ChocTop.new
+        @choctop = ChocTop::Configuration.new
         @choctop.add_file "README.txt", :position => [50, 100]
         @choctop.add_file "some_other_file.txt", :position => [50, 150]
         @choctop.prepare_files

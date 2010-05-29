@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe VersionHelper do
+describe ChocTop::VersionHelper do
   before(:each) do
-    @version_helper = VersionHelper.new(File.expand_path("spec/fixtures/Info.plist"))
+    @version_helper = ChocTop::VersionHelper.new(File.expand_path("spec/fixtures/Info.plist"))
   end
   
   it "should handle Xcodes default format d.d" do

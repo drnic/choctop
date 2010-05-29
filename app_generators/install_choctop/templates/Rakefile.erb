@@ -3,7 +3,7 @@ require "rake"
 
 require "choctop"
 
-ChocTop.new do |s|
+ChocTop::Configuration.new do |s|
   # Remote upload target (set host if not same as Info.plist['SUFeedURL'])
   # s.host     = '<%= urlname %>.com'
   s.remote_dir = '/path/to/upload/root/of/app'
