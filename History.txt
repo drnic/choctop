@@ -1,4 +1,14 @@
+== 0.12.0 2010-05-29
+* Tests run again
+* Reorganzied code base so that there is a module ChocTop and a class Configuration
+* New version helper
+  rake version:current
+  rake version:bump:major
+  rake version:bump:minor
+  rake version:bump:patch
+* Pulled in changes from all forks
 
+== 0.11.1
 * ChocTop no longer solely for Cocoa applications
 * Applications shortcut only included if the primary target is a .app bundle
 * Creates a non-versioned symlink to latest released DMG

@@ -2,17 +2,6 @@
 
 * http://drnic.github.com/choctop
 
-== Modifications by billymeltdown:
-
-Just some real basic stuff for our internal use here at Zetetic. I'd ignore the :scp business, 
-in the end it turned out to be whack, but I'll preserve it here in case anyone really needs it. 
-Rsync is definitely more appropriate.
-
-The thing I needed in particular was to be able to pass build settings to xcodebuild that I 
-have set in the XCode project and that we use in dependent projects (e.g. -sdk macosx10.5, etc).
-
-Added a gemspec so I can publish it from github, allowing us here at zetetic to use it specifically.
-
 == DESCRIPTION:
 
 Build and deploy tools for Cocoa apps using Sparkle for distributions and upgrades; 
@@ -29,12 +18,14 @@ application, creates a DMG package, generates a Sparkle XML file, and posts the 
 and XML file to your remote host via rsync.
 
 All rake tasks:
-
-    rake appcast         # Create dmg, update appcast file, and upload to host
-    rake build   # Build Xcode Release
-    rake dmg     # Create the dmg file for appcasting
-    rake feed    # Create/update the appcast file
-    rake upload  # Upload the appcast file to the host
+    rake build               # Build Xcode Release
+    rake dmg                 # Create the dmg file for appcasting
+    rake feed                # Create/update the appcast file
+    rake upload              # Upload the appcast file to the host
+    rake version:bump:major  # Bump the gemspec by a major version.
+    rake version:bump:minor  # Bump the gemspec by a minor version.
+    rake version:bump:patch  # Bump the gemspec by a patch version.
+    rake version:current     # Display the current version
 
 == Why is it called 'ChocTop'? 
 
@@ -100,7 +91,7 @@ Also, in your project's Info.plist, remember to update/add the following keys:
     CFBundleVersion - version for next release, using X.Y.Z format
     SUFeedURL - url to Sparkle URL (future: insert this automatically)
 
-The create the distribution, Sparkle XML file, and upload it to the remote host:
+Then create the distribution, Sparkle XML file, and upload it to the remote host:
 
   rake appcast
 
