@@ -2,10 +2,10 @@
 
 Gem::Specification.new do |s|
   s.name = %q{choctop}
-  s.version = "0.11.0"
+  s.version = "0.12.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Dr Nic Williams", "Chris Bailey"]
+  s.authors = ["Dr Nic Williams", "Chris Bailey", "Patrick Huesler"]
   s.date = %q{2010-05-29}
   s.default_executable = %q{install_choctop}
   s.description = %q{Build and deploy tools for Cocoa apps using Sparkle for distributions and upgrades; 
@@ -22,13 +22,15 @@ application, creates a DMG package, generates a Sparkle XML file, and posts the 
 and XML file to your remote host via rsync.
 
 All rake tasks:
-
-    rake appcast         # Create dmg, update appcast file, and upload to host
-    rake build   # Build Xcode Release
-    rake dmg     # Create the dmg file for appcasting
-    rake feed    # Create/update the appcast file
-    rake upload  # Upload the appcast file to the host}
-  s.email = ["drnicwilliams@gmail.com", "chris@cobaltedge.com"]
+    rake build               # Build Xcode Release
+    rake dmg                 # Create the dmg file for appcasting
+    rake feed                # Create/update the appcast file
+    rake upload              # Upload the appcast file to the host
+    rake version:bump:major  # Bump the gemspec by a major version.
+    rake version:bump:minor  # Bump the gemspec by a minor version.
+    rake version:bump:patch  # Bump the gemspec by a patch version.
+    rake version:current     # Display the current version}
+  s.email = ["drnicwilliams@gmail.com", "chris@cobaltedge.com", "patrick.huesler@gmail.com"]
   s.executables = ["install_choctop"]
   s.extra_rdoc_files = ["History.txt", "Manifest.txt"]
   s.files = ["History.txt", "Manifest.txt", "README.rdoc", "Rakefile", "app_generators/install_choctop/install_choctop_generator.rb", "app_generators/install_choctop/templates/Rakefile.erb", "app_generators/install_choctop/templates/release_notes.txt.erb", "app_generators/install_choctop/templates/release_notes_template.html.erb", "assets/DefaultVolumeIcon.icns", "assets/sky.jpg", "assets/sky_background.jpg", "assets/vanillia_dmg_icon.png", "assets/wood.jpg", "bin/install_choctop", "features/development.feature", "features/dmg.feature", "features/fixtures/custom_assets/appicon.icns", "features/initial_generator.feature", "features/rake_tasks.feature", "features/sparkle_feed.feature", "features/step_definitions/common_steps.rb", "features/step_definitions/dmg_steps.rb", "features/step_definitions/file_attribute_steps.rb", "features/step_definitions/generator_steps.rb", "features/step_definitions/remote_steps.rb", "features/step_definitions/xcode_steps.rb", "features/support/common.rb", "features/support/env.rb", "features/support/matchers.rb", "lib/choctop.rb", "lib/choctop/appcast.rb", "lib/choctop/dmg.rb", "lib/choctop/rake_tasks.rb", "lib/choctop/version_helper.rb", "script/console", "script/destroy", "script/generate", "spec/choctop_spec.rb", "spec/spec.opts", "spec/spec_helper.rb", "tasks/rspec.rake"]
