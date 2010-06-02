@@ -56,7 +56,7 @@ to the end:
 
     require "choctop"
 
-    ChocTop.new do |s|
+    ChocTop::Configuration.new do |s|
       s.remote_dir = '/path/to/upload/root/of/app'
       
       # Optional, showing defaults
