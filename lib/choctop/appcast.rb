@@ -87,8 +87,8 @@ module ChocTop
     end
 
     def upload_appcast
-      _host = host.blank? ? "" : host
-      _user = user.blank? ? "" : "#{user}@"
+      _host = host.nil? ? "" : host
+      _user = user.nil? ? "" : "#{user}@"
       case transport
       when :scp
         # this is whack, really, work out your rsync options

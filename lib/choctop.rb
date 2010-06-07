@@ -4,7 +4,6 @@ require "builder"
 require "erb"
 require "uri"
 require "osx/cocoa"
-require "active_support"
 require "RedCloth"
 
 require 'choctop/appcast'
@@ -18,7 +17,7 @@ module ChocTop
     include Dmg
     include RakeTasks
   
-    VERSION = '0.12.0'
+    VERSION = '0.12.1'
   
     attr_writer :build_opts
     def build_opts

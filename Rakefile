@@ -9,7 +9,6 @@ $hoe = Hoe.spec 'choctop' do
   developer 'Dr Nic Williams', 'drnicwilliams@gmail.com'
   developer 'Chris Bailey', 'chris@cobaltedge.com'
   developer 'Patrick Huesler', 'patrick.huesler@gmail.com'
-  extra_deps << ['activesupport']
   extra_deps << ['builder','>= 2.1.2']
   extra_dev_deps << ['newgem', ">= #{::Newgem::VERSION}"]
 end

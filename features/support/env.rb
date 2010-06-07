@@ -4,7 +4,6 @@ require "rubygems"
 require 'cucumber'
 require 'spec'
 
-require "activesupport"
 $:.unshift(File.dirname(__FILE__) + '/../../lib')
 require 'choctop'
 
