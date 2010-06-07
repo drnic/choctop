@@ -26,7 +26,7 @@ Your project is given a Rakefile, a release\_notes.txt and a release\_notes\_tem
 You edit the Rakefile with your custom DMG asset information and/or remote file locations for the rsync
 upload process. CommitChat's Rakefile includes:
 
-<pre lang="ruby">ChocTop.new do |s|
+<pre lang="ruby">ChocTop::Configuration.new do |s|
   s.host     = 'commitchat.com'
   s.base_url = 'http://commitchat.com/secret_path_to_beta'
   s.remote_dir = '/opt/apps/commitchat/secret_path_to_beta'
