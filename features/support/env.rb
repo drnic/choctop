@@ -1,8 +1,6 @@
-# require File.dirname(__FILE__) + "/../../lib/choctop"
-
-require "rubygems"
-require 'cucumber'
-require 'spec'
+require "bundler"
+Bundler.setup
+Bundler.require :cucumber
 
 $:.unshift(File.dirname(__FILE__) + '/../../lib')
 require 'choctop'
