@@ -1,11 +1,9 @@
-module Matchers
-  def contain(expected)
-    simple_matcher("contain #{expected.inspect}") do |given, matcher|
-      matcher.failure_message = "expected #{given.inspect} to contain #{expected.inspect}"
-      matcher.negative_failure_message = "expected #{given.inspect} not to contain #{expected.inspect}"
-      given.index expected
-    end
+RSpec::Matchers.define :contain do |expected|
+  match do |actual|
+    actual.index expected
+  end
+
+  failure_message_for_should do |actual|
+    "expected #{actual.inspect} to contain #{expected.inspect}"
   end
 end
-
-World(Matchers)
