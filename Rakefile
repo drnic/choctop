@@ -4,6 +4,7 @@ gem 'newgem', '>= 1.5.0'
 require 'newgem'
 
 Hoe.plugin :newgem
+Hoe.plugin :cucumberfeatures
 
 $hoe = Hoe.spec 'choctop' do
   developer 'Dr Nic Williams', 'drnicwilliams@gmail.com'
@@ -13,11 +14,6 @@ $hoe = Hoe.spec 'choctop' do
   extra_dev_deps << ['newgem', ">= #{::Newgem::VERSION}"]
 end
 
-task :release do
-  sh "gem push pkg/#{$hoe.name}-#{$hoe.version}.gem"
-end
-
 require 'newgem/tasks' # load /tasks/*.rake
-Dir['tasks/**/*.rake'].each { |t| load t }
 
-task :default => [:features]
+task :default => [:features, :spec]
