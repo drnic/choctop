@@ -1,0 +1,71 @@
+--- 
+dependencies: 
+  newgem: 
+    group: 
+    - :newgem
+    version: ">= 1.5.2"
+  rspec: 
+    group: 
+    - :cucumber
+    version: ">= 2.0.0.beta"
+  awesome_print: 
+    group: 
+    - :cucumber
+    version: ">= 0"
+  cucumber: 
+    group: 
+    - :cucumber
+    version: = 0.8.3
+  hoe: 
+    group: 
+    - :newgem
+    version: ">= 2.6.1"
+  builder: 
+    group: 
+    - :default
+    version: ">= 2.1.2"
+specs: 
+- rake: 
+    version: 0.8.7
+- RedCloth: 
+    version: 4.2.3
+- activesupport: 
+    version: 2.3.8
+- awesome_print: 
+    version: 0.2.1
+- builder: 
+    version: 2.1.2
+- diff-lcs: 
+    version: 1.1.2
+- trollop: 
+    version: 1.16.2
+- gherkin: 
+    version: 2.0.2
+- json_pure: 
+    version: 1.4.3
+- term-ansicolor: 
+    version: 1.0.5
+- cucumber: 
+    version: 0.8.3
+- rubyforge: 
+    version: 2.0.4
+- hoe: 
+    version: 2.6.1
+- rubigen: 
+    version: 1.5.5
+- syntax: 
+    version: 1.0.0
+- newgem: 
+    version: 1.5.3
+- rspec-core: 
+    version: 2.0.0.beta.15
+- rspec-expectations: 
+    version: 2.0.0.beta.15
+- rspec-mocks: 
+    version: 2.0.0.beta.15
+- rspec: 
+    version: 2.0.0.beta.15
+hash: d84dcad7b0afc6afeef553ec4526e83650dd11ed
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org

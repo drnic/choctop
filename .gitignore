@@ -10,3 +10,4 @@ tmp
 features/fixtures/*/build
 *.tmproj
 *.gem
+.bundle

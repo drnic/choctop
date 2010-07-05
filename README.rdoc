@@ -108,6 +108,15 @@ its set to Debug for development) and then Build. The "rake appcast" task should
 
     sudo gem install choctop
 
+== DEVELOPMENT:
+
+This project uses bundler to describe the required rubygem dependencies for development:
+
+    sudo gem install bundler
+    bundle install
+    rake
+
+
 == ORIGINAL CODE IDEAS:
 
 * Chris Bailey at http://codeintensity.blogspot.com/2008/03/creating-sparkle-appcast-via-rake-tasks.html
@@ -115,10 +124,10 @@ its set to Debug for development) and then Build. The "rake appcast" task should
 * Emanuele Vicentini's rake_dmg at http://github.com/baldowl/rake_dmg
 * AppleScript ideas from http://svn.tribler.org/abc/branches/old-mainbranch-till-4.1.7plus/mac/Makefile-from-vlc-ready
 
-    
+
 == SPONSORED BY:
 
-http://mocra.com - Mocra - the premier Rails/iPhone consultancy
+* Dr Nic was sponsored by Mocra, http://mocra.com
 
 == LICENSE:
 
