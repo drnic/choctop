@@ -147,9 +147,9 @@ module ChocTop
   
     # Folder from where all files will be copied into the DMG
     # Files are copied here if specified with +add_file+ before DMG creation
-    attr_accessor :src_folder
-    def src_folder
-      @src_folder ||= "build/#{build_type}/dmg"
+    attr_accessor :dmg_src_folder
+    def dmg_src_folder
+      @dmg_src_folder ||= "build/#{build_type}/dmg"
     end
   
     # Generated filename for a distribution, from name, version and .dmg
@@ -247,7 +247,7 @@ module ChocTop
     #   file proc { 'README.txt' }, :position => [50, 100]
     #   file :position => [50, 100] { 'README.txt' }
     # Required option:
-    #  +:position+ - two item array [x, y] window position
+    #   +:position+ - two item array [x, y] window position
     def file(*args, &block)
       path_or_helper, options = args.first.is_a?(Hash) ? [block, args.first] : [args.first, args.last]
       throw "add_files #{path_or_helper}, :position => [x,y] option is missing" unless options[:position]
@@ -255,6 +255,22 @@ module ChocTop
       files[path_or_helper] = options
     end
     alias_method :add_file, :file
+    
+    # Add the whole project as a mounted item; e.g. a TextMate bundle
+    # Examples:
+    #   root :position => [50, 100]
+    #   add_root :position => [50, 100], :name => 'My Thing'
+    # Required option:
+    #   +:position+ - two item array [x, y] window position
+    # Options:
+    #   +:name+ - override the name of the project when mounted in the DMG
+    def root(options)
+      throw "add_root :position => [x,y] option is missing" unless options[:position]
+      options[:name] ||= File.basename(File.expand_path("."))
+      self.files ||= {}
+      files['.'] = options
+    end
+    alias_method :add_root, :root
 
     def initialize
       $choctop = $sparkle = self # define a global variable for this object ($sparkle is legacy)

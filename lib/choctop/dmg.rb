@@ -11,17 +11,25 @@ module ChocTop
           else
             path_or_helper
         end
-        files[path] = options if path && File.exists?(path) && File.basename(path) != '.'
+        if path && File.exists?(path)
+          files[path] = options 
+          options[:name] ||= File.basename(path)
+        end
         files
       end
     end
 
+    # Two-phase copy: first to a tmp folder (to prevent recursion); then tmp folder to +dmg_src_folder+
     def copy_files
-      FileUtils.rm_r(src_folder) if File.exists? src_folder
-      FileUtils.mkdir_p(src_folder)
+      require 'tmpdir'
+      tmp_dmg_src_folder = File.join(Dir.tmpdir, Time.now.to_i.to_s) # probably unique folder
+      FileUtils.mkdir_p(tmp_dmg_src_folder)
       files.each do |path, options|
-        FileUtils.cp_r(path, src_folder)
+        FileUtils.cp_r(path, File.join(tmp_dmg_src_folder, options[:name]))
       end
+      FileUtils.rm_r(dmg_src_folder) if File.exists? dmg_src_folder
+      FileUtils.mkdir_p(dmg_src_folder)
+      Dir["#{tmp_dmg_src_folder}/*"].each { |f| FileUtils.cp_r(f, dmg_src_folder) }
     end
 
     def make_dmg
@@ -30,7 +38,7 @@ module ChocTop
       FileUtils.mkdir_p build_path
       FileUtils.mkdir_p mountpoint # TODO can we remove random mountpoints?
       FileUtils.rm_f(pkg) # make sure destination pkg doesn't already exist, or hdiutil will barf
-      sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder '#{src_folder}' '#{pkg}'"
+      sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder '#{dmg_src_folder}' '#{pkg}'"
       sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
       sh "bless --folder '#{volume_path}' --openfolder '#{volume_path}'"
       sh "sleep 1"
@@ -115,7 +123,7 @@ module ChocTop
     def set_position_of_files
       files.map do |file_options|
         path, options = file_options
-        target        = File.basename(path)
+        target        = options[:name]
         position      = options[:position].join(", ")
         %Q{set position of item "#{target}" to {#{position}}}
       end.join("\n")

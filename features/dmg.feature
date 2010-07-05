@@ -40,3 +40,13 @@ Feature: Can build a customised DMG image from application build
     And file "README.txt" in mounted volume is created
     And file "SomeBundle.thingy" in mounted volume is created
     And file "Applications" in mounted volume is not created
+
+  Scenario: Build a DMG for the entire project as an item (textmate bundle)
+    Given a TextMate bundle project "MyBundle.tmbundle"
+    When I invoke task "rake dmg"
+    And dmg "appcast/build/MyBundle.tmbundle.dmg" is mounted as "MyBundle.tmbundle"
+    And file "MyBundle.tmbundle" in mounted volume is created
+    And file "Applications" in mounted volume is not created
+  
+  
+  

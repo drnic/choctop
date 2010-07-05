@@ -1,7 +1,7 @@
 module ChocTop
   module Appcast
     def make_build
-      if skip_build
+      if skip_xcode_build
         puts "Skipping build task..."
       else
         sh "xcodebuild -configuration #{build_type} -target #{build_target} #{build_opts}"
@@ -56,9 +56,8 @@ module ChocTop
       end
     end
 
-    def skip_build
+    def skip_xcode_build
       return true if ENV['NO_BUILD']
-      return false if File.exists?('Info.plist')
       return false if Dir['*.xcodeproj'].size > 0
       true
     end

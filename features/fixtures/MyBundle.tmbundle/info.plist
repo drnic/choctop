@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>My Bundle</string>
+	<key>uuid</key>
+	<string>033772CF-17CE-44D2-A59A-8A90DACB6419</string>
+</dict>
+</plist>

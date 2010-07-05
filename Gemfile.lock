@@ -1,31 +1,31 @@
 --- 
 dependencies: 
+  rspec: 
+    group: 
+    - :cucumber
+    version: ">= 2.0.0.beta"
   newgem: 
     group: 
     - :newgem
     version: ">= 1.5.2"
     require: []
 
-  rspec: 
-    group: 
-    - :cucumber
-    version: ">= 2.0.0.beta"
   awesome_print: 
     group: 
-    - :cucumber
+    - :default
     version: ">= 0"
   bundler: 
     group: 
     - :development
     version: ">= 0"
-  cucumber: 
-    group: 
-    - :cucumber
-    version: = 0.8.3
   hoe: 
     group: 
     - :newgem
     version: ">= 2.6.1"
+  cucumber: 
+    group: 
+    - :cucumber
+    version: = 0.8.3
   builder: 
     group: 
     - :default
@@ -73,7 +73,7 @@ specs:
     version: 2.0.0.beta.15
 - rspec: 
     version: 2.0.0.beta.15
-hash: 4d2974262eac096880337a200d2ecb85b5ac2478
+hash: ec02e945eafbbe47f7c6edd57cb52eb0309b6a8d
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

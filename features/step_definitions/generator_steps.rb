@@ -49,3 +49,17 @@ Given /^a non\-Xcode chcotop project "([^\"]*)" with files: (.*)$/ do |name, fil
   end
   files.each { |file| choctop_add_file(file) }
 end
+
+Given /^a TextMate bundle project "([^"]*)"$/ do |name|
+  app_path = File.join(File.dirname(__FILE__), "../fixtures", name)
+  `cp -r '#{app_path}' #{@tmp_root}/ 2> /dev/null`
+  `rm -rf '#{@tmp_root}/#{name}/build'`
+  setup_active_project_folder name
+  steps <<-CUCUMBER
+    Given I run local executable "install_choctop" with arguments "."
+    Given Rakefile wired to use development code instead of installed RubyGem
+  CUCUMBER
+  ENV['NO_FINDER'] = 'YES' # disable Finder during tests
+  choctop_add_root
+end
+
