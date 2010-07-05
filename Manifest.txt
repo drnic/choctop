@@ -12,8 +12,24 @@ assets/sky_background.jpg
 assets/vanillia_dmg_icon.png
 assets/wood.jpg
 bin/install_choctop
+choctop.gemspec
 features/development.feature
 features/dmg.feature
+features/fixtures/App With Whitespace/App With Whitespace.xcodeproj/TemplateIcon.icns
+features/fixtures/App With Whitespace/App With Whitespace.xcodeproj/project.pbxproj
+features/fixtures/App With Whitespace/App With Whitespace_Prefix.pch
+features/fixtures/App With Whitespace/English.lproj/InfoPlist.strings
+features/fixtures/App With Whitespace/English.lproj/MainMenu.xib
+features/fixtures/App With Whitespace/Info.plist
+features/fixtures/App With Whitespace/main.m
+features/fixtures/SampleApp/English.lproj/InfoPlist.strings
+features/fixtures/SampleApp/English.lproj/MainMenu.xib
+features/fixtures/SampleApp/Info.plist
+features/fixtures/SampleApp/README.txt
+features/fixtures/SampleApp/SampleApp.xcodeproj/TemplateIcon.icns
+features/fixtures/SampleApp/SampleApp.xcodeproj/project.pbxproj
+features/fixtures/SampleApp/SampleApp_Prefix.pch
+features/fixtures/SampleApp/main.m
 features/fixtures/custom_assets/appicon.icns
 features/initial_generator.feature
 features/rake_tasks.feature
@@ -25,6 +41,7 @@ features/step_definitions/generator_steps.rb
 features/step_definitions/remote_steps.rb
 features/step_definitions/xcode_steps.rb
 features/support/common.rb
+features/support/dmg_helpers.rb
 features/support/env.rb
 features/support/matchers.rb
 lib/choctop.rb
@@ -36,6 +53,8 @@ script/console
 script/destroy
 script/generate
 spec/choctop_spec.rb
+spec/dmg_spec.rb
+spec/fixtures/Info.plist
 spec/spec.opts
 spec/spec_helper.rb
-tasks/rspec.rake
+spec/version_helper_spec.rb
