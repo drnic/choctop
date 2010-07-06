@@ -1,5 +1,9 @@
 --- 
 dependencies: 
+  escape: 
+    group: 
+    - :default
+    version: = 0.0.4
   rspec: 
     group: 
     - :cucumber
@@ -13,7 +17,7 @@ dependencies:
   awesome_print: 
     group: 
     - :default
-    version: ">= 0"
+    version: = 0.2.1
   bundler: 
     group: 
     - :development
@@ -26,14 +30,14 @@ dependencies:
     group: 
     - :cucumber
     version: = 0.8.3
+  builder: 
+    group: 
+    - :default
+    version: = 2.1.2
   RedCloth: 
     group: 
     - :default
     version: = 4.2.3
-  builder: 
-    group: 
-    - :default
-    version: ">= 2.1.2"
 specs: 
 - rake: 
     version: 0.8.7
@@ -59,6 +63,8 @@ specs:
     version: 1.0.5
 - cucumber: 
     version: 0.8.3
+- escape: 
+    version: 0.0.4
 - rubyforge: 
     version: 2.0.4
 - hoe: 
@@ -77,7 +83,7 @@ specs:
     version: 2.0.0.beta.15
 - rspec: 
     version: 2.0.0.beta.15
-hash: c25cb3b6cb1112401bceb22b39cfb91c177b4a3d
+hash: 2fa03535b60734ba6b435e984c1a4f65377fddae
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

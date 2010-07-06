@@ -5,6 +5,7 @@ require "erb"
 require "uri"
 require "osx/cocoa"
 require "RedCloth"
+require "escape"
 
 require 'choctop/appcast'
 require 'choctop/dmg'

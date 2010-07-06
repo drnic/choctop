@@ -9,6 +9,10 @@ module ChocTop
       task "build/#{build_type}/#{target}/Contents/Info.plist" do
         make_build
       end
+      
+      task :clean_build do
+        FileUtils.rm_rf(build_path)
+      end
 
       desc "Create the dmg file for appcasting"
       task :dmg => :build do
