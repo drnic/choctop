@@ -1,3 +1,8 @@
+== 0.13.0 2010-07-06
+
+* Can now package up entire project (such as a TextMate bundle) as an item (#root or #add_root helper)
+* SEE README: Using Bundler to define gem dependencies
+
 == 0.12.1 2010-06-07
 * No longer depend on active support
 
