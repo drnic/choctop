@@ -1,8 +1,8 @@
-# A sample Gemfile
 source :gemcutter
 
 gem 'builder','>= 2.1.2'
 gem 'awesome_print'
+gem 'RedCloth', '4.2.3'
 
 group :newgem do
   gem 'hoe', '>= 2.6.1'
