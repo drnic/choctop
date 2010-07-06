@@ -25,7 +25,12 @@ module ChocTop
       tmp_dmg_src_folder = File.join(Dir.tmpdir, Time.now.to_i.to_s) # probably unique folder
       FileUtils.mkdir_p(tmp_dmg_src_folder)
       files.each do |path, options|
-        sh ::Escape.shell_command(['cp', '-r', path, File.join(tmp_dmg_src_folder, options[:name])])
+        target = File.join(tmp_dmg_src_folder, options[:name])
+        sh ::Escape.shell_command(['cp', '-r', path, target])
+        if options[:exclude]
+          exclude_list = options[:exclude].is_a?(Array) ? options[:exclude] : [options[:exclude].to_s]
+          exclude_list.each { |exclude| sh ::Escape.shell_command(['rm', '-rf', File.join(target, exclude)]) }
+        end
       end
       FileUtils.rm_r(dmg_src_folder) if File.exists? dmg_src_folder
       FileUtils.mkdir_p(dmg_src_folder)

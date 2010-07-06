@@ -249,6 +249,9 @@ module ChocTop
     #   file :position => [50, 100] { 'README.txt' }
     # Required option:
     #   +:position+ - two item array [x, y] window position
+    # Options:
+    #   +:name+    - override the name of the project when mounted in the DMG
+    #   +:exclude+ - do not include files/folders
     def file(*args, &block)
       path_or_helper, options = args.first.is_a?(Hash) ? [block, args.first] : [args.first, args.last]
       throw "add_files #{path_or_helper}, :position => [x,y] option is missing" unless options[:position]
@@ -264,7 +267,8 @@ module ChocTop
     # Required option:
     #   +:position+ - two item array [x, y] window position
     # Options:
-    #   +:name+ - override the name of the project when mounted in the DMG
+    #   +:name+    - override the name of the project when mounted in the DMG
+    #   +:exclude+ - do not include files/folders
     def root(options)
       throw "add_root :position => [x,y] option is missing" unless options[:position]
       options[:name] ||= File.basename(File.expand_path("."))
