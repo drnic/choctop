@@ -15,21 +15,23 @@ module ChocTop
           files[path] = options 
           options[:name] ||= File.basename(path)
         end
+        if path =~ %r{\.webloc$}
+          files[path] = options 
+          options[:name] ||= File.basename(path)
+          options[:link] = true
+        end
         files
       end
     end
 
     # Two-phase copy: first to a tmp folder (to prevent recursion); then tmp folder to +dmg_src_folder+
     def copy_files
-      require 'tmpdir'
-      tmp_dmg_src_folder = File.join(Dir.tmpdir, Time.now.to_i.to_s) # probably unique folder
       FileUtils.mkdir_p(tmp_dmg_src_folder)
       files.each do |path, options|
-        target = File.join(tmp_dmg_src_folder, options[:name])
-        sh ::Escape.shell_command(['cp', '-r', path, target])
-        if options[:exclude]
-          exclude_list = options[:exclude].is_a?(Array) ? options[:exclude] : [options[:exclude].to_s]
-          exclude_list.each { |exclude| sh ::Escape.shell_command(['rm', '-rf', File.join(target, exclude)]) }
+        if options[:link]
+          add_link_to_dmg_src_folder(path, options)
+        else
+          add_file_to_dmg_src_folder(path, options)
         end
       end
       FileUtils.rm_r(dmg_src_folder) if File.exists? dmg_src_folder
@@ -188,7 +190,25 @@ module ChocTop
     	# hdiutil flatten $@
 	
     end
+    
+    def add_file_to_dmg_src_folder(path, options)
+      target = File.join(tmp_dmg_src_folder, options[:name])
+      sh ::Escape.shell_command(['cp', '-r', path, target])
+      if options[:exclude]
+        exclude_list = options[:exclude].is_a?(Array) ? options[:exclude] : [options[:exclude].to_s]
+        exclude_list.each { |exclude| sh ::Escape.shell_command(['rm', '-rf', File.join(target, exclude)]) }
+      end
+    end
 
+    def add_link_to_dmg_src_folder(path, options)
+      plist_name   = options[:name].gsub(/\.webloc$/, '')
+      plist_target = File.join(tmp_dmg_src_folder, plist_name)
+      target       = File.join(tmp_dmg_src_folder, options[:name])
+      sh ::Escape.shell_command(['defaults', 'write', plist_target, 'URL', options[:url]])
+      sh ::Escape.shell_command(['plutil', '-convert', 'xml1', '-o', target, "#{plist_target}.plist"])
+      sh ::Escape.shell_command(['rm', "#{plist_target}.plist"])
+    end
+    
     def run_applescript(applescript, tmp_file = "choctop-script")
       File.open(scriptfile = "/tmp/#{tmp_file}", "w") do |f|
         f << applescript
@@ -201,6 +221,13 @@ module ChocTop
         end
       end
       applescript
+    end
+    
+    def tmp_dmg_src_folder
+      @tmp_dmg_src_folder ||= begin
+        require 'tmpdir'
+        File.join(Dir.tmpdir, Time.now.to_i.to_s) # probably unique folder
+      end
     end
   end
 end

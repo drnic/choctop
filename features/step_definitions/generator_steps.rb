@@ -63,3 +63,8 @@ Given /^a TextMate bundle project "([^"]*)"$/ do |name|
   choctop_add_root
 end
 
+Given /^I want a link "([^"]*)" to "([^"]*)" in the DMG$/ do |name, url|
+  choctop_add_link name, url
+end
+
+

@@ -44,3 +44,13 @@ Then /^file "(.*)" in mounted volume (is|is not) invisible$/ do |file, is|
   end
 end
 
+When /^webloc file "([^"]*)" links to "([^"]*)"$/ do |name, url|
+  in_mounted_volume do
+    File.exists?(name).should be_true
+    
+    `cp '#{name}' /tmp/link.plist`
+    webloc_url = `defaults read /tmp/link URL`.strip
+    webloc_url.should == url
+  end
+end
+

@@ -276,6 +276,27 @@ module ChocTop
       files['.'] = options
     end
     alias_method :add_root, :root
+    
+    # Add the whole project as a mounted item; e.g. a TextMate bundle
+    # Examples:
+    #   add_link "http://github.com/drnic/choctop", :name => 'Github', :position => [50, 100]
+    #   add_link "http://github.com/drnic/choctop", 'Github.webloc', :position => [50, 100]
+    # Required option:
+    #   +:position+ - two item array [x, y] window position
+    #   +:name+    - override the name of the project when mounted in the DMG
+    def link(url, *options)
+      name = options.first if options.first.is_a?(String)
+      options = options.last || {}
+      options[:url] = url
+      options[:name] = name if name
+      throw "add_link :position => [x,y] option is missing" unless options[:position]
+      throw "add_link :name => 'Name' option is missing" unless options[:name]
+      options[:name].gsub!(/(\.webloc|\.url)$/, '')
+      options[:name] += ".webloc"
+      self.files ||= {}
+      files[options[:name]] = options
+    end
+    alias_method :add_link, :link
 
     def initialize
       $choctop = $sparkle = self # define a global variable for this object ($sparkle is legacy)

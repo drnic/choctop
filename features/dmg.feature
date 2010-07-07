@@ -48,5 +48,14 @@ Feature: Can build a customised DMG image from application build
     And file "MyBundle.tmbundle" in mounted volume is created
     And file "Applications" in mounted volume is not created
   
+  Scenario: Build a DMG with a URL webloc file
+    Given a TextMate bundle project "MyBundle.tmbundle"
+    And I want a link "GitHub.webloc" to "http://github.com/drnic/choctop" in the DMG
+    When I invoke task "rake dmg"
+    And dmg "appcast/build/MyBundle.tmbundle.dmg" is mounted as "MyBundle.tmbundle"
+    And file "MyBundle.tmbundle" in mounted volume is created
+    And file "Applications" in mounted volume is not created
+    And webloc file "GitHub.webloc" links to "http://github.com/drnic/choctop"
+  
   
   

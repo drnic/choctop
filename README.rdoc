@@ -76,6 +76,10 @@ to the end:
       s.file proc { 'README.txt' }, :position => [50, 100]
       s.file :position => [50, 100] { 'README.txt' }
       
+      # Link to external URLs
+      s.add_link 'http://github.com/drnic/choctop', 'Choctop', :position => [50, 100]
+      s.link 'http://github.com/drnic/choctop', :name => 'Choctop', :position => [50, 100]
+      
       # Even add the entire project (like a TextMate bundle)
       s.root :position => [100, 100]
       s.add_root :position => [100, 100]
