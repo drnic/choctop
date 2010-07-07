@@ -1,3 +1,7 @@
+== 0.13.1 2010-07-07
+
+* Can add URL .webloc files into DMG via #add_link/#link helper
+
 == 0.13.0 2010-07-06
 
 * Can now package up entire project (such as a TextMate bundle) as an item (#root or #add_root helper)
