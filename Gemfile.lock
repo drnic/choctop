@@ -76,13 +76,13 @@ specs:
 - newgem: 
     version: 1.5.3
 - rspec-core: 
-    version: 2.0.0.beta.15
+    version: 2.0.0.beta.16
 - rspec-expectations: 
-    version: 2.0.0.beta.15
+    version: 2.0.0.beta.16
 - rspec-mocks: 
-    version: 2.0.0.beta.15
+    version: 2.0.0.beta.16
 - rspec: 
-    version: 2.0.0.beta.15
+    version: 2.0.0.beta.16
 hash: 2fa03535b60734ba6b435e984c1a4f65377fddae
 sources: 
 - Rubygems: 
