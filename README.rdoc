@@ -19,7 +19,7 @@ and XML file to your remote host via rsync.
 
 All rake tasks:
     rake build               # Build Xcode Release
-    rake dmg                 # Create the dmg file for appcasting
+		rake dmg[automount]      # Create the dmg file for appcasting (`rake dmg`, or `rake dmg[automount]` to automatically mount the dmg)
     rake feed                # Create/update the appcast file
     rake upload              # Upload the appcast file to the host
     rake version:bump:major  # Bump the gemspec by a major version.

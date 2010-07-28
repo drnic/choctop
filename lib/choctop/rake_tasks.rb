@@ -14,13 +14,16 @@ module ChocTop
         FileUtils.rm_rf(build_path)
       end
 
-      desc "Create the dmg file for appcasting"
-      task :dmg => :build do
+      desc "Create the dmg file for appcasting (`rake dmg`, or `rake dmg[automount]` to automatically mount the dmg)"
+      task :dmg, :automount, :needs => :build do |t, args|
+        args.with_defaults(:automount => false)
+        
         detach_dmg
         make_dmg
         detach_dmg
         convert_dmg_readonly
         add_eula
+        mount_dmg if args[:automount]
       end
 
       desc "Create/update the appcast file"
