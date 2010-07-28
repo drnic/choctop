@@ -14,7 +14,7 @@ Feature: Setup a Cocoa app with choctop
   Scenario: Run "install_choctop" without arguments shows an error
     Given a Cocoa app that does not have an existing Rakefile
     When I run local executable "install_choctop" with arguments ""
-    Then I should see /USAGE: install_choctop path/to/CocoaApp/
+    Then I should see /USAGE: install_choctop path/to/project/
   
   Scenario: Install choctop and generate a release_notes file
     Given a Cocoa app that does not have an existing Rakefile

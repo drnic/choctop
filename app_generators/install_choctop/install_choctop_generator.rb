@@ -30,7 +30,7 @@ Installs choctop into your Cocoa application. This gives you
 rake tasks to build and deploy your Cocoa app's latest version for
 Sparkle appcast mechanism.
 
-USAGE: #{spec.name} path/to/CocoaApp
+USAGE: #{spec.name} path/to/project
 EOS
     end
 

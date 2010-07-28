@@ -1,3 +1,5 @@
+* Don't mention CocoaApp in usage; choctop can do more now
+
 == 0.13.1 2010-07-07
 
 * Can add URL .webloc files into DMG via #add_link/#link helper
