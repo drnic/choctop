@@ -25,6 +25,11 @@ module ChocTop
         @minor = $2.to_i
         @patch = $3.to_i
         @build = $4
+      else
+        @major = 0
+        @minor = 0
+        @patch = 0
+        @build = nil
       end
     end
 
