@@ -40,10 +40,6 @@ module ChocTop
         detach_dmg
       end
 
-      task :size do
-        puts configure_dmg_window
-      end
-
       namespace :version do
         desc "Display the current version"
         task :current do
