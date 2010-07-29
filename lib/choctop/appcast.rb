@@ -44,9 +44,11 @@ module ChocTop
     end
 
     def make_dmg_symlink
-      FileUtils.chdir(build_path) do
-        `rm '#{versionless_pkg_name}'`
-        `ln -s '#{pkg_name}' '#{versionless_pkg_name}'`
+      if pkg_name != versionless_pkg_name
+        FileUtils.chdir(build_path) do
+          `rm '#{versionless_pkg_name}'`
+          `ln -s '#{pkg_name}' '#{versionless_pkg_name}'`
+        end
       end
     end
 
@@ -63,9 +65,11 @@ module ChocTop
     end
 
     def make_release_notes
-      File.open("#{build_path}/#{release_notes}", "w") do |f|
-        template = File.read(release_notes_template)
-        f << ERB.new(template).result(binding)
+      if File.exist?(release_notes_template)
+        File.open("#{build_path}/#{release_notes}", "w") do |f|
+          template = File.read(release_notes_template)
+          f << ERB.new(template).result(binding)
+        end
       end
     end
 
