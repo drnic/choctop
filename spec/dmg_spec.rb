@@ -10,7 +10,7 @@ describe ChocTop::Dmg do
   end
 
   context "#prepare_files" do
-    it "should process :target_bundle into a path" do
+    it "should process :readme into a path" do
       FileUtils.chdir(@project_path) do
         @choctop.file :readme, :position=>[175, 65]
         @choctop.prepare_files

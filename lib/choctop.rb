@@ -299,6 +299,7 @@ module ChocTop
     alias_method :add_link, :link
     
     # Specify which background + volume images to use by default
+    # Can also add default targets
     # Supports
     # * :normal (default)
     # * :textmate
@@ -307,17 +308,17 @@ module ChocTop
       when :normal
         @background_file ||= File.dirname(__FILE__) + "/../assets/default_background.jpg"
         @volume_icon     ||= File.dirname(__FILE__) + "/../assets/default_volume.icns"
-        @app_icon_position ||= [175, 65]
+        @app_icon_position          ||= [175, 65]
         @applications_icon_position ||= [347, 270]
-        @icon_size ||= 104
+        @icon_size      ||= 104
         @icon_text_size ||= 12
+        
+        add_file :target_bundle, :position => app_icon_position
       when :textmate
         @background_file ||= File.dirname(__FILE__) + "/../assets/textmate_background.jpg"
         @volume_icon     ||= File.dirname(__FILE__) + "/../assets/textmate_volume.icns"
-        @app_icon_position ||= [175, 65]
-        @applications_icon_position ||= [347, 270]
-        @icon_size ||= 104
-        @icon_text_size ||= 12
+        @icon_size       ||= 104
+        @icon_text_size  ||= 12
       end
     end
     alias_method :project_type, :defaults
@@ -343,8 +344,6 @@ module ChocTop
       @rsync_args ||= '-aCv --progress'
 
       defaults :normal unless @project_type
-
-      add_file :target_bundle, :position => app_icon_position
 
       define_tasks
     end
