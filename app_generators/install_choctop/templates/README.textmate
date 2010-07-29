@@ -1,0 +1,2 @@
+You use choctop with the following rake tasks:
+  rake dmg     # Create the dmg file for appcasting

@@ -18,10 +18,12 @@ class InstallChoctopGenerator < RubiGen::Base
       case options[:project_type]
       when :textmate
         m.template "Rakefile.textmate.erb", "Rakefile"
+        m.readme "README.textmate"
       else
         m.template "Rakefile.erb", "Rakefile"
         m.template "release_notes.txt.erb", "release_notes.txt"
         m.file "release_notes_template.html.erb", "release_notes_template.html.erb"
+        m.readme "README.normal"
       end
     end
   end

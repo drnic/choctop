@@ -8,6 +8,8 @@ Manifest.txt
 README.rdoc
 Rakefile
 app_generators/install_choctop/install_choctop_generator.rb
+app_generators/install_choctop/templates/README.normal
+app_generators/install_choctop/templates/README.textmate
 app_generators/install_choctop/templates/Rakefile.erb
 app_generators/install_choctop/templates/Rakefile.textmate.erb
 app_generators/install_choctop/templates/release_notes.txt.erb
