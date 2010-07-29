@@ -297,6 +297,30 @@ module ChocTop
       files[options[:name]] = options
     end
     alias_method :add_link, :link
+    
+    # Specify which background + volume images to use by default
+    # Supports
+    # * :normal (default)
+    # * :textmate
+    def defaults(project_type)
+      case @project_type = project_type.to_sym
+      when :normal
+        @background_file ||= File.dirname(__FILE__) + "/../assets/default_background.jpg"
+        @volume_icon     ||= File.dirname(__FILE__) + "/../assets/default_volume.icns"
+        @app_icon_position ||= [175, 65]
+        @applications_icon_position ||= [347, 270]
+        @icon_size ||= 104
+        @icon_text_size ||= 12
+      when :textmate
+        @background_file ||= File.dirname(__FILE__) + "/../assets/textmate_background.jpg"
+        @volume_icon     ||= File.dirname(__FILE__) + "/../assets/textmate_volume.icns"
+        @app_icon_position ||= [175, 65]
+        @applications_icon_position ||= [347, 270]
+        @icon_size ||= 104
+        @icon_text_size ||= 12
+      end
+    end
+    alias_method :project_type, :defaults
 
     def initialize
       $choctop = $sparkle = self # define a global variable for this object ($sparkle is legacy)
@@ -317,16 +341,11 @@ module ChocTop
       @readme        ||= 'README.txt'
       @release_notes_template ||= "release_notes_template.html.erb"
       @rsync_args ||= '-aCv --progress'
-    
-      @background_file ||= File.dirname(__FILE__) + "/../assets/sky_background.jpg"
-      @app_icon_position ||= [175, 65]
-      @applications_icon_position ||= [347, 270]
-      @volume_icon ||= File.dirname(__FILE__) + "/../assets/DefaultVolumeIcon.icns"
-      @icon_size ||= 104
-      @icon_text_size ||= 12
+
+      defaults :normal unless @project_type
 
       add_file :target_bundle, :position => app_icon_position
-    
+
       define_tasks
     end
   end

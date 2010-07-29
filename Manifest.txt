@@ -14,9 +14,12 @@ app_generators/install_choctop/templates/Rakefile.erb
 app_generators/install_choctop/templates/Rakefile.textmate.erb
 app_generators/install_choctop/templates/release_notes.txt.erb
 app_generators/install_choctop/templates/release_notes_template.html.erb
-assets/DefaultVolumeIcon.icns
+assets/default_background.jpg
+assets/default_volume.icns
 assets/sky.jpg
 assets/sky_background.jpg
+assets/textmate_background.jpg
+assets/textmate_volume.icns
 assets/vanillia_dmg_icon.png
 assets/wood.jpg
 bin/install_choctop

@@ -1,4 +1,5 @@
-* install_choctop: --tmbundle/--textmate flag
+* install_choctop: added --tmbundle/--textmate flag
+* Added s.defaults/s.project_type to allow alternate default backgrounds; e.g. for all TextMate bundles
 * Don't mention CocoaApp in usage; choctop can do more now
 
 == 0.13.1 2010-07-07

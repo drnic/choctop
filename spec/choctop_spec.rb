@@ -1,7 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper.rb'
 
 describe ChocTop::Configuration do
-  
   describe "default" do
     before(:each) do
       FileUtils.chdir(File.dirname(__FILE__) + "/../features/fixtures/SampleApp") do
@@ -91,6 +90,50 @@ describe ChocTop::Configuration do
     
     it "should not render an Applications shortcut" do
       @choctop.set_position_of_shortcuts.should_not =~ /applications_folder/
+    end
+  end
+  
+  describe "defaults" do
+    before do
+      @my_project_path = File.dirname(__FILE__) + "/../tmp/MyProject"
+      FileUtils.rm_rf(@my_project_path)
+      FileUtils.mkdir_p(@my_project_path)
+    end
+
+    describe ":textmate" do
+      before do
+        FileUtils.chdir(@my_project_path) do
+          @choctop = ChocTop::Configuration.new do |s|
+            s.defaults :textmate
+          end
+          @choctop.prepare_files
+        end
+      end
+
+      it "should have textmate background" do
+        @choctop.background_file.should =~ /textmate_background.jpg$/
+      end
+
+      it "should have textmate volume icon" do
+        @choctop.volume_icon.should =~ /textmate_volume.icns$/
+      end
+    end
+
+    describe "normal" do
+      before do
+        FileUtils.chdir(@my_project_path) do
+          @choctop = ChocTop::Configuration.new
+          @choctop.prepare_files
+        end
+      end
+
+      it "should have default background" do
+        @choctop.background_file.should =~ /default_background.jpg$/
+      end
+
+      it "should have default volume icon" do
+        @choctop.volume_icon.should =~ /default_volume.icns$/
+      end
     end
   end
 end

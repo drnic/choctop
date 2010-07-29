@@ -1,5 +1,5 @@
 You use choctop with the following rake tasks:
-  rake appcast         # Create dmg, update appcast file, and upload to host
+  rake appcast # Create dmg, update appcast file, and upload to host
   rake build   # Create/update the appcast file
   rake dmg     # Create the dmg file for appcasting
-  rake upload  # Upload the appcast file to the host
+  rake upload  # Upload the dmg and appcast files to the host
