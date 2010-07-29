@@ -21,4 +21,15 @@ Feature: Setup a Cocoa app with choctop
     When I run local executable "install_choctop" with arguments "."
     Then file "release_notes.txt" is created
     And file "release_notes.txt" contents does match /Initial release/
-    
+  
+  Scenario: Install into a tmbundle
+    Given a TextMate bundle project "MyBundle"
+    When I run local executable "install_choctop" with arguments ". --textmate"
+    Then file "Rakefile" is created
+    Then file "release_notes.txt" is not created
+    When I invoke task "rake dmg"
+    And dmg "appcast/build/MyBundle.tmbundle.dmg" is mounted as "MyBundle.tmbundle"
+    And file "MyBundle.tmbundle" in mounted volume is created
+    And file "Applications" in mounted volume is not created
+  
+  

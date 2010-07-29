@@ -9,6 +9,7 @@ README.rdoc
 Rakefile
 app_generators/install_choctop/install_choctop_generator.rb
 app_generators/install_choctop/templates/Rakefile.erb
+app_generators/install_choctop/templates/Rakefile.textmate.erb
 app_generators/install_choctop/templates/release_notes.txt.erb
 app_generators/install_choctop/templates/release_notes_template.html.erb
 assets/DefaultVolumeIcon.icns

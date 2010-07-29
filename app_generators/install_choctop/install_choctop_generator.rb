@@ -1,7 +1,5 @@
 class InstallChoctopGenerator < RubiGen::Base
-  attr_reader :name, :module_name, :urlname, :version
-
-  default_options :version => "0.1.0"
+  attr_reader :name, :module_name, :urlname, :version, :github_user
 
   def initialize(runtime_args, runtime_options = {})
     super
@@ -17,18 +15,23 @@ class InstallChoctopGenerator < RubiGen::Base
     record do |m|
       %w( appcast/build ).each { |path| m.directory path }
 
-      m.template "Rakefile.erb", "Rakefile"
-      m.template "release_notes.txt.erb", "release_notes.txt"
-      m.file "release_notes_template.html.erb", "release_notes_template.html.erb"
+      case options[:project_type]
+      when :textmate
+        m.template "Rakefile.textmate.erb", "Rakefile"
+      else
+        m.template "Rakefile.erb", "Rakefile"
+        m.template "release_notes.txt.erb", "release_notes.txt"
+        m.file "release_notes_template.html.erb", "release_notes_template.html.erb"
+      end
     end
   end
 
   protected
     def banner
       <<-EOS
-Installs choctop into your Cocoa application. This gives you
-rake tasks to build and deploy your Cocoa app's latest version for
-Sparkle appcast mechanism.
+Installs choctop into your project/Cocoa application. This gives you
+rake tasks to build and deploy your project's latest version into a DMG
+and for release via Sparkle appcast mechanism.
 
 USAGE: #{spec.name} path/to/project
 EOS
@@ -38,12 +41,23 @@ EOS
       opts.separator ''
       opts.separator 'Options:'
       opts.on("-v", "--version", "Show the #{File.basename($0)} version number and quit.")
+      opts.on("--textmate", "--tmbundle", 
+              "Target project is a TextMate bundle",
+              "Default: false") { |o| options[:project_type] = :textmate }
       opts.on("-V", "--initial-version", 
-              "Show the #{File.basename($0)} version number and quit.",
+              "Set initial version number.",
               "Default: 0.1.0") { |o| options[:version] = o }
     end
 
     def extract_options
-      @version = options[:version]
+      @version     = options[:version]
+      @github_user = options[:github_user]
     end
+    
+    def self.default_github_user
+      `git config github.user || whoami`.strip
+    end
+
+  default_options :version => "0.1.0", :github_user => default_github_user
+
 end
