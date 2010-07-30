@@ -18,7 +18,7 @@ module ChocTop
     include Dmg
     include RakeTasks
   
-    VERSION = '0.13.1'
+    VERSION = '0.14.0'
   
     attr_writer :build_opts
     def build_opts
