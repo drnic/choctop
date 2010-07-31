@@ -3,6 +3,7 @@ Feature: Can build a customised DMG image from application build
   As a Cocoa developer or release manager
   I want a rake task to generate a DMG based on custom settings
 
+@unmount_dmg
   Scenario: Build a DMG with default custom DMG config
     Given a Cocoa app with choctop installed called "SampleApp"
     When I invoke task "rake dmg"
@@ -14,6 +15,7 @@ Feature: Can build a customised DMG image from application build
     And file ".background/background.jpg" in mounted volume is invisible
     And file ".VolumeIcon.icns" in mounted volume is created
 
+@unmount_dmg
   Scenario: Build a DMG with custom Applications symlink icon
     Given a Cocoa app with choctop installed called "SampleApp"
     And is configured for custom Applications icon
@@ -25,6 +27,7 @@ Feature: Can build a customised DMG image from application build
     And file "Applications" in mounted volume has GetFileInfo custom icon "1"
     And file "Applications" in mounted volume is aliased to "/Applications"
   
+@unmount_dmg
   Scenario: Build a DMG with extra included file such as README in the project folder
     Given a Cocoa app with choctop installed called "SampleApp"
     And is configured for an asset file "README.txt" to be included in dmg
@@ -33,6 +36,7 @@ Feature: Can build a customised DMG image from application build
     And file "README.txt" in mounted volume is created
     And file "SampleApp.app.dSYM" in mounted volume is not created
 
+@unmount_dmg
   Scenario: Build a DMG for non-Xcode project
     Given a non-Xcode chcotop project "MyProject" with files: README.txt, SomeBundle.thingy
     When I invoke task "rake dmg"
@@ -41,6 +45,7 @@ Feature: Can build a customised DMG image from application build
     And file "SomeBundle.thingy" in mounted volume is created
     And file "Applications" in mounted volume is not created
 
+@unmount_dmg
   Scenario: Build a DMG for the entire project as an item (textmate bundle)
     Given a TextMate bundle project "MyBundle.tmbundle"
     When I invoke task "rake dmg"
@@ -48,6 +53,7 @@ Feature: Can build a customised DMG image from application build
     And file "MyBundle.tmbundle" in mounted volume is created
     And file "Applications" in mounted volume is not created
   
+@unmount_dmg
   Scenario: Build a DMG with a URL webloc file
     Given a TextMate bundle project "MyBundle.tmbundle"
     And I want a link "GitHub.webloc" to "http://github.com/drnic/choctop" in the DMG
