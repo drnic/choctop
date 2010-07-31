@@ -1,3 +1,9 @@
+== 0.14.1 2010-08-01
+
+* add option to automatically mount the dmg created by the 'dmg' rake task [george]
+* tag-activated ("@unmount_dmg") cucumber (After) hook to unmount disk images used for testing [george]
+* cucumber tests folder aliasing in mounted volume via a call to osascript and an external AppleScript file [george]
+
 == 0.14.0 2010-07-30
 
 * install_choctop: added --tmbundle/--textmate flag
