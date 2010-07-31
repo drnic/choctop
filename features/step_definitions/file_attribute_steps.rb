@@ -9,8 +9,10 @@ Then /^file "(.*)" in mounted volume has GetFileInfo (.*) "(.*)"/ do |file, file
   end
 end
 
-Then /^file "(.*)" in mounted volume is aliased to "(.*)"/ do |file, target|
+Then /^file "(.*)" in mounted volume is aliased to "\/(.*)"/ do |folder_alias, target|
   in_mounted_volume do
-    puts "TODO - how to get applescript to test this?"
+    disk_name = `pwd`.chomp.split("/").last # HACK and an ugly on at that
+    folder_alias_url = `osascript #{File.join(File.dirname(__FILE__), "../support/get_folder_alias_target_url.scpt")} #{folder_alias} #{disk_name}`.chomp
+    folder_alias_url.should == "file://localhost/#{target}/"
   end
 end
