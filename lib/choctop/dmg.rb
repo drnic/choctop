@@ -46,7 +46,7 @@ module ChocTop
       FileUtils.mkdir_p mountpoint # TODO can we remove random mountpoints?
       FileUtils.rm_f(pkg) # make sure destination pkg doesn't already exist, or hdiutil will barf
       sh "hdiutil create -format UDRW -quiet -volname '#{name}' -srcfolder '#{dmg_src_folder}' '#{pkg}'"
-      sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
+      mount_dmg
       sh "bless --folder '#{volume_path}' --openfolder '#{volume_path}'"
       sh "sleep 1"
 
@@ -55,6 +55,10 @@ module ChocTop
       configure_volume_icon
       configure_applications_icon if include_applications_icon?
       configure_dmg_window
+    end
+    
+    def mount_dmg
+      sh "hdiutil attach '#{pkg}' -mountpoint '#{volume_path}' -noautoopen -quiet"
     end
 
     def volume_background
