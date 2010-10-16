@@ -55,11 +55,8 @@ module ChocTop
   
     # The name of the target in Xcode, such as MacRuby's Compile or
     # Embed.
-    # Uses the application name by default.
+    # Default: empty
     attr_accessor :build_target
-    def build_target
-      @build_target ||= name
-    end
   
     def target_bundle
       @target_bundle ||= Dir["#{build_products}/#{name}.*"].first
