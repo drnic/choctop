@@ -45,6 +45,7 @@ to a remote host, instantly activating all your users' Sparkle auto-updates.
 * packages a DMG of your released app using Info.plist configuration (rake dmg)
 * generates Sparkle-formatted XML file
 * uploads the DMG and XML files to a remote host
+* optional code-signing of application bundle before dmg build
 
 == SYNOPSIS:
 
@@ -87,6 +88,9 @@ to the end:
       # Custom DMG options
       s.volume_icon = "dmg.icns"
       s.icon_size = 104
+      
+      # Code-signing (unused if property is not set)
+      s.codesign_identity = 'Foo Widgets LLC'
     end
 
 In your Rakefile, update the ChocTop configuration with the host and remote_dir details.
