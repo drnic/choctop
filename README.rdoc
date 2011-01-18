@@ -115,6 +115,29 @@ its set to Debug for development) and then Build. The "rake appcast" task should
 == INSTALL:
 
     sudo gem install choctop
+    
+== POTENTIAL HANG-UPS:
+
+* Choctop is not building my project's target
+* My DMG is named wrong
+* My DMG is empty
+
+These can be caused by a combination of any of the following:
+
+* You have set a custom PRODUCT_NAME in your project settings in XCode.
+* You have ${EXECUTABLE_NAME} set as the value of CFBundleExecutable in your Info.plist
+* Your target's name doesn't match the PRODUCT\_NAME and/or the EXECUTABLE\_NAME
+* You have set a customized Build Products directory in XCode's Preferences
+
+None of these particulars is a problem, you just have to give choctop a little more info. Example:
+
+    ChocTop::Configuration.new do |s|
+      # ... snip ...
+      s.name = 'Strip Sync'           # what my final .app bundle should be named
+      s.build_target = 'StripSync'    # name of the target that should be built
+                                      # and build_products is where the magic happens
+      s.build_products = '/Users/frankmanowar/Documents/xcode-build/Release'
+    end
 
 == DEVELOPMENT:
 
