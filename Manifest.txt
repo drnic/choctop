@@ -1,5 +1,3 @@
-.bundle/config
-.bundle/environment.rb
 .rspec
 Gemfile
 Gemfile.lock
@@ -56,6 +54,8 @@ features/step_definitions/xcode_steps.rb
 features/support/common.rb
 features/support/dmg_helpers.rb
 features/support/env.rb
+features/support/get_folder_alias_target_url.scpt
+features/support/hooks.rb
 features/support/matchers.rb
 lib/choctop.rb
 lib/choctop/appcast.rb
