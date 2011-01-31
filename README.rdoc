@@ -148,9 +148,25 @@ None of these particulars is a problem, you just have to give Choctop a little m
 This project uses bundler to describe the required rubygem dependencies for development:
 
     sudo gem install bundler
-    bundle install
+    bundle
     rake
 
+If you add/remove files, bump versions, etc then you need to update the Manifest.txt and the gemspec.
+
+    rake manifest
+    bundle
+    rake gemspec # optional
+    rake install_gem
+
+To release a new version:
+
+* Bump version number in `lib/choctop.rb` - see `ChocTop::VERSION`
+* Rebuild the Manifest.txt and gemspec:
+
+    rake manifest
+    bundle
+    rake gemspec
+    rake release VERSION=X.Y.Z
 
 == ORIGINAL CODE IDEAS:
 

@@ -1,89 +1,55 @@
---- 
-dependencies: 
-  escape: 
-    group: 
-    - :default
-    version: = 0.0.4
-  rspec: 
-    group: 
-    - :cucumber
-    version: ">= 2.0.0.beta"
-  newgem: 
-    group: 
-    - :newgem
-    version: ">= 1.5.2"
-    require: []
+GEM
+  remote: http://rubygems.org/
+  specs:
+    RedCloth (4.2.3)
+    activesupport (2.3.10)
+    awesome_print (0.2.1)
+    builder (2.1.2)
+    cucumber (0.8.3)
+      builder (~> 2.1.2)
+      diff-lcs (~> 1.1.2)
+      gherkin (~> 2.0.2)
+      json_pure (~> 1.4.3)
+      term-ansicolor (~> 1.0.4)
+    diff-lcs (1.1.2)
+    escape (0.0.4)
+    gherkin (2.0.2)
+      trollop (~> 1.16.2)
+    hoe (2.8.0)
+      rake (>= 0.8.7)
+    json_pure (1.4.6)
+    newgem (1.5.3)
+      RedCloth (>= 4.1.1)
+      activesupport (~> 2.3.4)
+      hoe (>= 2.4.0)
+      rubigen (>= 1.5.3)
+      syntax (>= 1.0.0)
+    rake (0.8.99.5)
+    rspec (2.4.0)
+      rspec-core (~> 2.4.0)
+      rspec-expectations (~> 2.4.0)
+      rspec-mocks (~> 2.4.0)
+    rspec-core (2.4.0)
+    rspec-expectations (2.4.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.4.0)
+    rubigen (1.5.5)
+      activesupport (~> 2.3.5)
+    syntax (1.0.0)
+    term-ansicolor (1.0.5)
+    trollop (1.16.2)
 
-  awesome_print: 
-    group: 
-    - :default
-    version: = 0.2.1
-  bundler: 
-    group: 
-    - :development
-    version: ">= 0"
-  hoe: 
-    group: 
-    - :newgem
-    version: ">= 2.6.1"
-  cucumber: 
-    group: 
-    - :cucumber
-    version: = 0.8.3
-  builder: 
-    group: 
-    - :default
-    version: = 2.1.2
-  RedCloth: 
-    group: 
-    - :default
-    version: = 4.2.3
-specs: 
-- rake: 
-    version: 0.8.7
-- RedCloth: 
-    version: 4.2.3
-- activesupport: 
-    version: 2.3.8
-- awesome_print: 
-    version: 0.2.1
-- builder: 
-    version: 2.1.2
-- bundler: 
-    version: 0.9.26
-- diff-lcs: 
-    version: 1.1.2
-- trollop: 
-    version: 1.16.2
-- gherkin: 
-    version: 2.0.2
-- json_pure: 
-    version: 1.4.3
-- term-ansicolor: 
-    version: 1.0.5
-- cucumber: 
-    version: 0.8.3
-- escape: 
-    version: 0.0.4
-- rubyforge: 
-    version: 2.0.4
-- hoe: 
-    version: 2.6.1
-- rubigen: 
-    version: 1.5.5
-- syntax: 
-    version: 1.0.0
-- newgem: 
-    version: 1.5.3
-- rspec-core: 
-    version: 2.0.0.beta.16
-- rspec-expectations: 
-    version: 2.0.0.beta.16
-- rspec-mocks: 
-    version: 2.0.0.beta.16
-- rspec: 
-    version: 2.0.0.beta.16
-hash: 2fa03535b60734ba6b435e984c1a4f65377fddae
-sources: 
-- Rubygems: 
-    uri: http://gemcutter.org
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  RedCloth (= 4.2.3)
+  awesome_print (= 0.2.1)
+  builder (= 2.1.2)
+  bundler
+  cucumber (= 0.8.3)
+  escape (= 0.0.4)
+  hoe (>= 2.6.1)
+  newgem (>= 1.5.2)
+  rake (~> 0.8.7)
+  rspec (>= 2.0.0.beta)
