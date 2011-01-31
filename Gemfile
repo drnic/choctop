@@ -1,5 +1,6 @@
 source :gemcutter
 
+gem 'rake', '~> 0.8.7'
 gem 'builder','2.1.2'
 gem 'awesome_print', '0.2.1'
 gem 'RedCloth', '4.2.3'
