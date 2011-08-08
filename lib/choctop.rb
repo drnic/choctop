@@ -33,6 +33,7 @@ module ChocTop
 
     # Name of the Info.plist file
     # Default: "Info.plist"
+    attr_accessor :info_plist_name
     def info_plist_name
       @info_plist_name ||= 'Info.plist'
     end
