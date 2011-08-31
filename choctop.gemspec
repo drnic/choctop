@@ -50,6 +50,7 @@ All rake tasks:
       s.add_runtime_dependency(%q<awesome_print>, ["= 0.2.1"])
       s.add_runtime_dependency(%q<RedCloth>, ["= 4.2.3"])
       s.add_runtime_dependency(%q<escape>, ["= 0.0.4"])
+      s.add_runtime_dependency(%q<rubigen>, ["= 1.5.5"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<rspec>, [">= 2.0.0.beta"])
       s.add_development_dependency(%q<cucumber>, ["= 0.8.3"])
