@@ -51,5 +51,5 @@ DEPENDENCIES
   escape (= 0.0.4)
   hoe (>= 2.6.1)
   newgem (>= 1.5.2)
-  rake (~> 0.8.7)
+  rake (>= 0.8.7)
   rspec (>= 2.0.0.beta)

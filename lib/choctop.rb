@@ -225,6 +225,14 @@ module ChocTop
     def icon_text_size=(size)
       @icon_text_size = size.to_i
     end
+    
+    # Codesigning identity
+    # This string should match the name of the identity in your Keychain that
+    # you wish to use to sign the executable before building the DMG
+    attr_accessor :codesign_identity
+    def codesign_identity
+      @codesign_identity ||= false
+    end
   
     # The url for the remote package, without the protocol + host
     # e.g. if absolute url is http://mydomain.com/downloads/MyApp-1.0.dmg

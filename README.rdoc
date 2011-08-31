@@ -36,7 +36,7 @@ the wonderful Choc-Top ice creams. MMmmm.
 
 Wikipedia: http://en.wikipedia.org/wiki/Choc-Top
 
-== FEATURES/PROBLEMS:
+== FEATURES
 
 ChocTop comes with rake tasks to instantly deploy your latest Cocoa app's version
 to a remote host, instantly activating all your users' Sparkle auto-updates.
@@ -45,6 +45,7 @@ to a remote host, instantly activating all your users' Sparkle auto-updates.
 * packages a DMG of your released app using Info.plist configuration (rake dmg)
 * generates Sparkle-formatted XML file
 * uploads the DMG and XML files to a remote host
+* optional code-signing of application bundle before dmg build
 
 == SYNOPSIS:
 
@@ -87,6 +88,9 @@ to the end:
       # Custom DMG options
       s.volume_icon = "dmg.icns"
       s.icon_size = 104
+      
+      # Code-signing (unused if property is not set)
+      s.codesign_identity = 'Foo Widgets LLC'
     end
 
 In your Rakefile, update the ChocTop configuration with the host and remote_dir details.
@@ -115,6 +119,29 @@ its set to Debug for development) and then Build. The "rake appcast" task should
 == INSTALL:
 
     sudo gem install choctop
+    
+== COMMON PROBLEMS:
+
+* Choctop is not building the project's target
+* The DMG's base-name does not match the executable name (e.g. "MyProjectDir.dmg" instead of "My App.dmg")
+* The DMG does not contain the application bundle
+
+These can be caused by a combination of any of the following:
+
+* You have set a custom PRODUCT_NAME in your project settings in XCode.
+* You have ${EXECUTABLE_NAME} set as the value of CFBundleExecutable in your Info.plist
+* Your target's name doesn't match the PRODUCT\_NAME and/or the EXECUTABLE\_NAME
+* You have set a customized Build Products directory in XCode's Preferences
+
+None of these particulars is a problem, you just have to give Choctop a little more info. Example:
+
+    ChocTop::Configuration.new do |s|
+      # ... snip ...
+      s.name = 'Strip Sync'           # what my final .app bundle should be named
+      s.build_target = 'StripSync'    # name of the target that should be built
+                                      # and build_products is where the magic happens
+      s.build_products = '/Users/frankmanowar/Documents/xcode-build/Release'
+    end
 
 == DEVELOPMENT:
 
