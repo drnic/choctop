@@ -24,7 +24,7 @@ GEM
       hoe (>= 2.4.0)
       rubigen (>= 1.5.3)
       syntax (>= 1.0.0)
-    rake (0.8.99.5)
+    rake (0.8.7)
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
       rspec-expectations (~> 2.4.0)
