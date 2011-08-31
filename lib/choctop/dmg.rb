@@ -1,5 +1,11 @@
 module ChocTop
   module Dmg
+    def codesign_executable
+      sh "codesign -v -s '#{codesign_identity}' '#{build_products}/#{name}.app'"
+      # this next step just provides the new codesigning info for confirmation
+      sh "codesign -dv '#{build_products}/#{name}.app'"
+    end
+    
     def prepare_files
       self.files = files.inject({}) do |files, file|
         path_or_helper, options = file
@@ -40,6 +46,7 @@ module ChocTop
     end
 
     def make_dmg
+      codesign_executable if codesign_identity
       prepare_files
       copy_files
       FileUtils.mkdir_p build_path
