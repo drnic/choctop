@@ -105,6 +105,7 @@ describe ChocTop::Configuration do
         FileUtils.chdir(@my_project_path) do
           @choctop = ChocTop::Configuration.new do |s|
             s.defaults :textmate
+            s.add_file "README.txt", :position => [0,0]
           end
           @choctop.prepare_files
         end
