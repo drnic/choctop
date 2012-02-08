@@ -44,8 +44,12 @@ module ChocTop
     attr_accessor :name
   
     # The version of the Cocoa application
-    # Default: info_plist['CFBundleVersion']
+    # Default: info_plist['CFBundleShortVersionString']
     attr_accessor :version
+
+    # The internal version of the Cocoa application
+    # Default: info_plist['CFBundleVersion']
+    attr_accessor :internal_version
   
     # The target name of the distributed DMG file
     # Default: #{name}.app
@@ -332,7 +336,8 @@ module ChocTop
       # Defaults
       @name ||= info_plist['CFBundleExecutable'] || File.basename(File.expand_path("."))
       @name = File.basename(File.expand_path(".")) if @name == '${EXECUTABLE_NAME}'
-      @version ||= info_plist['CFBundleVersion']
+      @version ||= info_plist['CFBundleShortVersionString']
+      @internal_version ||= info_plist['CFBundleVersion']
       @build_type = ENV['BUILD_TYPE'] || 'Release'
     
       if base_url
