@@ -34,7 +34,8 @@ module ChocTop
               xml.enclosure(:url => "#{base_url}/#{pkg_name}",
                             :length => "#{File.size(pkg)}",
                             :type => "application/dmg",
-                            :"sparkle:version" => version,
+                            :"sparkle:version" => internal_version,
+                            :"sparkle:shortVersionString" => version,
                             :"sparkle:dsaSignature" => dsa_signature)
             end
           end
